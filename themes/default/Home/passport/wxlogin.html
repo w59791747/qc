@@ -1,0 +1,28 @@
+<include file="public:header" />
+<div class="wxlogin">
+  <div class="tips" id="tip">微信登录</div>
+  <img alt="微信登录" src="https://www.kuaizhan.com/common/encode-png?large=true&&bg=ffffff&fg=000000&w=300&data=<{$codeurl}>"  class="erweima"/>
+  <div class="farial forg" id='show' ></div>
+  <div class="wxfooter">请使用微信扫描二维码登录<br />“<{$CONFIG.site.sitename}>”</div>
+</div>
+<script type="text/javascript">
+(function(){
+	var interval = setInterval(function(){
+		var link = "<{:U('passport/wxcheck',array('token'=>$token))}>";
+
+		$.post(link, function (data) {
+			if (data.status == 'success') {
+				$('.wxfooter').html(data.msg);
+				clearInterval(interval);
+				window.location.href = "<{:U('member/index')}>";
+			} else {
+				$('.wxfooter').html(data.msg);
+			}
+		}, 'json');
+		
+	
+}, 3000);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-CN" />
+
+<style type="text/css">
+* { margin:0; padding:0; border:0; }
+body { background:#242D3C;}
+a.ctr_close{ background:url(<{$admin_statics}>/images/ctr_close.png) no-repeat;width:10px;height:200px;overflow: hidden;position:absolute; top:50%; left:50%; margin:-100px 0 0 -5px; cursor:pointer;}
+a.ctr_open{background:url(<{$admin_statics}>/images/ctr_open.png) no-repeat;width:10px;height:200px;overflow: hidden;position:absolute; top:50%; left:50%; margin:-100px 0 0 -5px; cursor:pointer;};
+
+</style>
+</head>
+<script type="text/javascript">
+var counter = 0;  //加个计数参数 
+//伸缩frame 
+function folder(){ 
+
+       counter++; 
+        if(parent.document.getElementById('frameset_main').cols=="0,10,*"){
+            parent.document.getElementById('frameset_main').cols = "210,10,*";       
+            document.getElementById('close').style.display="block";
+            document.getElementById('open').style.display="none";
+            
+        }else{
+            parent.document.getElementById('frameset_main').cols="0,10,*";
+            document.getElementById('close').style.display="none";
+            document.getElementById('open').style.display="block";
+        }
+
+}
+</script>
+<body>
+<a class="ctr_close" alt="点击关闭" id="close" onclick="folder()"></a>
+<a class="ctr_open" alt="点击展开"  id="open"style="display:none;" onclick="folder()"></a>
+</body>
+</html>

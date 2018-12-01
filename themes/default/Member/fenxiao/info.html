@@ -1,0 +1,53 @@
+<include file="public:header"/>
+
+<div class="uc_mid_r yitou_list">
+			<ul class="cz_tit">
+				<li ><a href="<{:U('fenxiao/lists')}>">邀请链接</a></li>
+				<li class="cz_cur"><a href="<{:U('fenxiao/info')}>">邀请记录</a></li>
+			</ul>
+			<!--<div class="yitou_data">
+				<p>邀请数据概览</p>
+				<ul>
+					<li>累计邀请人数<span>18</span></li>
+					<li>近30天邀请人数<span>8</span></li>
+					<li>近90天邀请人数<span>12</span></li>
+					<li style="border:none">累计赚得积分<span>16</span></li>
+				</ul>
+			</div>
+			<div class="select_yitou">
+				<span>请选择时间：</span><input type="text" /><span>到</span><input type="text" /><a href="" class="queding sy_queding">确定</a>
+			</div>-->
+             <if condition="$list">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				 <tbody>
+					<tr>
+						<th width="10%">ID</th>
+						<th width="20%">用户</th>						
+						<th width="40%">电话</th>						
+						<th width="30%">时间</th>										
+					</tr>			 
+					 <foreach name="list" item="var">
+                      <tr>
+                        <td><{$var.uid}></td>
+                        <td><{$var[name]}></td>
+                        <td><{$var.mobile}></td>
+                        <td><{$var.dateline|date="Y-m-d",###}></td>
+                      </tr>
+                    </foreach>
+
+				</tbody>
+			</table>
+            <else/>
+			<div class="yitou_none">
+				<img src="__TMPL__statics/images/member/jilu_none.jpg" alt="暂时没有记录" title="暂时没有记录" />
+			</div>
+            </if>
+				<div class="select_page us_center"><{$page}></div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<include file="public:footer"/>

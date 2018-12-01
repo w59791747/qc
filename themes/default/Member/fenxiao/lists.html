@@ -1,0 +1,27 @@
+<include file="public:header"/>
+
+<div class="uc_mid_r yitou_list">
+			<ul class="cz_tit">
+				<li class="cz_cur"><a href="<{:U('fenxiao/lists')}>">邀请链接</a></li>
+				<li><a href="<{:U('fenxiao/info')}>">邀请记录</a></li>
+			</ul>
+			<div class="wdyq">
+				<div>邀请地址：<{$CONFIG.site.host}><{:U('/index/index',array('fenxiao'=>$MEMBER[uid]))}></div>
+				<div class="bdsharebuttonbox"><a href="javascript:void(0);" style="background:none;padding:0">分享赚积分：</a><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+				 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdUrl":"<{$CONFIG.site.host}><{:U('/index/index',array('fenxiao'=>$MEMBER['uid']))}>","bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script> 
+			</div>
+			<div class="yqsm">
+				<ul>
+					<li><b>邀请赚积分说明：</b></li>
+					<li>1、邀请人分享地址，被邀请人只要在网站注册认证或者进行投资等行为，邀请人都可以获得积分！</li>
+					<li>2、邀请机制是永久的，一次邀请成功，永久返现积分！</li>
+					<li>3、平台支持积分众筹功能，所赚积分可以在投资项目的时候直接抵扣现金；</li>
+					<li>4、积分可以在积分商城中进行礼品兑换；</li>
+				</ul>
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+<include file="public:footer"/>

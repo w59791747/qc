@@ -1,0 +1,181 @@
+<include  file='public:header'/>
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>设置</span><i></i><span>基本设置</span><i></i><span>站点设置</span>
+           
+            </div>
+          </div>
+		<form target="zhuchuang_frm" action="<{:U('setting/site')}>" method="post">
+           <div class="daemonTable">
+              	<table class="table_data" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th class="alginRt w-200"> <font class="pointcl">*</font> 站点名称: </th>
+                        <td><input type="text" name="data[sitename]" value="<{$CONFIG.site.sitename}>" class="text w-200 " /></td>
+                    </tr>
+                    <tr>
+                        <th class="alginRt w-200"> <font class="pointcl">*</font> 站点网址: </th>
+                        <td><input type="text" name="data[host]" value="<{$CONFIG.site.host}>" class="text w-200 " /></td>
+                    </tr>
+                    <tr>
+                        <th class="alginRt w-200"> <font class="pointcl">*</font> 图片域名: </th>
+                        <td><input type="text"  name="data[imgurl]" value="<{$CONFIG.site.imgurl}>" class="text w-200 " /></td>
+                    </tr>
+                    
+                    
+                    
+                    <tr>
+                        <th class="alginRt w-200"> LOGO </th>
+                        <td><div class="fileBox w-200">
+                        
+                         <img id="photo_img"  src="__ATTACHS__/<{$CONFIG.site.logo|default='default.jpg'}>" />
+                        </div>
+                          <input type="hidden" name="data[logo]" value="<{$CONFIG.site.logo}>" id="data_photo" />
+                          <input class="file"  id="photo_file" name="photo_file" type="file" multiple="true" value="" />
+                         </td>
+                      </tr>
+
+					   <tr>
+                        <th class="alginRt w-200"> 登录LOGO </th>
+                        <td><div class="fileBox w-200">
+                        
+                         <img id="photo_img2"  src="__ATTACHS__/<{$CONFIG.site.loginlogo|default='default.jpg'}>" />
+                        </div>
+                          <input type="hidden" name="data[loginlogo]" value="<{$CONFIG.site.loginlogo}>" id="data_photo2" />
+                          <input class="file"  id="photo_file2" name="photo_file2" type="file" multiple="true" value="" />
+                         </td>
+                      </tr>
+                      
+                      
+                   
+                    <tr>
+                        <th class="alginRt w-200"> 浮动年化收益率: </th>
+                        <td><input type="text"  name="data[fdnh]" value="<{$CONFIG.site.fdnh}>" class="text w-200 " /></td>
+                    </tr> 
+                      
+                    <tr>
+                        <th class="alginRt w-200"> QQ: </th>
+                        <td><input type="text"  name="data[qq]" value="<{$CONFIG.site.qq}>" class="text w-200 " /></td>
+                    </tr>
+                    
+                     
+                    
+                     <tr>
+                        <th class="alginRt w-200">  QQ群: </th>
+                        <td><textarea name="data[qqqun]"><{$CONFIG.site.qqqun}></textarea></td>
+                    </tr>
+
+					  <tr>
+                        <th class="alginRt w-200">  工作时间: </th>
+						<td><input type="text"  name="data[gzsj]" value="<{$CONFIG.site.gzsj}>" class="text w-200 " /></td>
+                    </tr>
+
+
+					
+                    
+                    <tr>
+                        <th class="alginRt w-200"> 电话: </th>
+                        <td><input type="text"  name="data[tel]" value="<{$CONFIG.site.tel}>" class="text w-200 " /></td>
+                    </tr>
+                     <tr>
+                        <th class="alginRt w-200">  邮件: </th>
+                        <td><input type="text"  name="data[email]" value="<{$CONFIG.site.email}>" class="text w-200 " /></td>
+                    </tr>
+                    
+                   
+                       <tr>
+                            <th class="alginRt w-200">  ICP备案: </th>
+                            <td><input type="text"  name="data[icp]" value="<{$CONFIG.site.icp}>" class="text w-200 " /></td>
+                    </tr>
+
+					  <tr>
+                            <th class="alginRt w-200">  登录底部: </th>
+                            <td><input type="text"  name="data[login_footer]" value="<{$CONFIG.site.login_footer}>" class="text w-200 " /></td>
+                    </tr>
+                    
+                     <tr>
+                        <th class="alginRt w-200">  视频地址: </th>
+                        <td><input type="text"  name="data[video]" value="<{$CONFIG.site.video}>" class="text w-500 " /></td>
+                    </tr>
+                    
+                     <tr>
+                        <th class="alginRt w-200">  年化平均收益率: </th>
+                        <td><input type="text"  name="data[shouyi]" value="<{$CONFIG.site.shouyi}>" class="text w-500 " /></td>
+                    </tr>
+                     
+                    
+                     <tr>
+                        <th class="alginRt w-200">  统计代码: </th>
+                        <td><textarea name="data[tongji]"><{$CONFIG.site.tongji}></textarea></td>
+                    </tr>
+                    
+                    
+                      <tr>
+                        <th class="alginRt w-100"> </th>
+                        <td>
+                        <input type="submit" value="确认保存" class="pub_btn" />
+                        </td>
+                      </tr>
+                </table>
+           </div>
+        </form>  
+        
+        
+ <script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js?t=<{$nowtime}>"></script>
+
+    <link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+    <script>
+        $("#photo_file").uploadify({
+			//'debug':true,
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"setting"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '上传网站LOGO',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo").val(data);
+                $("#photo_img").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+
+    </script>  
+    
+    <script>
+        $("#photo_file1").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"setting"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '上传手机LOGO',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo1").val(data);
+                $("#photo_img1").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+
+    </script>  
+
+	<script>
+        $("#photo_file2").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"setting"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '登录LOGO',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo2").val(data);
+                $("#photo_img2").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+
+    </script>  
+
+
+          
+
+<include  file='public:footer'/>           
+               
+   

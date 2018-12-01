@@ -1,0 +1,54 @@
+<include file="public:header"/>
+<div class="ucenterCont_frt frt">
+  <div class="tabList"> <a href="#" class="current">订单管理</a> </div>
+  <div class="ucenterBox">
+  <div class="qcscreen_tab qcscreen_form">
+  <form method="post"  action="<{:U('order/lists')}>">
+  	<span>类型：</span><select name = 'type' class="text">
+    <option    <if condition="$type eq 0"> selected="selected" </if>>-全部-</option>
+    <foreach name="typelist" key="key" item="var">
+    <option value="<{$key}>" <if condition="$type eq $key"> selected="selected" </if>><{$var}></option>
+    </foreach>
+    </select>
+    <span>支付状态：</span><select name = 'status' class="text">
+    	 <option value="0"  <if condition="$status eq 0"> selected="selected" </if>>-全部-</option>
+    <foreach name="statuslist" key="key" item="var">
+    <option value="<{$key+2}>" <if condition="$status eq $key"> selected="selected" </if>><{$var}></option>
+    </foreach>
+    </select>
+    <span>时间：</span><input name = 'stime' value="<{$stime}>" type="text" class="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});" /><em>~</em><input name = 'ltime' type="text" value="<{$ltime}>" class="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
+    <input class="btn" type="submit" value="搜索" />
+  </form>
+  </div>
+  
+    <form method="post"   target="chuang_frm">
+      <table class="uc_list_table" cellspacing="0" cellspacing="0">
+      <tr>
+        <th class="w-100"> 订单ID </th>
+        <th class="w-100">订单号</th>
+        <th class="w-100">类型</th>
+        <th class="w-100">总金额</th>
+        <th class="w-200">支付状态</th>
+        <th class="w-200">添加时间</th>
+        <th class="w-400">操作</th>
+      </tr>
+      <foreach name="list" item="var">
+        <tr>
+          <td><{$var.order_id}></td>
+          <td><{$var.order_no}></td>
+          <td><{$typelist[$var[type]]}></td>
+          <td>￥<{$var.amount}></td>
+          <td ><{$statuslist[$var[pay_status]]}></td>
+          <td><{$var.dateline|date="Y-m-d H:i:s",###}></td>
+          <td><a class="btn changeBtn" href="<{:U('order/orderdetail',array('order_id'=>$var['order_id']))}>">查看</a>
+            <if condition="$var.pay_status eq 0"> <a target="chuang_frm" class="btn deleteBtn" mini="confirm" href="<{:U('order/orderdelete',array('order_id'=>$var['order_id']))}>">取消订单</a> </if></td>
+        </tr>
+      </foreach>
+    </form>
+    </table>
+    <div class="ucenterPage"> <{$page}> </div>
+  </div>
+</div>
+</div>
+</div>
+<include file="public:footer"/>

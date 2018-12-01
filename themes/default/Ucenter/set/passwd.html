@@ -1,0 +1,37 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+<section class="contentWrapper">
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">修改密码</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+  <section class="page_center_box">
+    <div class="introForm">
+      <form method="post"  action="<{:U('set/passwd')}>"  target="chuang_frm">
+       <div class="regGroup clearfix">
+       <label class="title">旧密码</label>
+        <div class="control_txt">
+        <input class="text" type="text" name="oldpwd"  type="password" placeholder="旧密码">
+        </div></div>
+        <div class="regGroup clearfix">
+       <label class="title">新密码</label>
+        <div class="control_txt">
+        <input class="text" type="text" name="newpwd"  type="password" placeholder="新密码">
+        </div></div>
+        <div class="regGroup clearfix">
+       <label class="title">确认密码</label>
+        <div class="control_txt">
+        <input class="text" type="text" name="pwd2"  type="password" placeholder="确认密码">
+        </div></div>
+         <div class="regGroup clearfix">
+        <input class="btn" type="submit" value="确认保存">
+        </div>
+      </form>
+    </div>
+    </div>
+  </section>
+</section>
+<include file="public:footersmall"/> 

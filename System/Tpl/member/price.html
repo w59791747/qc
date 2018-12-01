@@ -1,0 +1,30 @@
+<div class="theme-poptit"><span>增加资金</span> <a href="javascript:;" title="关闭" class="close">×</a> </div>
+						<div class="theme_popover_table">
+                          <form  target="zhuchuang_frm" action="<{:U('member/price',array('uid'=>$detail['uid']))}>" method="post">
+							<table class="table_data" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <th class="alginRt w-100"> <font class="pointcl">*</font> 资金 </th>
+                            <td>
+                            	<input type="text" name="data[number]" value="<{$detail.number|default=''}>" class="text w-400" />
+                            </td>
+                          </tr>
+                          
+                          <tr>
+                            <th class="alginRt w-100"> <font class="pointcl">*</font> 日志 </th>
+                            <td>
+                            	<textarea style="width:400px; height:100px;" name="data[log]"></textarea>
+                            </td>
+                          </tr>
+                          
+                          
+                           <tr>
+                                <th class="alginRt w-100"> </th>
+                                <td>
+                                <input type="submit" value="增加资金" class="pub_btn" />
+                                </td>
+                              </tr>
+                          
+                          </table>
+						</div>
+
+

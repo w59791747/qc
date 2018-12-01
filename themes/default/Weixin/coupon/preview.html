@@ -1,0 +1,80 @@
+<include file="public:headercoupon"/>
+<link rel="stylesheet" type="text/css" href="__TMPL__coupon/static/css/Coupon.css?201150408">
+<body style="background:#FFE3B4;">
+<div class="voucherPage">
+	<img src="__TMPL__coupon/static/img/coupon_img1.png" width="100%" height="" />
+    <div class="voucherPage_cont">
+    	<div class="voucherPage_tab">
+            <ul>
+                <li class="voucherPage_tab_list on"><a href="javascript:;">未使用</a></li>
+                <li class="voucherPage_tab_list"><a href="javascript:;">已使用</a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+	<?php $temp = strtotime($items[$item[coupon_id]]['ltime']); ?>
+    <div class="voucherPage_list_box">
+        
+        <div class="voucherPage_list" style=" display:block;">
+            <ul>
+				<foreach name="list2" item="item">
+				
+				<if condition="$temp lt $time">
+                 
+                    <li class="list">
+                        <div class="fr img"><img src="__TMPL__coupon/static/img/coupon_img2.png" /></div>
+                 
+                        <div class="wz">
+                            <big><{$items[$item[coupon_id]][end_tips]}>元</big>
+                             <p><{$items[$item[coupon_id]][use_tips]}></p>
+                            <p class="time">优惠码：<{$item.sn}></p>
+                           
+                            
+                             <p class="time">过期时间：<{$items[$item[coupon_id]][ltime]}></p>
+                           
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                  </foreach>
+            </ul>
+        </div>
+        <div class="voucherPage_list">
+            <ul>
+				<foreach name="list1" item="item">
+                    <li class="list grey">
+                        <div class="fr img"><img src="__TMPL__coupon/static/img/coupon_img3.png" /></div>
+                        <div class="wz">
+                            <big><{$items[$item[coupon_id]][end_tips]}>元</big>
+                             <p><{$items[$item[coupon_id]][use_tips]}></p>
+                            <p class="time">优惠码：<{$item[sn]}></p>
+                             <p class="time">过期时间：<{$items[$item[coupon_id]][ltime]}></p>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                  </foreach>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+	$(document).ready(function(e) {	
+		$('.voucherPage_tab_list').each(function (e) {
+			$(this).click(function(){
+				$('.voucherPage_tab_list').removeClass("on");
+				$(this).addClass("on");
+				$(".voucherPage_list_box .voucherPage_list").each(function(i){
+					if(e==i){
+						$(".voucherPage_list_box .voucherPage_list").hide();
+						$(this).show();
+					}
+					else{
+						$(this).hide();
+					}
+				});
+			});
+		});
+	});
+</script>
+<div class="footer_copy">&copy;<{$CONFIG.site.sitename}></div>
+</body>
+</html>

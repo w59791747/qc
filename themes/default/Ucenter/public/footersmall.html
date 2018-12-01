@@ -1,0 +1,33 @@
+ <script>
+	$('#goback').click(function(){
+		history.back(-1);	
+	})
+
+	function goTop(){
+			$('html,body').animate({'scrollTop':0},600);
+		}
+	//顶部置顶效果和返回顶部效果
+    var stu = true;
+	$(window).scroll(function(){
+  	  if($(window).scrollTop() > 150) {
+          $('a.goTop').show();
+      } else {
+          $('a.goTop').hide();
+      }	
+      
+      if($(window).scrollTop() > 0) {
+        if(stu){
+          stu = false;
+          var headerClone = $('header').clone();
+          headerClone.addClass('headerClone');
+          headerClone.insertBefore($('.pageWrapper'));  
+        }        
+      } else {
+        stu = true;
+        $('.headerClone').remove();
+      } 
+	});
+</script>  
+</section>
+</body>
+</html>

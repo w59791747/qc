@@ -1,0 +1,114 @@
+<include file="public:header" /> <include file="public:top" />
+<section class="contentWrapper">
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">积分商城</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<div id="search-bar">
+  <ul class="search-bar_list clearfix">
+    <li class="list pro_list"><a href="#"><{$catelist[$cate][cate_name]|default='积分分类'}></a></li>
+     <li class="list pro_list"><a href="#"><{$fanwei_arr[$fanwei]|default='积分范围'}></a></li>
+    <li class="list pro_list last"><a href="#">
+    	 <if condition="$order eq 2"> 最新上线 <elseif condition="$order eq 3"/>积分排序<else/>最热排行</if>    
+    </a></li>
+  </ul>
+  <span></span>
+  <div class="search-bar_pull">
+    <div class="list_box">
+      <ul>
+        <li><a href="<{:U('product/index',array('cate'=>0,'fanwei'=>$fanwei,'order'=>$order))}>">全部</a>
+        </li>
+        <foreach name='catelist' key='key' item='val'>
+          <li> 
+            <a <if condition="$cate eq $val[cate_id]"> class="cur" </if>  href="<{:U('product/index',array('cate'=>$val[cate_id],'fanwei'=>$fanwei,'order'=>$order))}>"><{$val.cate_name}></a>
+          </li>
+        </foreach>        
+      </ul>
+    </div>
+   <div class="list_box">
+      <ul>
+        <li><a href="<{:U('product/index',array('cate'=>$cate,'fanwei'=>0,'order'=>$order))}>">全部</a>
+        
+        </li>
+        <foreach name='fanwei_arr' key='key' item='val'>
+        <li> 
+    <a  <if condition="$fanwei eq $key"> class="cur" </if>  href="<{:U('product/index',array('cate'=>$cate,'fanwei'=>$key,'order'=>$order))}>"><{$val}></a>
+    </li>
+        </foreach>
+      </ul>
+    </div>
+    <div class="list_box">
+      <ul>
+        <li><a 
+      <if condition="$order eq 1"> class="cur"</if>
+      href="<{:U('product/index',array('cate'=>$cate,'fanwei'=>$fanwei,'order'=>1))}>">最热排行</a></li> <li><a 
+
+      <if condition="$order eq 2"> class="cur"</if>
+      href="<{:U('product/index',array('cate'=>$cate,'fanwei'=>$fanwei,'order'=>2))}>">最新上线</a></li> <li><a 
+          
+      <if condition="$order eq 3"> class="cur"</if>
+      href="<{:U('product/index',array('cate'=>$cate,'fanwei'=>$fanwei,'order'=>3))}>">积分排序</a></li>
+        </li>
+        
+      </ul>
+    </div>
+    <div class="mask_bg"></div>
+  </div>
+</div>
+<section class="page_center_box">
+<div class="zcList">
+  <ul class="mpubList wpicList">  
+  	<foreach name='list' key='key' item='item'>     
+      <li> <a href="<{:U('product/detail',array('product_id'=>$item['product_id']))}>">
+      <div class="fl mpubPic"> <img alt="<{$item.title}>" src="__ATTACHS__/<{$item.photo|default='default.jpg'}>"></div>
+      <div class="mpubTxt">
+        <h4><{$item['title']}></h4>
+        <p><font class="black9">所需积分</font><{$item['jifen']}></p>
+        <!-- <p><font class="black9">累计购买</font><{$item['buys']}>人</p> -->
+        <span onclick="window.location=<{:U('product/detail',array('product_id'=>$item['product_id']))}>" class="go_product">去兑换</span>
+      </div>
+      </a> </li>
+    </foreach>    
+  </ul>
+  <?php if(strlen($page) > 12){?>
+  <div class="page"> <{$page}> </div>
+  <?php } ?>
+</div>
+<script>
+/*头部下来分类开始*/
+	$("#search-bar .search-bar_list .list").each(function(e){
+		$(this).click(function(){
+			if($(this).hasClass("on")){
+				$(this).parent().find(".list").removeClass("on");
+				$(this).removeClass("on");
+				$(".mask_bg").hide();
+				$("#search-bar .search-bar_pull").hide();
+			}
+			else{
+				$(this).parent().find(".list").removeClass("on");
+				$(this).addClass("on");
+				$(".mask_bg").show();
+				$("#search-bar .search-bar_pull").show();
+			}
+			$("#search-bar .search-bar_pull .list_box").each(function(i){
+				if(e==i){
+					$(this).parent().find(".list_box").hide();
+					$(this).show();
+				}
+				else{
+					$(this).hide();
+				}
+				$(this).find("li").click(function(){
+					$(this).parent().find("li").removeClass("on");
+					$(this).addClass("on");
+					$(".mask_bg").hide();
+					$("#search-bar .search-bar_pull").hide();
+					$("#search-bar .search-bar_list .list").removeClass("on");
+				});
+			});
+		});
+	});
+</script> 
+<include file="public:footer" /> 

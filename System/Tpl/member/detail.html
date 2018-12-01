@@ -1,0 +1,116 @@
+<include  file='public:header'/>
+<div class="pad">
+<div class="breadNav">
+  <div class="flt breadNav_text"> <span>会员</span><i></i><span>会员管理</span><i></i><span>会员查看</span> </div>
+</div>
+<form target="zhuchuang_frm"   method="post">
+  <div class="daemonTable">
+    <table class="table_data" cellpadding="0" cellspacing="0">
+      <tr>
+        <th rowspan="3" class="alginRt w-200"> 头像 </th>
+        <td rowspan="3" class="w-300"><?PHP $str = $detail[from].'_face'; ?>
+          <img width="100px;" id="photo_img"  src="__ATTACHS__/<{$detail.face|default=$CONFIG[attachs][$str]}>" /></td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200"> 用户名 </th>
+        <td  ><{$detail.name|default=''}> </td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200"> 城市 </th>
+        <td class="w-300"><{$detail.city|default=''}> </td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200"> 邮箱 </th>
+        <td><{$detail.mail|default=''}>
+          <if condition="$detail.verify eq 1 || $detail.verify eq 3 || $detail.verify eq 5 || $detail.verify eq 7">
+          <span class="green">[已验证]
+          <else/>
+          <span class="red">[未验证]
+          </if>
+          </span></td>
+        <th class="alginRt w-200"> 手机 </th>
+        <td><{$detail.mobile|default=''}>
+          <if condition="$detail.verify eq 2  || $detail.verify eq 3 || $detail.verify eq 6 || $detail.verify eq 7">
+          <span class="green">[已验证]
+          <else/>
+          <span class="red">[未验证]
+          </if>
+          </span></td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200"> 积分 </th>
+        <td><{$detail.gold|default='0'}> </td>
+        <th class="alginRt w-200"> 资金 </th>
+        <td><{$detail[price]/100|default='0'}> </td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200"> 昵称 </th>
+        <td><{$detail.nickname|default=''}> </td>
+        <th class="alginRt w-200"> 性别 </th>
+        <td><if condition="$detail.gender eq man">男士
+            <else/>
+            女士</if></td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200"> 出生时期 </th>
+        <td><{$detail.Y|default=''}>-<{$detail.M|default=''}>-<{$detail.D|default=''}> </td>
+        <th class="alginRt w-200"> 上次登录时间 </th>
+        <td><{$detail.lastlogin|date="Y-m-d H:i:s",###}>(<{$detail.login_ip_area|default=''}>) </td>
+      </tr>
+      
+      <tr>
+        <th class="alginRt w-200"> 分销人 </th>
+        <td><{$fenxiao.name|default='无分销'}> </td>
+        <th class="alginRt w-200"> 注册时间 </th>
+        <td><{$detail.dateline|date="Y-m-d H:i:s",###}> </td>
+      </tr>
+     
+      
+      <tr>
+        <th colspan="4"> 用户详细信息 </th>
+      </tr>
+      <tr>
+        <th class="alginRt w-200"> 真实姓名 </th>
+        <td><{$detail.detail.realname|default='--'}> </td>
+        <th class="alginRt w-200"> 身份证号码 </th>
+        <td><{$detail.detail.card|default='--'}> </td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200">身份证正面照</th>
+        <td><img width="100px;" id="photo_img"  src="__ATTACHS__/<{$detail.detail.card_zhen|default='default.jpg'}>" /></td>
+        <th class="alginRt w-200"> 身份证反面照 </th>
+        <td><img width="100px;" id="photo_img"  src="__ATTACHS__/<{$detail.detail.card_fan|default='default.jpg'}>" /></td>
+      </tr>
+     
+    </table>
+  </div>
+</form>
+<script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js?t=<{$nowtime}>"></script> 
+<script type="text/javascript" src="__PUBLIC__/js/area.js?t=<{$nowtime}>"></script>
+<link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+<script>
+        $("#photo_file").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"member_thumb"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '上传头像',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+			//'debug' : true,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo").val(data);
+                $("#photo_img").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+
+    </script> 
+<script type="text/javascript">_init_area();</script> 
+<script type="text/javascript">
+		var Gid  = document.getElementById ;
+		var showArea = function(){
+			Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" + 	
+			Gid('s_city').value + " - 县/区" + 
+			Gid('s_county').value + "</h3>"
+									}
+		</script> 
+<include  file='public:footer'/> 

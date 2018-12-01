@@ -1,0 +1,113 @@
+<include  file='public:header'/>
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>会员</span><i></i><span>会员管理</span><i></i><span>添加会员</span>
+           
+            </div>
+          </div>
+		<form target="zhuchuang_frm"  action="<{:U('member/create')}>" method="post">
+           <div class="daemonTable">
+              	<table class="table_data" cellpadding="0" cellspacing="0">
+                    
+                    <tr>
+                        <th class="alginRt w-200"><font class="pointcl">*</font> 用户名 </th>
+                        <td>
+                        	<input type="text" name="data[name]" value="<{$detail.name|default=''}>" class="text w-400" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="alginRt w-200"><font class="pointcl">*</font> 密码 </th>
+                        <td>
+                        	<input type="password" name="data[passwd]" value="<{$detail.passwd|default=''}>" class="text w-400" />
+                        </td>
+                    </tr>
+                    
+                   
+                    
+                   
+                    
+                     <tr>
+                        <th class="alginRt w-200"> 头像 </th>
+                        <td><div class="fileBox w-200">
+                        
+                         <img id="photo_img"  src="__ATTACHS__/<{$detail.face|default='default.jpg'}>" />
+                        </div>
+                          <input type="hidden" name="data[face]" value="<{$detail.face}>" id="data_photo" />
+                          <input class="file"  id="photo_file" name="photo_file" type="file" multiple="true" value="" />
+                         </td>
+                      </tr>
+                      
+                      <tr>
+                          <th class="alginRt w-200"> 是否是虚拟账号 </th>
+                          <td><label class="radio"> <input type="radio" name="data[xuni]" value="1" 
+                              
+                              <if condition="$detail.xuni eq 1"> checked="checked" </if>
+                              >
+                              是</label>
+                            <label class="radio"> <input type="radio" name="data[xuni]" value="0" 
+                              
+                              <if condition="$detail.xuni neq 1"> checked="checked" </if>
+                              >
+                              否</label></td>
+                        </tr>
+                    <tr>
+                        <th class="alginRt w-200"> 邮箱 </th>
+                        <td>
+                        	<input type="text" name="data[mail]" value="<{$detail.mail|default=''}>" class="text w-400" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="alginRt w-200"> 手机 </th>
+                        <td>
+                        	<input type="text" name="data[mobile]" value="<{$detail.mobile|default=''}>" class="text w-400" />
+                        </td>
+                    </tr>
+                    
+                    
+                    
+                      <tr>
+                        <th class="alginRt w-100"> </th>
+                        <td>
+                        <input type="submit" value="确认添加" class="pub_btn" />
+                        </td>
+                      </tr>
+                </table>
+           </div>
+        </form> 
+        
+        
+        <script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js?t=<{$nowtime}>"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/area.js?t=<{$nowtime}>"></script>
+
+    <link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+    <script>
+        $("#photo_file").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"member_thumb"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '上传头像',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+			//'debug' : true,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo").val(data);
+                $("#photo_img").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+
+    </script>   
+    
+      <script type="text/javascript">_init_area();</script>
+      
+      <script type="text/javascript">
+		var Gid  = document.getElementById ;
+		var showArea = function(){
+			Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" + 	
+			Gid('s_city').value + " - 县/区" + 
+			Gid('s_county').value + "</h3>"
+									}
+		</script>
+<include  file='public:footer'/>    
+
+   

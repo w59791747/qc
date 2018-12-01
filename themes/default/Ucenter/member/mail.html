@@ -1,0 +1,67 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+  <header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">邮箱认证</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+  <div class="tabList tabList_three clearfix"><span> <a href="<{:U('ucenter/member/name')}>">实名认证</a></span><span> <a href="<{:U('ucenter/member/mail')}>"  class="current">邮箱认证</a></span><span> <a href="<{:U('ucenter/member/mobile')}>">手机认证</a></span> </div>
+  <if condition="$MEMBER.verify eq 1 || $MEMBER.verify eq 3 || $MEMBER.verify eq 5 || $MEMBER.verify eq 7">
+    <div class="warning"> 已经通过邮箱认证：<span class="fontcl"><{$MEMBER.mail}></span> </div>
+    <else/>
+    <div class="introForm">
+      <div class="regGroup clearfix">
+        <label class="title">邮箱</label>
+        <div class="control_txt">
+          <input id="email" class="text" name="mail"  type="text" placeholder="请输入邮箱" />
+        </div>
+      </div>
+      <div class="regGroup clearfix">
+        <input type="button" class="btn"  id="jq_send" value="立刻认证"/>
+      </div>
+    </div>
+  </if>
+  <div style="display: none;" class="jq_show">邮件已经发送到您的邮箱！亲可以进入邮箱点击相关链接进行认证！如果没有收到可以重新发送</div>
+  <script type="text/javascript">
+        var email_timeout;
+        var email_count = 200;
+        var email_lock = 0;
+        $(function () {
+            $("#jq_send").click(function () {
+                if ($("#email").val() == '') {
+                    alert('请填写要认证的邮件！');
+                } else {
+                    if (email_lock == 0) {
+                        $.ajax({
+                            url: '<{:U("ucenter/member/sendemail")}>',
+                            data: 'email=' + $("#email").val(),
+                            type: 'post'
+                        });
+                        email_count = 200;
+                        $('#jq_send').attr("disabled", "disabled");
+                        BtnCount();
+                        email_lock = 1;
+                        $(".jq_show").show();
+                    }
+                }
+            });
+        }); 
+         function BtnCount () {
+            if (email_count == 0) {
+                $('#jq_send').removeAttr("disabled");
+                $('#jq_send').val("重新发送");
+                email_lock = 0;
+                clearTimeout(email_timeout);
+            }
+            else {
+                email_count--;
+                $('#jq_send').val("重新发送(" + email_count.toString() + ")秒");
+                email_timeout = setTimeout(BtnCount, 1000);
+            }
+        };
+    </script> 
+</section>
+<include file="public:footersmall"/>

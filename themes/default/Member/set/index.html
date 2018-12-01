@@ -1,0 +1,83 @@
+<include file="public:header"/>
+
+<div class="uc_mid_r yitou_list">
+			<ul class="cz_tit">
+				<li class="cz_cur"><a href="<{:U('member/set/index')}>">修改资料</a></li>
+				<li><a href="<{:U('member/set/passwd')}>">修改密码</a></li>
+				<li ><a href="<{:U('member/set/renzheng')}>">账号认证</a></li>
+				<li><a href="<{:U('member/set/pwd')}>">支付密码</a></li>
+				<li ><a href="<{:U('member/set/card')}>">绑定银行卡</a></li>
+				<li><a href="<{:U('member/set/adress')}>">收货地址</a></li>
+			</ul>
+			<div class="xgzl">
+             <form method="post"  action="<{:U('set/index')}>"  target="chuang_frm">
+				
+                <p class="sfz">
+                  <span>头像</span>
+                  <div class="control_txt">
+                    <img id="photo_img" width="100px;"  src="__ATTACHS__/<{$MEMBER.face|default='default.jpg'}>" />
+                    <input type="hidden" name="data[face]" value="<{$MEMBER.face}>" id="data_photo" />
+                    <input class="xg_touxiang"  id="photo_file" name="photo_file" type="file" multiple="true" value="" />
+                  </div>
+                </p>
+                
+                
+				<p><span>生日</span>
+                	<select name="data[Y]" class="text sel_year short" rel="<{$MEMBER.Y|default='2000'}>">
+                    </select>
+                    &nbsp;年&nbsp;
+                    <select name="data[M]" class="text sel_month short" rel="<{$MEMBER.M|default='2'}>">
+                    </select>
+                    &nbsp;月&nbsp;
+                    <select name="data[D]" class="text sel_day short" rel="<{$MEMBER.D|default='14'}>">
+                    </select>
+                    &nbsp;日&nbsp; </p>
+				<p><span>性别</span>女&nbsp; 
+                <input type="radio" name="data[gender]" 
+              <if condition="$MEMBER.gender eq woman"> checked="checked" </if>
+              value="woman" />男</label>
+            <label class="radio"> <input type="radio" name="data[gender]" 
+              <if condition="$MEMBER.gender eq man"> checked="checked" </if>
+              value="man" />
+                </p>
+                 <input type="submit" class="cz_but" value="提交数据">
+                 </form>
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js?t=<{$nowtime}>"></script> 
+<script type="text/javascript" src="__PUBLIC__/js/area.js?t=<{$nowtime}>"></script> 
+<script type="text/javascript" src="__PUBLIC__/js/birthday.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+<script>
+        $("#photo_file").uploadify({
+			
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"member_thumb"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '上传头像',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+			//'debug' : true,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo").val(data);
+                $("#photo_img").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+		
+</script> 
+		
+<script>  
+        $(function () {
+            $.ms_DatePicker({
+                    YearSelector: ".sel_year",
+                    MonthSelector: ".sel_month",
+                    DaySelector: ".sel_day"
+            });
+            $.ms_DatePicker();
+        }); 
+ </script> 
+<include file="public:footer"/> 

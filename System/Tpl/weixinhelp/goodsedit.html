@@ -1,0 +1,61 @@
+<include  file='public:header'/>
+<div class="pad">
+<div class="breadNav">
+  <div class="flt breadNav_text"> <span>功能管理</span><i></i><span>微信应用</span><i></i><span>修改奖品</span> </div>
+</div>
+<form  target="zhuchuang_frm" action="<{:U('weixinhelp/goodsedit',array('id'=>$detail['id']))}>" method="post">
+  <table class="table_data" cellpadding="0" cellspacing="0">
+    <tr>
+      <th class="alginRt w-200">奖项标题：</th>
+      <td><input type="text" name="data[title]" value="<{$detail.title|default=''}>" class="text w-200" /></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-200">奖项：</th>
+      <td><input type="text" name="data[name]" value="<{$detail.name|default=''}>" class="text w-200" /></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-200">奖品图片：</th>
+      <td><div class="fileBox w-200"><img id="photo_img" src="__ROOT__/attachs/<{$detail.photo|default='default.jpg'}>" /> </div>
+        <input type="hidden" name="data[photo]" value="<{$detail.photo}>" id="data_photo" />
+        <input id="photo_file" name="photo_file" type="file" multiple="true" value="" /></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-200">名额数量：</th>
+      <td><input type="text" name="data[num]" value="<{$detail.num|default=''}>" class="text w-200" /></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-200">排序号：</th>
+      <td><input type="data" name="data[sort]" value="<{$detail.sort|default=''}>" class="text w-200" /></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-200" style="z-index:1000"> </th>
+      <td><input type="submit" value="修改商品" class="pub_btn" /></td>
+    </tr>
+  </table>
+</form>
+<script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js?t=<{$nowtime}>"></script>
+<link rel="stylesheet" href="__PUBLIC__/umeditor/themes/default/css/umeditor.min.css" type="text/css">
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/umeditor/umeditor.config.js"></script> 
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/umeditor/umeditor.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+<script>
+		
+        $("#photo_file").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"crowd_thumb"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '上传商品图片',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+			//'debug' : true,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo").val(data);
+                $("#photo_img").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+		
+		
+		
+
+    </script> 
+<include  file='public:footer'/> 

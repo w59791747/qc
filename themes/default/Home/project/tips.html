@@ -1,0 +1,64 @@
+<include file="public:header" /><include file="public:top" />
+</div>
+</div>
+
+<div class="item_search">
+<div class="search_wrap">
+  <div class="bread_nav">您的位置：<a href="<{:U('/index')}>">首页</a>&nbsp;/&nbsp;<a href="<{:U('/project')}>">汽车众筹</a>&nbsp;/&nbsp;标签搜索：<a href=""><{$Projecttips[$tip_id]['cate_name']}></a></div></div>
+  
+<div class="itemwrap">
+  <div class="itemlist qczc">
+    <volist name="list"  mod="12" id="item">
+      <if condition="$mod%2 eq 0">
+      <ul>
+        </if>
+        <li> <a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>" class="list_tit"><img src="__ATTACHS__/<{$Projecttips[$item[tip_id]][img]}>" alt="<{$item.title}>" /><span>【第<{$item.project_id}>期】<{$item.title}></span></a>
+          <div class="jindu">
+            <if condition="$item[status] eq 0 ">
+              <div></div>
+              <elseif condition="$item[status] eq 1 "/>
+              <div class="cur_jindu" style="width:<{:zc_int($item[have_price]/$item[fund_raising]*100)}>%"></div>
+              <elseif condition="$item[status] gt 1 "/>
+              <div class="end_jindu"></div>
+            </if>
+          </div>
+          <div class="canshu">
+            <p>时间：<{$item.dateline|date="Y-m-d H:i",###}><span>|</span>支持人数：<{$item.have_num|default='0'}>人</p>
+            <p><b>众筹额：<font>￥<{:zhu_int($item[fund_raising]/1000000)}></font>万</b><span>|</span>已筹：￥<{:zhu_int($item[have_price]/1000000)}>万</p>
+            <if condition="$item[status] eq 0 ">
+              <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>" class="yuchou">预筹中</a></p>
+              <elseif condition="$item[status] eq 1 "/>
+              <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>" class="yuchou">众筹中</a></p>
+              <elseif condition="$item[status] eq 2 "/>
+              <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>">出售中</a></p>
+              <elseif condition="$item[status] eq 3 "/>
+              <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>">投票中</a></p>
+              <elseif condition="$item[status] eq 4 "/>
+              <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>">待回款</a></p>
+              <elseif condition="$item[status] eq 5 "/>
+              <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>" class="jieshu">已完成</a></p>
+              <elseif condition="$item[status] eq -2 "/>
+              <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>" class="jieshu">已回购</a></p>
+            </if>
+          </div>
+          <if  condition="$item['status'] eq 5 || $item['status'] eq -2">
+            <div class="end_layer">
+              <div>
+                <p><{:zhu_msubstr($item[title],0,5)}>已分红</p>
+                <p>万元收益：<{$item[shouyi][shouyi]|ceil}>元</p>
+                <p>回款周期：<{$item[shouyi][days]}>天</p>
+                <p>年化收益：<?php echo ceil($item[shouyi][shouyi]*365/$item[shouyi][days])/100;?>%</p>
+              </div>
+            </div>
+          </if>
+          <a href="<{:U('project/tips',array('tip_id'=>$item[tip_id]))}>" class="tag"><{$Projecttips[$item[tip_id]][cate_name]}></a> </li>
+        <if condition="$mod%2 eq 1">
+      </ul>
+      </if>
+    </volist>
+    </ul>
+    <div class="select_page"> <{$page}></div>
+  </div>
+</div>
+<div class="fenge"></div>
+<include file="public:footer" /> 

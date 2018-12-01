@@ -1,0 +1,26 @@
+<include file="public:header"/>
+
+<div class="uc_mid_r">
+			<div class="cz_cont">
+            <form method="post"  action="<{:U('member/pricedown')}>"  target="chuang_frm">
+				<p><span>当前可用提现余额（元）：</span><{$MEMBER.price}></p>
+				<p><span>请输入提现金额（元）：</span><input name="data[number]" type="text"></p>
+				<p><span>请选择充值方式：</span>
+                	<select name="data[card_id]">
+                     <foreach name="card" item="var">
+                        <option value="<{$var.card_id}>"><{$var.bank}>   <{:cardstr($var[card])}></option>
+                     </foreach>
+                  </select>
+                </p>	
+                <p><span style="color:#59B743">
+                	备注：提现收取<{$CONFIG[integral][shouxufei]}>元手续费，一次最低取<{$CONFIG[integral][min]}>元
+                </span></p>
+                <input type="submit" class="cz_but" value="申请提现">
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+    </form>
+<include file="public:footer"/>

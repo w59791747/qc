@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <title>微信支付</title>
+    <script type="text/javascript">
+	function onBridgeReady(){
+	   WeixinJSBridge.invoke(
+	       'getBrandWCPayRequest', <{$jsApiParameters}>,
+	       function(res){  
+				if(msg.indexOf("request:ok")>0){
+					//window.location.href = "<{link ctl='package:order' arg0=$input.trade_no}>";
+					<?php echo $jsApiParameters; ?>,
+				}else{
+					alert('支付失败或已取消');
+				}	       	
+	       }
+	   ); 
+	}
+	if (typeof WeixinJSBridge == "undefined"){
+	   if( document.addEventListener ){
+	       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+	   }else if (document.attachEvent){
+	       document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+	       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+	   }
+	}else{
+	   onBridgeReady();
+	}
+	</script>
+</head>
+</html>

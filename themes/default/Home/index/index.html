@@ -1,0 +1,235 @@
+
+<include file="public:header" /><include file="public:top" />
+<!--头部结束-->
+<!--首页弹出二维码-->
+<!-- <div class="sy_layer">
+			<p class="fd_shouyi">浮动年化收益率</p>
+			<p class="nianhua"><{$CONFIG[site][fdnh]}>%+</p>
+			<if condition="empty($MEMBER)">
+			<p class="kj_zhuce"><a href="<{:U('home/passport/login')}>"><input type="submit" value="快速注册享收益" /></a></p>
+			<else/>
+			<p class="kj_zhuce"><a href="<{:U('/project')}>"><input type="submit" value="快速去众筹" /></a></p>
+			</if>
+			<p><a href="<{:U('/guide')}>"><img src="__TMPL__statics/images/whatis.jpg" alt="什么是汽车众筹系统" /></a></p>
+		</div> -->
+	</div>
+</div>
+
+
+
+<div class="flexslider">
+	<ul class="slides">
+     <calldata mdl="adv" where="adv_id=1" limit="0,6" cache="21600" order="orderby asc">
+     	<li style="background:url(__ATTACHS__/<{$item.thumb}>) 50% 0 no-repeat;"  onclick="window.open('<{$item.link}>','<{$item.target}>')"></li>
+     </calldata>
+	</ul>
+</div>
+
+<div class="youshi">
+	<div>
+		<ul>
+			<li><img src="__TMPL__statics/images/cz.png" alt="专注车众筹" /><span>专注车众筹</span><span class="youshi_note">优势高，期限短、回报高</span></li>
+			<li><img src="__TMPL__statics/images/hb.png" alt="高收益低门槛" /><span>高收益低门槛</span><span class="youshi_note">1元即可众筹，门槛低</span></li>
+			<li><img src="__TMPL__statics/images/td.png" alt="专业评估团队" /><span>专业评估团队</span><span class="youshi_note">专业评估中心控制风险</span></li>
+			<li><img src="__TMPL__statics/images/hg.png" alt="限时回购" /><span>限时回购</span><span class="youshi_note">60天滞销回购保障</span></li>
+			<li style="border:none"><img src="__TMPL__statics/images/aq.png" alt="安全可靠" /><span>安全可靠</span><span class="youshi_note">众筹项目100%真实可靠</span></li>
+		</ul>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+<div class="itemwrap">
+  <div class="ad_area">
+    <ul>
+       <calldata mdl="adv" where="adv_id=99" limit="0,6" cache="21600" order="orderby asc">
+        <li style="background:url(__ATTACHS__/<{$item.thumb}>) 50% 0 no-repeat;"  onclick="window.open('<{$item.link}>','<{$item.target}>')"></li>
+       </calldata>
+    </ul>
+  </div>
+	<div class="itemlist">
+<!-- 		<h1>中国领先的二手车众筹平台，安全可靠</h1>
+		<h2>众筹一笔资金，用于购买相应的车辆<br />车辆属于全体投资人，销售车辆赚取价差进行分红，省心、放心、安心！</h2> -->
+		<ul>
+        	<foreach name="list1" key='key' item="item">
+            	<if condition="$key lt 4">
+                    <li>
+                    	<a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>" class="list_tit"><img src="__ATTACHS__/<{$Projecttips[$item[tip_id]][img]}>" alt="<{$item.title}>" /><span>【第<{$item.project_id}>期】<{$item.title}></span></a>
+                        <div class="jindu">
+                        	<if condition="$item[status] eq 0 ">
+                            <div></div>
+                            <elseif condition="$item[status] eq 1 "/>
+                            <div class="cur_jindu" style="width:<{:zc_int($item[have_price]/$item[fund_raising]*100)}>%"></div>
+                            <elseif condition="$item[status] gt 1 "/>
+                            	<div class="end_jindu"></div>
+                            </if>
+                        </div>
+                        <div class="canshu">
+                            <p>时间：<{$item.dateline|date="Y-m-d H:i",###}><span>|</span>支持人数：<{$item.have_num|default='0'}>人</p>
+                            <p><b>众筹额：<font>￥<{:zhu_int($item[fund_raising]/1000000)}></font>万</b><span>|</span>已筹：￥<{$item[have_price]/1000000}>万</p>
+                            
+                            <if condition="$item[status] eq 0 ">
+                            <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>" class="yuchou">预筹中</a></p>
+                            <elseif condition="$item[status] eq 1 "/>
+                            <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>" class="yuchou">众筹中</a></p>
+                            <elseif condition="$item[status] eq 2 "/>
+                            <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>">出售中</a></p>
+							<elseif condition="$item[status] eq 3 "/>
+                            <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>">投票中</a></p>
+							<elseif condition="$item[status] eq 4 "/>
+                            <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>">待回款</a></p>
+                            </if>
+                        </div>
+                        <a href="<{:U('project/tips',array('tip_id'=>$item[tip_id]))}>" class="tag"><{$Projecttips[$item[tip_id]][cate_name]}></a>
+                    </li>
+               		
+                </if>
+            </foreach>
+		</ul>
+
+		<ul>
+			<foreach name="list1" key='key' item="item">
+            	<if condition="$key gt 3">
+                   <li>
+                    	<a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>" class="list_tit"><img src="__ATTACHS__/<{$Projecttips[$item[tip_id]][img]}>" alt="<{$item.title}>" /><span>【第<{$item.project_id}>期】<{$item.title}></span></a>
+                        <div class="jindu">
+                        	<if condition="$item[status] eq 0 ">
+                            <div></div>
+                            <elseif condition="$item[status] eq 1 "/>
+                            <div class="cur_jindu" style="width:<{:zc_int($item[have_price]/$item[fund_raising]*100)}>%"></div>
+                            <elseif condition="$item[status] gt 1 "/>
+                            	<div class="end_jindu"></div>
+                            </if>
+                        </div>
+                        <div class="canshu">
+                            <p>时间：<{$item.dateline|date="Y-m-d H:i",###}><span>|</span>支持人数：<{$item.have_num|default='0'}>人</p>
+                            <p><b>众筹额：<font>￥<{:zhu_int($item[fund_raising]/1000000)}></font>万</b><span>|</span>已筹：￥<{:zhu_int($item[have_price]/1000000)}>万</p>
+                            
+                            <if condition="$item[status] eq 0 ">
+                            <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>" class="yuchou">预筹中</a></p>
+                            <elseif condition="$item[status] eq 1 "/>
+                            <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>" class="yuchou">众筹中</a></p>
+                            <elseif condition="$item[status] eq 2 "/>
+                            <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>">出售中</a></p>
+							<elseif condition="$item[status] eq 3 "/>
+                            <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>">投票中</a></p>
+							<elseif condition="$item[status] eq 4 "/>
+                            <p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>">待回款</a></p>
+                            </if>
+                        </div>
+                        <a href="<{:U('project/tips',array('tip_id'=>$item[tip_id]))}>" class="tag"><{$Projecttips[$item[tip_id]][cate_name]}></a>
+                    </li>
+               		
+                </if>
+            </foreach>
+		</ul>
+
+		<!-- <div class="zc_more"><a href="<{:U('/project')}>">+ 更多众筹车辆</a></div> -->
+	</div>
+	<div class="fenge"></div>
+  <div class="ad_area">
+    <ul>
+       <calldata mdl="adv" where="adv_id=100" limit="0,6" cache="21600" order="orderby asc">
+        <li style="background:url(__ATTACHS__/<{$item.thumb}>) 50% 0 no-repeat;"  onclick="window.open('<{$item.link}>','<{$item.target}>')"></li>
+       </calldata>
+    </ul>
+  </div>
+	<div class="itemlist">
+		<!-- <h1>成功案例</h1>
+		<h2>在这里，您可以看出我们的实力！</h2> -->
+		<ul>
+        	 <calldata mdl="project" where="`audit`=1 and `status` IN (5,-2)  and `closed`=0 " limit="0,4" cache="0" format='true' order="dateline desc">
+             
+             <li>
+				<a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>" class="list_tit"><img src="__ATTACHS__/<{$Projecttips[$item[tip_id]][img]}>" alt="<{$item.title}>" /><span>【第<{$item.project_id}>期】<{$item.title}></span></a>
+				<div class="jindu">
+					<div class="end_jindu"></div>
+				</div>
+				<div class="canshu">
+					<p>时间：<{$item.dateline|date="Y-m-d H:i",###}><span>|</span>支持人数<{$item.have_num|default='0'}>人</p>
+					<p><b>众筹额：<font>￥<{:zhu_int($item[fund_raising]/10000)}></font>万</b><span>|</span>已筹：￥<{:zhu_int($item[have_price]/10000)}>万</p>
+					<p><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>" class="jieshu">已分红，项目完成</a></p>
+				</div>
+				<a href="" class="tag">大众</a>
+				<div class="end_layer">
+					<div>
+						<p><{:zhu_msubstr($item[title],0,5)}>已分红</p>
+						<p>万元收益：<{$item[shouyi][shouyi]|ceil}>元</p>
+						<p>回款周期：<{$item[shouyi][days]}>天</p>
+						<p>年化收益：<?php echo ceil($item[shouyi][shouyi]*365/$item[shouyi][days])/100;?>%</p>
+					</div>
+				</div>
+			</li>
+        </calldata>
+		</ul>
+
+		<!-- <div class="zc_more"><a href="<{:U('project/index',array('status'=>'6'))}>">+ 更多成功案例</a></div> -->
+	</div>
+	<div class="fenge"></div>
+</div>
+<div class="news">
+	<div class="newswrap">
+		<div class="tslice">
+         	<foreach name="articlelist" key='key' item="val">
+             <if condition="$key eq 0">
+              <p class="gonggao"><{$val[title]}><a href="<{:U('article/index',array('cate_id'=>$val[cate_id]))}>" class="more">MORE</a></p>
+			<ul>
+               <calldata mdl="Article" where="`closed`=0 and `audit`=1 and `cate_id`={$val['cate_id']} " limit="0,7" cache="21600" format='true' order="dateline desc">
+               
+                <li><a href="<{:U('article/detail',array('article_id'=>$item[article_id]))}>"><{$item[title]}></a><font><{$item.dateline|date="Y-m-d",###}></font></li>
+               
+              </calldata>
+			</ul>
+             </if>
+            </foreach>			
+		</div>
+		<div class="tslice">
+			<foreach name="articlelist" key='key' item="val">
+             <if condition="$key eq 1">
+              <p class="gonggao"><{$val[title]}><a href="<{:U('article/index',array('cate_id'=>$val[cate_id]))}>" class="more">MORE</a></p>
+			<ul>
+               <calldata mdl="Article" where="`closed`=0 and `audit`=1 and `cate_id`={$val['cate_id']} " limit="0,7" cache="21600" format='true' order="dateline desc">
+              
+                <li><a href="<{:U('article/detail',array('article_id'=>$item[article_id]))}>"><{$item[title]}></a><font><{$item.dateline|date="Y-m-d",###}></font></li>
+               
+              </calldata>
+			</ul>
+             </if>
+            </foreach>	
+		</div>
+		<div style="margin-right:0" class="ph_list">
+			<p class="paihang">投资排行</p>
+			<ul>
+			
+                
+                 <calldata mdl="Member" where="`closed`  IN (1,0) " limit="0,7" cache="21600" format='true' order="tou_price desc">   		
+                 <if condition="$index lt 7 ">
+                  <li><span><{$index}></span><a href=""><{:zhu_name($item[name])}></a><font>投资总额：&nbsp;¥ <{:zhu_int($item[tou_price]/100)}><font></li>
+                  <else/>
+                  <li class="noBorder"><span><{$index}></span><a href=""><{:zhu_name($item[name])}></a><font>投资总额：&nbsp;¥ <{:zhu_int($item[tou_price]/100)}><font></li>
+                  </if>
+                </calldata>
+                
+			</ul>			
+		</div>
+	</div>
+	<div style="clear:both"></div>
+</div>
+<div class="fenge"></div>
+<!-- <div class="shuju">
+<input type="hidden" id='v1' value="<{$count[count1]}>" />
+<input type="hidden" id='v2' value="<{$count[count2]}>" />
+<input type="hidden" id='v3' value="<{$count[count3]}>" />
+	<div class="data">
+		<div class="textA"></div>
+		<div class="textA1">发布项目总数</div>
+		<div class="fenge1"></div>
+		<div class="textB"></div>
+		<div class="textB1">累计支持人数</div>
+		<div class="fenge2"></div>
+		<div class="textC"></div>
+		<div class="textC1">累计投资资金</div>
+	</div>
+</div> -->
+<div class="fenge"></div>
+
+<include file="public:footer" />

@@ -1,0 +1,45 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"></a></div>
+  <div class="title">充值确认信息</div>
+  <div class="right"><a href="<{:U('/mobile/index')}>" id="indexIco" title="首页"></a></div>
+</header>
+<section class="page_ucenter_box">
+  <div class="introForm">
+
+ <if condition="($code eq wxpay && $wx eq 1) || $code eq lianlian">
+	<form method="post"  action="<{:U('payment/order')}>">
+ <else />
+    <form method="post"  action="<{:U('payment/order')}>" target="chuang_frm">
+</if>	
+      <div class="regGroup clearfix">
+        <label class="title">充值来源</label>
+        <div class="control_txt"> <{$types[$from]}> </div>
+      </div>
+      <div class="regGroup clearfix">
+        <label class="title">充值金额</label>
+        <div class="control_txt"> ￥<{$number}> </div>
+      </div>
+      <div class="regGroup clearfix">
+        <label class="title">支付方式</label>
+        <div class="control_txt"> <{$payment[$code][name]}> </div>
+      </div>
+      <input type="hidden" name="data[order_id]" value="<{$order_id}>" />
+      <input type="hidden" name="data[code]" value="<{$code}>" />
+      
+      <if  condition="$code eq money">
+        <div class="regGroup clearfix">
+          <label class="title">支付密码</label>
+          <div class="control_txt">
+             <input type="password" class="text" name="data[pwd]" value="" />
+          </div>
+        </div>
+      </if>
+      <div class="regGroup clearfix">
+        <input type="submit" class="btn" value="立刻支付">
+      </div>
+    </form>
+  </div>
+</section>
+<include file="public:footersmall"/>

@@ -1,0 +1,83 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">订单详情</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+  <form method="post"  action="<{:U('product/orderdetail',array('order_id'=>$detail[order_id]))}>"  target="chuang_frm">
+    <div class="ucenter_table">
+      <table width="100%" cellpadding="0" cellspacing="0">
+	  	 
+	   <tr>
+        <th> 商品名称 </th>
+        <td><a href="<{:U('mobile/product/detail',array('product_id'=>$product[product_id]))}>"><{$product.title}></a></td>
+      </tr>
+       <tr>
+        <th> 单价 </th>
+        <td><{$detail[danjia]}></td>
+       </tr>
+       <tr>
+        <th> 总价 </th>
+        <td><{$detail.amount|default='0'}></td>
+      </tr>
+        <tr>
+          <th> 联系人 </th>
+          <td><{$detail.name}></td>
+        </tr>
+       <tr>
+          <th> 电话 </th>
+          <td><{$detail.mobile|default='0'}></td>
+        </tr>
+        <tr>
+          <th> 运费 </th>
+          <td><{$detail.yunfei}></td>
+        </tr>
+       <tr>
+          <th> 地址 </th>
+          <td><{$detail.addr|default='--'}></td>
+        </tr>
+      <tr>
+        <th> 购买状态 </th>
+        <td><{$zhifu_list[$detail[payed]]}></td>
+        
+         </tr>
+       <tr>
+        <th> 购买时间 </th>
+        <td ><{$detail.dateline|date="Y-m-d H:i:s",###}></td>
+      </tr>
+      <if condition="$detail[payed] lt 1">
+        <tr>
+          <th>状态</th>
+          <td colspan="3" class="uc_pr_btn">未支付></td>
+        </tr>
+        <elseif condition="$detail.payed eq 1 && $detail.status eq 0 "/>
+        <tr>
+        <th>状态</th>
+          <td colspan="3"  class="uc_pr_btn">已支付(待卖家发货)</td>
+        </tr>
+        
+        <elseif condition="$detail.payed eq 1 && $detail.status eq 1 "/>
+         	<th>状态</th>
+          <td colspan="3"  class="uc_pr_btn">
+           <a target="chuang_frm" class="btn" href="<{:U('product/shouhuo',array('buy_id'=>$detail['buy_id']))}>">确认收货</a>
+          </td>
+        </tr>
+         <elseif condition="$detail.payed eq 1 && $detail.status eq 2 "/>
+        		
+         <tr>
+        <th>状态</th>
+          <td colspan="3"  class="uc_pr_btn">订单完成</td>
+        </tr>
+              
+           </if>
+           	 
+      </table>
+    </div>
+     </if>
+  </form>
+</section>
+<include file="public:footersmall"/> 

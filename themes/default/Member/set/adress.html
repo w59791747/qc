@@ -1,0 +1,54 @@
+<include file="public:header"/>
+
+
+<div class="uc_mid_r yitou_list">
+			<ul class="cz_tit">
+				<li><a href="<{:U('member/set/passwd')}>">修改密码</a></li>
+				<li ><a href="<{:U('member/set/renzheng')}>">账号认证</a></li>
+				<li><a href="<{:U('member/set/pwd')}>">支付密码</a></li>
+				<li><a href="<{:U('member/set/card')}>">绑定银行卡</a></li>
+				<li class="cz_cur"><a href="<{:U('member/set/adress')}>">收货地址</a></li>
+			</ul>
+			<div class="select_yitou">
+				<a href="<{:U('set/adresscreate')}>" class="queding yhk">+ 新建收货地址</a>
+			</div>
+             <if condition="$list">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				 <tbody>
+					<tr>
+						<th width="10%">ID</th>
+						<th width="10%">联系人</th>
+						<th width="30%">地址</th>						
+						<th width="10%">电话</th>
+						<th width="15%">添加时间</th>
+						<th width="25%">操作</th>
+					</tr>
+								 
+					<foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.addr_id}></td>
+                            <td><{$var.contact}></td>
+                            <td><span class="ad_text"><{$var.city}><{$var.addr}></span><div>详细地址：<{$var.city}> <{$var.addr}></div></td>
+                            <td><{$var.phone}></td>
+                            <td><{$var.dateline|date="Y-m-d",###}></td>
+                            <td style="text-align:left">
+                            <if condition="$var.default neq 1">
+                             <a target="chuang_frm" class="gozf" href="<{:U('set/set_default',array('addr_id'=>$var['addr_id']))}>">设为默认</a></if>
+                             <a class="gozf" href="<{:U('set/adressedit',array('addr_id'=>$var['addr_id']))}>">编辑</a>
+                              <a target="chuang_frm" class="quxiao" mini="confirm" href="<{:U('set/adressdelete',array('addr_id'=>$var['addr_id']))}>">删除</a>
+                            </td>
+                        </tr>
+                    </foreach>
+				</tbody>
+			</table>
+            <else/>
+			<div class="yitou_none">
+				<img src="__TMPL__statics/images/member/jilu_none.jpg" alt="暂时没有记录" title="暂时没有记录" />
+			</div>
+           	</if>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+<include file="public:footer"/>

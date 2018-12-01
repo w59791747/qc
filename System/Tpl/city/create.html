@@ -1,0 +1,40 @@
+<div class="theme-poptit"><span>添加城市</span> <a href="javascript:;" title="关闭" class="close">×</a> </div>
+						<div class="theme_popover_table">
+                          <form  target="zhuchuang_frm" action="<{:U('city/create')}>" method="post">
+							<table class="table_data" cellpadding="0" cellspacing="0">
+                            
+                            <tr>
+                                <th class="alginRt w-100"> <font class="pointcl">*</font> 选择省份 </th>
+                                <td>
+                                    <select name="data[province_id]" class="text w-200">
+                                    	 <foreach name="province" item="var">
+                                            <option value="<{$var.province_id}>"><{$var.province_name}></option>
+                                        </foreach>
+                                    </select>
+                                </td>
+                              </tr>
+                          <tr>
+                            <th class="alginRt w-100"> <font class="pointcl">*</font> 城市名称 </th>
+                            <td>
+                            	<input type="text" name="data[city_name]" value="<{$detail.city_name|default=''}>" class="text w-200" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="alginRt w-100"> <font class="pointcl">*</font> 排序 </th>
+                            <td>
+                           <input type="text" name="data[orderby]" value="<{$detail.orderby|default=''}>" class="text w-200"  />
+                            </td>
+                          </tr>
+                           
+                         
+                           <tr>
+                                <th class="alginRt w-100"> </th>
+                                <td>
+                                <input type="submit" value="创建城市" class="pub_btn" />
+                                </td>
+                              </tr>
+                          
+                          </table>
+						</div>
+
+

@@ -1,0 +1,90 @@
+<include file="public:header"/>
+<div class="uc_mid_r">
+  <ul class="cz_tit">
+    <li class="cz_cur"><a href="<{:U('member/priceup')}>">充值确认信息</a></li>
+  </ul>  
+   <div class="cz_cont">
+    <if condition="$code eq alipay">
+      <div class="sm_title"><{$payment[$code][name]}>&nbsp;<{$types[$from]}>&nbsp;转账汇款<font class="color">
+        <if condition="$order['pay_status'] eq 1">(已支付)
+          <else/>
+          (待支付)</if>
+        </font></div>
+      <div class="clearfix sm_box clearfix">
+        <div class="sm_text sm_txt ">
+          <p><span>支付宝账号：</span><b><{$payment[$code]["setting"]['alipay_partner']}></b></p>
+          <p><span>公司名称：</span><b><{$payment[$code]["setting"]['alipay_company']}></b></p>
+          <p><span>支付金额：</span><b class="pointcl">￥<{$number}></b></p>
+          <if  condition="$log['jifen'] gt 0">
+            <p><span>使用积分：</span><b class="pointcl"><{$log.jifen}></b></p>
+            <p><span>实际支付：</span><b class="pointcl">￥<{$log[actual_pay]/100}></b></p>
+          </if>
+          <p><span>到账时间：</span><b><{$payment[$code]["setting"]['alipay_daozhang']}>分钟</b></p>
+          <p><span>备注/附言：</span><b><{$order[note]}></b></p>
+        </div>
+        <div class="sm_ewm"><img src="__ATTACHS__/<{$payment[$code]["setting"]['alipay_erweima']}>"  />
+          <span>扫描二维码进行转账</span>
+        </div>
+      </div>
+      <div class="sm_box sm_txt mt10">
+        <p><span>温馨提示：</span><b><{$payment[$code]["setting"]['alipay_beizhu']}></b></p>
+      </div>
+      <elseif condition="$code eq wxpay"/>
+      <div class="sm_title"><{$payment[$code][name]}>&nbsp;<{$types[$from]}>&nbsp;转账汇款<font class="color">
+        <if condition="$order['pay_status'] eq 1">(已支付)
+          <else/>
+          (待支付)</if>
+        </font></div>
+      <div class="clearfix sm_box ">
+        <div class="sm_text sm_txt">
+          <p><span>微信账号：</span><b><{$payment[$code]["setting"]['wxpay_partner']}></b></p>
+          <p><span>公司名称：</span><b><{$payment[$code]["setting"]['wxpay_company']}></b></p>
+          <p><span>支付金额：</span><b class="pointcl">￥<{$number}></b></p>
+          <if  condition="$log['jifen'] gt 0">
+            <p><span>使用积分：</span><b class="pointcl"><{$log.jifen}></b></p>
+            <p><span>实际支付：</span><b class="pointcl">￥<{$log[actual_pay]/100}></b></p>
+          </if>
+          <p><span>到账时间：</span><b><{$payment[$code]["setting"]['wxpay_daozhang']}>分钟</b></p>
+          <p><span>备注/附言：</span><b><{$order[note]}></b></p>
+        </div>
+        <div class="sm_ewm"><img src="__ATTACHS__/<{$payment[$code]["setting"]['wxpay_erweima']}>"  />
+          <span>扫描二维码进行转账</span>
+        </div>
+      </div>
+      <div class="sm_box sm_txt mt10">
+        <p><span>温馨提示：</span><b><{$payment[$code]["setting"]['wxpay_beizhu']}></b></p>
+      </div>
+      <elseif condition="$code eq bank" />
+      <div class="sm_title"><{$payment[$code][name]}>&nbsp;<{$types[$from]}>&nbsp;转账汇款<font class="color">
+        <if condition="$order['pay_status'] eq 1">(已支付)
+          <else/>
+          (待支付)</if>
+        </font></div>
+      <div class="clearfix sm_box">
+        <div class="sm_auto sm_txt">
+          <p><span>银行账户：</span><b><{$payment[$code]["setting"]['bank_partner']}></b></p>
+          <p><span>开户行：</span><b><{$payment[$code]["setting"]['bank_kaihu']}></b></p>
+          <p><span>收款人：</span><b><{$payment[$code]["setting"]['bank_user']}></b></p>
+          <p><span>支付金额：</span><b class="pointcl"> ￥<{$number}></b></p>
+          <if  condition="$log['jifen'] gt 0">
+            <p><span> 使用积分：</span><b class="pointcl"><{$log.jifen}></b></p>
+            <p><span> 实际支付：</span><b class="pointcl">￥<{$log[actual_pay]/100}></b></p>
+          </if>
+          <p><span>到账时间：</span><b><{$payment[$code]["setting"]['bank_daozhang']}>分钟</b></p>
+          <p><span>备注/附言：</span><b><{$order[note]}></b></p>
+          <p><span> 温馨提示：</span><b><{$payment[$code]["setting"]['bank_beizhu']}></b></p>
+        </div>
+      </div>
+    </if>
+  </div>
+</div>
+</div>
+<div style="clear:both"></div>
+</div>
+</div>
+<script type="text/javascript">
+$('.keyradio_txt .keyradio').click(function(){
+		$('.keyradio_txt .keyradio').removeClass('keycolor');
+		$(this).addClass('keycolor');
+	});</script> 
+<include file="public:footer"/>

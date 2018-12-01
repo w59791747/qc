@@ -1,0 +1,66 @@
+<include  file='public:header'/>
+
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>后台管理</span><i></i><span>运营管理</span><i></i><span>分享设置</span>
+           
+            </div>
+            <div class="frt breadNav_other">
+           
+                <div class="bn_input theme-pop-btn">
+               
+                   <div class="bn_input"> 
+                   <{:ROLE('fx/create','','添加分享链接','load','pub_btn',500,250)}>
+                   </div>
+                </div>
+            <div class="clear"></div>
+          </div>
+          </div>
+		<form target="zhuchuang_frm" method="post">
+             <div class="daemonTable">
+              <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+                
+                <tr>
+                	<th class="w-100">
+                    序号
+                    </th>
+                    <th>名称</th>
+                    <th>电话</th>
+                    <th>链接地址</th>
+                    <th class="w-150">
+                    操作
+                    </th>
+                </tr>
+                   <foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.fx_id}></td>
+                            <td><{$var.name}></td>
+                            
+                            <td><{$var.mobile}></td>
+                            <td><{$var.link}></td>
+                            <td>
+                            	<{:ROLE('fx/buy',array("fx_id"=>$var["fx_id"]),'投资数据','','pub_btn')}>
+                                <{:ROLE('fx/reg',array("fx_id"=>$var["fx_id"]),'注册数据','','pub_btn')}>
+                                <{:ROLE('fx/edit',array("fx_id"=>$var["fx_id"]),'编辑','load','pub_btn',500,250)}>
+                                <{:ROLE('fx/delete',array("fx_id"=>$var["fx_id"]),'删除','act','pub_btn gry')}>
+                               
+                            </td>
+                        </tr>
+                    </foreach>
+
+                </table>
+           </div>
+              <div class="daemonBot">
+                <div class="flt daemonBot_cz">
+                </div>
+                <div class="frt daemonPage">
+                   <{$page}>
+                </div>
+                <div class="clear"></div>
+              </div>
+          </div>    
+          
+
+<include  file='public:footer'/>
+      

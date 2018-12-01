@@ -1,0 +1,53 @@
+
+<div class="footer">
+
+	<div class="footwrap">
+    	 <volist name="Articlecate"  mod="2" id="var">
+        
+         	<ul>
+                <li><{$var.title}></li>
+                 <volist name="var.list"  id="item">
+				   <?php
+                                $url = U('article/detail',array('article_id'=>$item[article_id]));
+                            ?>
+                	<li><a href="<{$item[linkurl]|default=$url}>"><{$item.title}></a></li>
+                 </volist>
+            </ul>
+    	</volist>
+   
+		<!--
+		<ul class="saoma">
+			<li><img src="__TMPL__statics/images/erweima.jpg" alt="电话" /><br />android端</li>
+		</ul>
+		<ul class="saoma">
+			<li><img src="__TMPL__statics/images/erweima.jpg" alt="电话" /><br />ios端</li>
+		</ul>
+		-->
+		<ul class="saoma">
+			<li><img src="__ATTACHS__/<{$CONFIG[attachs][erweima1]}>" alt="电话" /><br />关注微信</li>
+		</ul>
+		<ul class="fright">
+			<li class="ftell"><img src="__TMPL__statics/images/tell.gif" alt="电话" />&nbsp;：<{$CONFIG[site][tel]}></li>
+			<li><{$CONFIG[site][gzsj]}></li>
+			<li class="fkefu"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$CONFIG[site][qq]}>&amp;site=qq&amp;menu=yes">联系在线客服</a></li>
+		</ul>
+		<div style="clear:both"></div>
+	</div>
+
+
+	<div class="zhichi">
+		Copyright © 2014-2016 技术支持：助创cms <{$CONFIG[site][icp]}>
+	</div>
+
+</div>
+
+<div class="kefu">
+	<ul>
+		<li class="zxkf"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$CONFIG[site][qq]}>&amp;site=qq&amp;menu=yes">咨询客服</a></li>
+		<li class="zxcz"><a href="<{:U('/guide')}>">新手指引</a></li>
+		<li class="bzzx"><a href="<{:U('article/index',array('cate_id'=>136))}>">帮助中心</a></li>
+		<li class="gotop"><img src="__TMPL__statics/images/gotop.png" alt="返回顶部" /></li>
+	</ul>
+</div>
+</body>
+</html>

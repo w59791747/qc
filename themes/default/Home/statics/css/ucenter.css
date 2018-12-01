@@ -1,0 +1,130 @@
+/*头部*/
+.ucentertop_frt a{ color:#666; margin-left:15px;}
+.ucentertop_frt a:hover{ text-decoration:underline;}
+.ucenterNav{ margin-top:7px;}
+.ucenterNav ul li{ float:left; margin-left:50px; font-size:16px;}
+.ucenterNav ul li a{ display:block; text-align:center;}
+.ucenterNav ul li a i{ display:inline-block; width:24px; height:24px; background:url(../images/ucenter/navIco.png) no-repeat; vertical-align:middle;}
+.ucenterNav ul li a span{ display:block; height:28px; line-height:28px; color:#333;}
+.ucenterNav ul li a.index i{ background-position:0px 0px;}
+.ucenterNav ul li a.hyzx i{ background-position:0px -24px;}
+.ucenterNav ul li a.xmgl i{ background-position:0px -48px;}
+.ucenterNav ul li a.yygl i{ background-position:0px -72px;}
+.ucenterNav ul li a.fxgl i{ background-position:0px -96px;}
+.ucenterNav ul li a.ddgl i{ background-position:0px -120px;}
+.ucenterNav ul li a.xxgl i{ background-position:0px -144px;}
+.ucenterNav ul li a.szgl i{ background-position:0px -168px;}
+.ucenterNav ul li a:hover{ color:#333;}
+.ucenterNav ul li a.current{ color:#4285f4;}
+.ucenterNav ul li a.current i{ background-position-x:-24px;}
+.ucenterCont{ margin:30px 0px;}
+.ucenterCont_flt{ width:230px; background:#EAEDF4; border:1px solid #d5d9e2;}
+.ucenterCont_frt{ background:#fff; width:950px;  border:1px solid #e6e6e6;}
+
+/*左侧样式*/
+.a_userinfo{height:175px;text-align:center;padding:18px 20px 0;border-bottom:1px solid #d8dce5}
+.a_userinfo h3{ text-align:center; height:24px; line-height:24px; margin-bottom:5px; font-weight:700;}
+.a_userinfo .u_img{position:relative;height:100px;margin-bottom:3px}
+.a_userinfo .u_img .uc_mask{position:absolute;top:-16px;left:37px;width:116px;height:116px;background:url(../images/ucenter/uc-txbg.png) no-repeat;}
+.a_userinfo .u_img img{width:90px;height:90px;border-radius:50%;}
+.a_userquar a{ display:inline-block; width:30px; height:30px; border:1px solid #caccd2; margin:0px 5px; border-radius:32px; background:#f8f8f8; position:relative;}
+.a_userquar a i{ display:inline-block; width:16px; height:16px; background:url(../images/ucenter/ucenterIco.png) no-repeat; margin:7px 0px 0px 0px;}
+.a_userquar a.smrz i{ background-position:0px 0px;}
+.a_userquar a.sjrz i{ background-position:0px -16px;}
+.a_userquar a.yxrz i{ background-position:0px -32px;}
+.a_userquar a em{ position:absolute; left:13px; top:13px; background:url(../images/ucenter/ucenterIco.png) no-repeat; background-position:0px -47px; width:12px; height:12px;}
+
+.side_index a{ display:block; background:#629cfb; color:#fff; font-size:14px; height:45px; line-height:45px; padding:0px 25px;}
+.menu_dl dt {position: relative;height:45px;font-weight: normal;line-height: 45px;
+color: #474e5d;text-indent: 44px;background-image: url(../images/member-center-sprites.png) no-repeat;background-position: 200px -368px;cursor: default; background-color:#dce0e9; font-size:14px; font-weight:700;}
+.menu_dl dt:after{ position:absolute; content:''; width:10px; height:5px; background:url(../images/ucenter/navIco.png) 0px -327px no-repeat; top:20px; right:20px;}
+.menu_dl dt i {position: absolute;left: 18px;top: 15px;float: left;width:18px;height: 18px;
+background:url(../images/ucenter/navIco.png) no-repeat;}
+.menu_dl dt.grzx i {background-position:0px -194px;}
+.menu_dl dt.xmfl i {background-position:0px -214px;}
+.menu_dl dt.yygl i {background-position:0px -231px;}
+.menu_dl dt.fxgl i {background-position:0px -249px;}
+.menu_dl dt.ddgl i {background-position:0px -268px;}
+.menu_dl dt.xxgl i {background-position:0px -286px;}
+.menu_dl dt.jbsz i {background-position:0px -305px;}
+/*.menu_dl dd{ display:none;}*/
+.menu_dl dd p{text-indent: 44px;height:36px;line-height:36px; margin-bottom:1px;}
+.menu_dl dd a{ display:block;font-size: 12px;color: #474e5d;}
+.menu_dl dd a:hover,.menu_dl dd a.current{ color:#4285f4; background:#fff;}
+/*右侧样式*/
+.tabList{ background:#F0F2F5; height:40px; line-height:40px; border-bottom:1px #e6e6e6 solid;}
+.ucenterBox{ padding:10px;}
+.tabList a{ display:inline-block; height:40px; line-height:40px; padding:0px 20px;border-right:1px #E0E0E0 solid; text-align:center; font-size:14px; float:left;}
+.tabList a.current{ background:#fff; height:41px;}
+.warning{ height:38px; line-height:38px; padding:0px 10px; border:1px solid #B6C4D8; background:#E8EEF7;}
+.warning i{display:inline-block; width:20px; height:20px; background:url(../images/ucenter/ucenterIco.png) no-repeat; vertical-align:middle; background-position:0px -59px; margin-right:3px;}
+.introForm{ margin:30px 30px 0px 30px;}
+
+.introForm .regGroup{ width:auto;}
+.uctBtn{ background:#EB4F38; margin:0px 10px; border-radius:3px; height:28px; line-height:28px;}
+
+.w-50{ width:50px;}
+.w-100{ width:100px;}
+.w-150{ width:150px;}
+.w-200{ width:200px;}
+.uc_list_table{ width:100%; margin-bottom:20px;}
+.uc_list_table tr th{ background:#f0f0f0;}
+.uc_list_table tr th,.uc_list_table tr td{ border-bottom:1px solid #E7EBEF;line-height:30px; text-align:left; padding:5px 10px;}
+.uc_list_table tr td .btn{ margin-right:10px;}
+.changeBtn,.deleteBtn{ display:inline-block; height:26px; line-height:26px; border-radius:3px; padding:0px; width:60px; text-align:center; color:#222;}
+.changeBtn{ background:#e1edfe; border:1px solid #A6ADB9}
+.deleteBtn{ background:#fefefe; border:1px solid #ccc;}
+.ucenterPage{text-align:right; margin:20px 0px 10px;}
+.uc_list_table tr td .btn:hover{ color:#000;}
+.ucenterPage a,.ucenterPage strong{ display:inline-block; height:24px; padding:0px 10px; line-height:24px; border:1px solid #A6ADB9; background:#fff; margin-left:5px;}
+
+.ucenterPage strong,.ucenterPage a:hover{ color:#fff; background:#629cfb;}
+.uc_detail_table{ width:100%; border-left:1px solid #E7EBEF; border-top:1px solid #E7EBEF;}
+.uc_detail_table tr th,.uc_detail_table tr td{border-right:1px solid #E7EBEF; border-bottom:1px solid #E7EBEF; padding:5px 10px; line-height:30px;}
+.uc_detail_table tr th{background:#f9f9f9; text-align:right; width:100px;}
+
+.uc_index_intro{color:#474e5d; border-bottom:2px dotted #ccc; margin:0px 20px; padding:20px 0px;}
+.uc_index_intro .tit{ margin-bottom:10px; height:30px; line-height:30px; font-size:16px; font-weight:700; color:#474e5d;}
+.uc_shuxing{ width:100%; font-size:14px; line-height:30px;}
+.uc_shuxing p.half{ width:45%; margin-right:5%; float:left; height:30px; overflow:hidden;}
+.uc_price{  width:45%; margin-right:5%; margin-top:10px;line-height:24px; font-size:14px;}
+.uc_price h4{  font-size:16px; font-weight:normal; line-height:30px;}
+.uc_price big{ font-size:24px; line-height:50px; font-weight:700;}
+.uc_pr_btn .btn{ border-radius:3px; margin-right:10px; height:28px; line-height:28px; width:70px; text-align:center; padding:0px;}
+.uc_pr_btn .txbtn{ background:#EB4F38;}
+.uc_index_tongji{color:#474e5d; margin:0px 20px; padding:20px 0px;}
+.uc_index_tongji .tit{ margin-bottom:10px; height:30px; line-height:30px; font-size:16px; font-weight:700; color:#4285f4;}
+.tongjiBox{ width:100%; height:300px; background:#fafafa;} 
+
+/*弹出框样式*/
+.ctpop_cont{ padding:30px 20px 10px;}
+.uctpop_bg{ z-index: 9998; position:fixed; top:0; left:0; width:100%; height:100%;background:rgba(0,0,0,0.6); filter: pro gid:DXImageTransform.Microsoft.gradient(startcolorstr=#BF000000,endcolorstr=#BF000000); display:none;}
+.uctpop_wrap{z-index:9999; position:fixed; top:150px; left:50%; width:480px; height:auto; margin:0px 0 0 -240px; background-color:#fff; display:none; font-family:"Microsoft YaHei";border:8px solid rgba(0,0,0,0.8); }
+.uctpop_wrap .poptit{ background:#f8f8f8; border-bottom:1px solid #eee; height:40px; line-height:40px; padding:0px 10px;}
+.uctpop_wrap .poptit span{ font-size:16px; color:#333;}
+.uctpop_wrap .poptit .close{float:right; color:#333; padding:5px; margin:3px -5px -5px; font:bold 20px/24px simsun;}
+.uctpop_wrap textarea{ padding:5px 1%; width:98%; height:80px; margin-bottom:0px;}
+.popGroup{ margin-bottom:10px; width:100%;}
+.popGroup label{ float:left; width:90px; font-size:12px; height:40px; line-height:40px; text-align:right; color:#666;}
+.popGroup .pop_txt{ margin-left:110px; font-size:12px;}
+.popGroup .pop_txt input.text{ width:80%;}
+.popGroup .pop_txt .focus{ border:1px solid #9cc1ff;box-shadow:0px 0px 3px rgba(66,133,244,0.75);}
+.popGroup .pop_txt select.text{ height:36px; line-height:36px;padding:0px; width:82%;}
+.popGroup .pop_txt input.btn{ width:80px;  height:38px; line-height:38px;border-radius:3px;}
+.popGroup .pop_txt input.btn:hover{ color:#fff;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

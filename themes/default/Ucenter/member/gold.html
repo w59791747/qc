@@ -1,0 +1,38 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+  <header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">积分日志</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+  <div class="tabList tabList_two clearfix"><span><a href="<{:U('ucenter/member/gold')}>" class="current">积分日志</a></span><span> <a href="<{:U('ucenter/member/price')}>"  >资金日志</a></span> </div>
+  <foreach name="list" item="var">
+  <div class="ucenter_table">
+		<table width="100%" cellpadding="0" cellspacing="0">
+		<tr>
+        	<th>ID</th>
+            <td><{$var.log_id}></td>
+        </tr>
+        <tr>
+        	<th>积分</th>
+            <td><{$var.number}></td>
+        </tr>
+        <tr>
+        	<th>日志</th>
+            <td><{$var.log}></td>
+        </tr>
+        <tr>
+        	<th>时间</th>
+            <td><{$var.dateline|date="Y-m-d H:i:s",###}></td>
+        </tr>
+	</table>
+  </div>
+  </foreach>
+   <div class="page"> <{$page}> </div>
+</section>
+   <include file="public:footersmall"/>
+
+

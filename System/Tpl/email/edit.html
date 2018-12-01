@@ -1,0 +1,39 @@
+<include  file='public:header'/>
+
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>模版管理</span><i></i><span>邮件模版</span><i></i><span>编辑模板</span>
+           
+            </div>
+          </div>
+           <form target="zhuchuang_frm"  action="<{:U('email/edit',array('email_id'=>$detail['email_id']))}>" method="post">
+           <div class="daemonTable">
+              	<table class="table_data" cellpadding="0" cellspacing="0">
+                   
+                    <tr>
+                        <th class="alginRt w-200"> 标签 </th>
+                        <td>
+                        	<input type="text" name="data[email_key]" value="<{$detail.email_key|default=''}>" class=" text w-400" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="alginRt w-200"> 模版 </th>
+                        <td>
+                        	<textarea  name="data[email_tmpl]"><{$detail.email_tmpl|default=''}></textarea>
+                        </td>
+                    </tr>
+                    
+                      <tr>
+                        <th class="alginRt w-100"> </th>
+                        <td>
+                        <input type="submit" value="确定编辑" class="pub_btn" />
+                        </td>
+                      </tr>
+                </table>
+           </div>
+        </form>  
+<include  file='public:footer'/>    
+
+      
+

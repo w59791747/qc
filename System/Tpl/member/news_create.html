@@ -1,0 +1,89 @@
+<include  file='public:header'/>
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>会员</span><i></i><span>会员管理</span><i></i><span>推送信息</span>
+           
+            </div>
+          </div>
+		<form target="zhuchuang_frm"  action="<{:U('member/news_create')}>" method="post">
+           <div class="daemonTable">
+              	<table class="table_data" cellpadding="0" cellspacing="0">
+                    
+                   
+                   
+                    
+                    <tr>
+                        <th class="alginRt w-200"><font class="pointcl">*</font> 角色 </th>
+                        <td>
+                        	<select name="data[from]" class="text w-200">
+                            	 <option  value="1">全部</option>
+                                <foreach name="fromlist" key='key' item="val">
+                                    <option  value="<{$key}>" <if condition="$key eq $from" class="text w-400"> selected="selected" </if>><{$val}></option>
+                                </foreach>
+                            </select>
+                        </td>
+                    </tr>
+                    
+                      <tr>
+                        <th class="alginRt w-200"><font class="pointcl">*</font> 标题 </th>
+                        <td>
+                        	<input type="text" name="data[title]" value="<{$detail.title|default=''}>" class="text w-400" />
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th class="alginRt w-200"><font class="pointcl">*</font> 内容 </th>
+                        <td>
+                        	<textarea name="data[content]"></textarea>
+                        </td>
+                    </tr>
+                    
+                    
+                    
+                      <tr>
+                        <th class="alginRt w-100"> </th>
+                        <td>
+                        <input type="submit" value="确认添加" class="pub_btn" />
+                        </td>
+                      </tr>
+                </table>
+           </div>
+        </form> 
+        
+        
+        <script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js?t=<{$nowtime}>"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/area.js?t=<{$nowtime}>"></script>
+
+    <link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+    <script>
+        $("#photo_file").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"member_thumb"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '上传头像',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+			//'debug' : true,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo").val(data);
+                $("#photo_img").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+
+    </script>   
+    
+      <script type="text/javascript">_init_area();</script>
+      
+      <script type="text/javascript">
+		var Gid  = document.getElementById ;
+		var showArea = function(){
+			Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" + 	
+			Gid('s_city').value + " - 县/区" + 
+			Gid('s_county').value + "</h3>"
+									}
+		Gid('s_county').setAttribute('onchange','showArea()');
+		</script>
+<include  file='public:footer'/>    
+
+   

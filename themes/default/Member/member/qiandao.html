@@ -1,0 +1,42 @@
+<include file="public:header"/>
+
+<div class="uc_mid_r">
+			
+			<div class="cz_cont">
+				<p><span>我的积分：</span><{$MEMBER.gold}></p>
+                 <if condition="$is_qiandao">
+                 
+            	 <p><span style="color:#30A615">今天已签到，请明天再来~</p>
+                 <else/>
+				 <p><a mini='act' href="<{:U('member/qiandao_create')}>" class="qdbut">签到送积分</a></p>
+                </if>                    
+                    <div class="qiandaotime">
+						  <div class="weeks clearfix"> <span>周日</span> <span>周一</span> <span>周二</span> <span>周三</span> <span>周四</span> <span>周五</span> <span>周六</span> </div>
+						  <table width="100%" cellpadding="0" cellspacing="0">
+						  
+							 <foreach name="month_day_arr" item="var">
+								<tr>
+								 <foreach name="var" item="item">
+									  <td  
+										<?php
+											if(in_array($item,$arr)){
+												echo "class='on'";
+											}
+										?>
+									  
+									  ><{$item}></td>
+								  </foreach>
+								</tr>
+							 </foreach>
+							
+						  </table>
+						  <div class="qiandaozhushi">
+							<p><b class="pointcl">备注：</b>每天签到送 <{$jifen}> 积分</p>
+						  </div>	
+			</div>			
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+<include file="public:footer"/>

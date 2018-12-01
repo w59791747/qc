@@ -1,0 +1,275 @@
+<include  file='public:header'/>
+<link href="<{$admin_statics}>/css/jquery.dad.css" type="text/css" rel="stylesheet">
+<div class="pad">
+<div class="inTongzhi"> <i class="laba"></i> 欢迎<b> <{$admin.admin_name}></b> 来到<{$CONFIG.site.sitename}>管理后台！ </div>
+<div>
+  <div class="intjList clearfix">
+    <div class="cont firstcont"> <a  target="main_frm"  href="<{:U('project/create')}>">
+    <i class="ico1"></i>
+        <h4>发起众筹</h4>
+     
+      </a> </div>
+    <div class="cont secondcont"> <a  target="main_frm"  href="<{:U('project/crowd_toupiao')}>">
+      <i class="ico2"></i>
+        <h4>众筹投票</h4>
+      
+      </a> </div>
+    <div class="cont thirdcont"> <a  target="main_frm" href="<{:U('verify/index')}>">
+       <i class="ico3"></i>
+        <h4>实名认证</h4>
+      
+      </a> </div>
+    <div class="cont fourthcont"> <a target="main_frm" href="<{:U('memberlog/tixian')}>">
+       <i class="ico4"></i>
+        <h4>提现审核</h4>
+     
+      </a> </div>
+    <div class="clear"></div>
+  </div>
+  <div class="indexCont">
+    <div class="publicTit clearfix"><span><i class="fbxm"></i>发布项目统计</span></div>
+    <div class="tongjiFull clearfix">
+      <div class="tjd_chose clearfix"></div>
+      <div class="bjb" id="container"></div>
+      <a target="main_frm" href="<{:U('tongjiproject/index')}>">查看详细项目统计报表</a> </div>
+    </div>
+  </div>
+  <div class="indexCont">
+    <div class="publicTit clearfix"><span><i class="hyzc"></i>会员注册统计</span></div>
+    <div class="tongjiFull clearfix">
+      <div class="tjd_chose clearfix"></div>
+      <div class="bjb" id='container2'></div>
+      <div class="tongjiCont">
+        <foreach name="tongji2[from_lists]" key='key' item="v">
+          <if condition="$key eq 'all'"> <span><i>总数</i><b><{$v}></b></span>
+            <else/>
+            <span><i><{$from_list[$key]}></i><b><{$v}></b></span> </if>
+        </foreach>
+        <a target="main_frm" href="<{:U('tongjimember/index')}>">查看详细会员统计报表</a> </div>
+    </div>
+  </div>
+ 
+  
+  <div class="clearfix">
+    <div class="indexCont_half flt">
+      <div class="publicTit clearfix"><span><i class="kfxx"></i>助创系统开发信息</span></div>
+      <div class="indexCont_kfxx">
+        <p><font class="black6">安装环境：apache+php+mysql</font></p>
+        <p><font class="black6">系统开发：</font>合肥助创信息科技有限公司开发部</p>
+        <p><font class="black6">联系电话：</font>0551-65568651</p>
+        <p><font class="black6">售前QQ：</font><a class="qqjt" href="http://wpa.qq.com/msgrd?v=3&amp;uin=3029347583&amp;site=qq&amp;menu=yes" target="_blank">QQ交谈</a> </p>
+        <p><font class="black6">系统官网：</font><a target="_blank" href="http://www.izhuchuang.com">www.izhuchuang.com</a></p>
+      </div>
+    </div>
+    <div class="indexCont_half frt">
+      <div class="publicTit"><span class="flt"><i class="gfxx"></i>官方公告信息</span></div>
+      <ul class="indexCont_ul">
+      	<foreach name="gonggao" key='key' item="var">
+          <li> <a target="_blank" href="http://www.izhuchuang.com/article/detail/article_id/<{$var.article_id}>.html"  class="black6"><{$var.title}></a></li>
+        </foreach>
+      </ul>
+    </div>
+  </div>
+    <div class="indexCont">
+      <div class="publicTit clearfix"><span class="flt"><i class="yhfk"></i>最新用户反馈</span><a target="main_frm" href="<{:U('feedback/index')}>" class="frt black9">更多</a></div>
+      <ul class="indexCont_ul">
+        <foreach name="feedback" key='key' item="var">
+          <li> 
+          <{:msubstr($var[content],0,40)}>
+            <{:ROLE('feedback/edit',array("feedback_id"=>$var["feedback_id"]),'去处理','','frt')}> </li>
+        </foreach>
+      </ul>
+   
+  </div>
+</div>
+</aside>
+<script src="<{$admin_statics}>/js/jquery-1.11.3.min.js"></script> 
+<script src="<{$admin_statics}>/js/jquery.dad.min.js"></script> 
+<script src="__PUBLIC__/js/highcharts/highcharts.js"></script> 
+<script src="__PUBLIC__/js/highcharts/modules/exporting.js"></script> 
+<!--右侧JS--> 
+<script type="text/javascript">
+
+$(document).ready(function(){
+$("table.table_data  tr:odd").addClass("cred");
+
+
+	});
+	
+</script> 
+<script type="text/javascript">
+<!--右侧JS-->
+$(document).ready(function(){
+
+	$('.jq22').dad({
+		draggable: 'h4'
+	});
+	
+	});
+	
+</script> 
+<script>
+	$(function () {
+    $('#container').highcharts({
+        title: {
+            text: '<{$title}>',
+            x: -20 //center
+        },
+        
+        xAxis: {
+            categories: [<{$tongji[x]}>]
+        },
+        yAxis: {
+            title: {
+                text: '项目人数'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ''
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [ {
+            name: '<{$type_list[crowd]}>',
+            data: [<{$tongji[y][crowd]}>]
+        }]
+    });
+});
+				
+</script> 
+<script>
+          $(function () {
+            $('#container2').highcharts({
+                chart: {
+                    type: 'column',
+                    margin: [ 50, 50, 100, 80]
+                },
+                title: {
+                    text: '<{$title2}>'
+                },
+                xAxis: {
+                    categories: [
+                        <{$tongji2[x]}>
+                    ],
+                    labels: {
+                        rotation: 0,
+                        align: 'center',
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '注册人数'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                tooltip: {
+                    pointFormat: '<b>{point.y:.1f}</b>',
+                },
+                series: [{
+                    name: 'Population',
+                    data: [<{$tongji2[y]}>],
+                    dataLabels: {
+                        enabled: false,
+                        rotation: -90,
+                        color: '#FFFFFF',
+                        align: 'right',
+                        x: 4,
+                        y: 10,
+                        style: {
+                           
+                        }
+                    }
+                }]
+            });
+        });
+        </script> 
+<script>
+ 	$(function () {
+    $('#container3').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: '<{$title3}>'
+        },
+        tooltip: {
+    	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    connectorColor: '#000000',
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: [
+			 <{$tongji3[tongji]}>
+            ]
+        }]
+    });
+});				
+ 
+ </script> 
+<script>
+ 	$(function () {
+    $('#container4').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: '<{$title4}>'
+        },
+        tooltip: {
+    	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    connectorColor: '#000000',
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: [
+			 <{$tongji4[tongji]}>
+            ]
+        }]
+    });
+});				
+ 
+ </script>

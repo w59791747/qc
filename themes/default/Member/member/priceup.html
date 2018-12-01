@@ -1,0 +1,38 @@
+<include file="public:header"/>
+<div class="uc_mid_r">
+			<ul class="cz_tit">
+				<li class="cz_cur"><a href="<{:U('member/priceup')}>">线上充值</a></li>
+				<li><a href="<{:U('member/priceup2')}>">线下充值</a></li>
+			</ul>
+            <form method="post"  action="<{:U('member/pricepay')}>"  target="chuang_frm">
+			<div class="cz_cont">
+				<p><span>当前可用余额（元）：</span><{$MEMBER.price}></p>
+                 <if condition="$order">
+                 <input readonly="readonly"  type="hidden" name="data[order_id]"  value="<{$order[order_id]}>" />
+            	 <p><span>充值金额（元）：<input readonly="readonly"  type="text" name="data[number]"  value="<{$order[amount]/100}>" class="text" /></p>
+                 <else/>
+				<p><span>请输入充值金额（元）：</span><input type="text /" name="data[number]" ></p>
+                </if>
+				<p><span>请选择充值方式：</span></p>	
+				<ul>	
+                    
+                    <foreach name="payment" item="var">
+                        <eq name="var.is_open" value="1">
+                          <if condition="$var['code'] neq 'money'">
+                           <li><label><input class="pay_int" value="<{$var.code}>" name="data[code]" type="radio" />
+                           <img src="__PUBLIC__/images/<{$var.logo}>" alt="" /><label></li>
+                           
+                          </if>
+                        </eq>
+                      </foreach>
+				</ul>	
+                <input type="submit" class="cz_but" value="立即充值">
+                </form>
+			</div>			
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+<include file="public:footer"/>

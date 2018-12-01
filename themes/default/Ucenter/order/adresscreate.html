@@ -1,0 +1,58 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">添加收货地址</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+  <div class="introForm">
+    <form method="post"  action="<{:U('order/adresscreate')}>"  target="chuang_frm">
+      <div class="regGroup clearfix">
+        <label class="title">联系人</label>
+        <div class="control_txt">
+          <input type="text" name="data[contact]" value="<{$detail.contact|default=$MEMBER[detail][realname]}>" class="text" />
+        </div>
+      </div>
+      <div class="regGroup clearfix">
+        <label class="title">联系电话</label>
+        <div class="control_txt">
+          <input type="text" name="data[phone]" value="<{$detail.phone|default=$MEMBER[mobile]}>" class="text" />
+        </div>
+      </div>
+      <div class="regGroup clearfix ">
+        <label class="title">所在城市</label>
+        <div class="control_txt">
+          <select id="s_province" name="s_province" class="text city">
+          </select>
+          <select id="s_city" name="s_city" class="text city">
+          </select>
+          <select id="s_county" name="data[city]" class="text city">
+          </select>
+        </div>
+      </div>
+      <div class="regGroup clearfix">
+        <label class="title">详细地址</label>
+        <div class="control_txt">
+          <input type="text" name="data[addr]" value="<{$detail.addr|default=''}>" class="text" />
+        </div>
+      </div>
+      <div class="regGroup clearfix">
+        <input type="submit" class="btn" value="创建收货地址">
+      </div>
+    </form>
+  </div>
+  <script type="text/javascript" src="__PUBLIC__/js/area.js?t=<{$nowtime}>"></script> 
+  <script type="text/javascript">_init_area();</script> 
+  <script type="text/javascript">
+		//var Gid  = document.getElementById ;
+		var showArea = function(){
+			$('#show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" + 	
+			$('#s_city').value + " - 县/区" + 
+			$('#s_county').value + "</h3>"
+									}
+		</script> 
+</section>
+<include file="public:footersmall"/> 

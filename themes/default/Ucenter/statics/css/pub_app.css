@@ -1,0 +1,94 @@
+@charset "utf-8";
+/* CSS Document */
+html{height:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-webkit-font-smoothing:antialiased;}
+body{margin:0;padding:0;min-height:100%;font-family:"MICROSOFT YAHEI"; font-size: 0.12rem; color:#333; background: #f6f6f6;min-width: 320px;max-width: 100%;}  
+h1,h2,h3,h4,h5,h6,p,figure,form{margin:0;}  
+table{border-collapse:collapse;border-spacing:0;}  
+img{border:0;vertical-align:middle;-ms-interpolation-mode: bicubic;}  
+a{text-decoration:none;color:#333;-webkit-tap-highlight-color:rgba(0,0,0,0);}  
+a:focus{outline:none;-moz-outline:none;}  
+a:visited{outline:none;-moz-outline:none;}  
+ul,li,ol,dl,dt,dd{margin: 0;padding:0;list-style: none outside none;}
+table,tr,th,td,input{margin: 0;padding:0; border-collapse: collapse; border-spacing: 0;}
+h1,h2,h3,h4{ font-weight:normal;}
+table{ width:100%;}
+ol li{list-style:none;}  
+em{font-style:normal;}
+img{ border:0; border:none; max-width:100%;}
+ul.inline-style li{float:left;display:inline;}
+button,input,select,textarea{font-size:0.875em;margin: 0;outline: 0 none;vertical-align: baseline;*vertical-align: middle;font-family:"MICROSOFT YAHEI";-webkit-tap-highlight-color:rgba(0,0,0,0); border:0.01rem solid #dedede;height:0.4rem;  line-height:0.4rem;}  
+input.text,select.text{-webkit-appearance: none}
+textarea{overflow: auto;vertical-align: top;resize:none;}  
+button,input{line-height: normal;}  
+button,  
+html input[type="button"],   
+input[type="reset"],  
+input[type="submit"]{-webkit-appearance: button;cursor: pointer;*overflow: visible;}  
+button[disabled],
+input[disabled],
+input[type="checkbox"],
+input[type="radio"]{box-sizing: border-box;padding: 0;*height: 0.13rem;*width: 0.13rem;} 
+button::-moz-focus-inner,  
+input::-moz-focus-inner{border: 0;padding: 0;}
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display: block;}  
+audio,canvas,video{display: inline-block;*display: inline;*zoom: 1;}  
+audio:not([controls]){display: none;height: 0;}  
+input[type="search"]{-webkit-appearance: textfield;-moz-box-sizing: content-box;-webkit-box-sizing: content-box;box-sizing: content-box; box-sizing: border-box;}  
+input:-moz-placeholder{color: #999;}  
+input::-webkit-input-placeholder{color:#999;}
+.none{ display:none;}
+.clearfix { display: block; *zoom: 1; }
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.article{ font-size:0.14rem; line-height:0.24rem;}
+.article p a{color:#2d64b3;text-decoration:underline}
+.article p{ text-indent:2em;}
+.article h1,.article h2,.article h3,.article h4{ text-indent:2em;height:0.4rem;line-height:0.4rem; color:#666;}
+.article img{ max-width:100%;height:auto; margin:0.1rem auto; vertical-align:top; display:block;}
+
+.mt10{margin-top:0.10rem;}
+.mb10{margin-bottom:0.10rem;}
+.mr10{margin-right:0.10rem;}
+.ml10{margin-left:0.10rem;}
+
+.fontcl{ color:#FF6501;}
+.subfontcl{ color:#00B050;}
+.pointcl{ color:#fd0202;}
+.black0{ color:#000;}
+.black3{ color:#333;}
+.black6{ color:#666;}
+.black9{ color:#999;}
+.whitecl{ color:#fff;}
+.red{ color:#fd0202;}
+.green{ color:#16C990;}
+
+.btn{ display:inline-block;opacity:1;cursor:pointer; text-align:center; color:#fff; border-radius:0.03rem; outline:none;-webkit-appearance: none; border:none; background-color:#FF6501; height:0.36rem;  line-height:0.36rem; font-size:0.14rem;}
+.btn:hover{opacity:0.9;filter:alpha(opacity=90); color:#fff; text-decoration:none;}
+
+.overflow_clear{overflow:hidden;text-overflow:ellipsis; text-overflow: -o-ellipsis-lastline; white-space:nowrap;}/*css溢出省略*/
+.fl{float:left;}
+.fr{float:right;}
+.clear{clear:both; font-size: 0; height: 0; line-height: 0;}
+
+@media (max-width:240px){
+    html { font-size: 75px;}
+}
+@media screen and (min-width: 240px) and (max-width: 319px){
+    html{font-size:75px;}
+}
+@media screen and (min-width: 320px) and (max-width: 479px){
+    html{font-size:100px;}
+}
+@media screen and (min-width: 480px) and (max-width: 639px){
+    html{font-size:150px;}
+}
+@media screen and (min-width: 640px) and (max-width: 719px){
+    html{font-size:200px;}
+}
+@media screen and (min-width: 720px) and (max-width:967px){
+    html{font-size:225px;}
+}
+@media (min-width:721px) {
+    html { font-size: 100px;}
+}
+/*以上为通用样式*/
+

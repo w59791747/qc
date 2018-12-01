@@ -1,0 +1,46 @@
+<include file="public:header" /><include file="public:top" />
+<!--面包屑导航-->
+</div>
+</div>
+
+<div class="zx_list">
+	<div class="zx_list_wrap">
+		<div class="zx_list_l">
+			<ul>
+           		<foreach name="list" key='key' item="item">
+                 	<if condition="112 eq $item['cate_id'] || 148 eq $item['cate_id'] ">
+                    	 <foreach name="item.child"  item="val">
+                         <?php
+                        $url2 = U('article/detail',array('article_id'=>$val[article_id]));
+                    ?>
+                    	<li><a <if condition="$detail['article_id'] eq $val['article_id'] "> class="cur_zx_list" </if> href="<{$val[linkurl]|default=$url2}>"><{$val.title}></a></li>
+                        </foreach>
+                    <else/>
+                    <li><a <if condition="$cate_id eq $item['cate_id'] "> class="cur_zx_list" </if> href="<{:U('article/index',array('cate_id'=>$item['cate_id']))}>"><{$item.title}></a></li>
+                    </if>
+                </foreach>
+				 <li><a class="cur_zx_list" href="<{:U('cheshang/index')}>">合作车商</a></li>
+			</ul>
+		</div>
+		<div class="zx_list_r">
+		<div class="huodong">
+				
+				<ul>
+					<foreach name='list2' item='item'>
+                    
+                    <li><a  href=""><img src="__ATTACHS__/<{$item.img}>" alt="<{$item.title}>" /><span><{$item.title}></span></a></li>
+        
+                   </foreach>
+				</ul>
+
+			</div>
+        	
+			<div class="select_page zx_list_page"><{$page}></div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+<div class="fenge"></div>
+
+<include file="public:footer" /> 

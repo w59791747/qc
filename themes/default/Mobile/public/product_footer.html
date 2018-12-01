@@ -1,0 +1,69 @@
+<script>
+	$('#goback').click(function(){
+	history.back(-1);	
+})
+</script>
+
+<div class="footerTxt">
+  <p class="black9"><{$CONFIG[site][sitename]}> <{$CONFIG[site][icp]}></p>
+</div>
+</section>
+</section>
+</section>
+<a class="goTop" href="javascript:goTop();"></a> 
+<script>
+	  TouchSlide({ slideCell:"#dreamtabBox" });
+		TouchSlide({ slideCell:"#fabuOptionBox" });
+		TouchSlide({ slideCell:"#memberOptionBox" });
+		
+	  //回到顶部
+	  function goTop(){
+			$('html,body').animate({'scrollTop':0},600);
+		}
+    var stu = true;
+		$(window).scroll(function(){
+  		if($(window).scrollTop() > 150) {
+          $('a.goTop,.usedFk').show();
+      } else {
+          $('a.goTop,.usedFk').hide();
+      }	
+      
+      if($(window).scrollTop() > 0) {
+        if(stu){
+          stu = false;
+          var headerClone = $('header').clone();
+          headerClone.addClass('headerClone');
+          headerClone.insertBefore($('.contentWrapper'));  
+        }        
+      } else {
+        stu = true;
+        $('.headerClone').remove();
+      } 
+
+		});
+</script>
+<if condition="$CONFIG['home']['project'] eq on && $ctl eq index"> 
+  <script type="text/javascript" src="__PUBLIC__/js/area.js?t=<{$nowtime}>"></script> 
+  <script type="text/javascript">_init_area();</script> 
+  <script type="text/javascript">_init_area2();</script> 
+  <script type="text/javascript">_init_area1();</script> 
+</if>
+<footer>
+  <div class="tz_btn">      
+      <div class="tz_btn_r fr">
+          <a onclick="buy()" class="pro_btn">立即兑换</a>
+      </div>
+      <div class="jifen_count">
+          <div class="dd">
+              <div class="kucun"> 
+                <a class="amountBtn minus" href="javascript:;" quantity="-">-</a>
+                <input type="text" id="cart_product_num" class="amount" onchange="check(this.value);" value="1" />
+                <a class="amountBtn plus" href="javascript:;"  quantity="+">+</a> 
+              </div>
+          </div>
+      </div>
+      <div class="fenge"></div>
+  </div>
+</footer>
+</body>
+</html>

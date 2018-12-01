@@ -1,0 +1,28 @@
+<include file="public:headercoupon"/>
+<link rel="stylesheet" type="text/css" href="__TMPL__coupon/static/css/Coupon.css?201150408">
+<body style="background:#E85346;">
+<div class="voucherPage"> <img src="__TMPL__coupon/static/img/coupon_img4.png" width="100%" height="" />
+  <div class="couponpage_intro">
+    <foreach name="detail" item="item">
+      <h2>活动介绍</h2>
+      <div class="nr">
+        <p><{$item.intro}></p>
+      </div>
+      <h2>活动时间</h2>
+      <div class="nr">
+        <p><{$item.stime}> 至 <{$item.ltime}></p>
+      </div>
+      <div class="couponpage_butn_box"><a href="<{:U('weixin/coupon/sign',array('coupon_id'=>$item['coupon_id']))}>" class="butn">立即领取</a> </div>
+	   <div class="couponpage_butn_box"><a href="<{:U('weixin/coupon/preview',array('coupon_id'=>$coupon['coupon_id']))}>" class="butn">查看我的优惠券</a> </div>
+    </foreach>
+    <div class="zhuyi">
+      <h3>【注意事项】</h3>
+      <p>
+        <{$item.use_tips}>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="footer_copy">&copy;<{$CONFIG.site.sitename}></div>
+</body>
+</html>

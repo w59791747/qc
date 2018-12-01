@@ -1,0 +1,48 @@
+<include file="public:header"/>
+
+<div class="uc_mid_r yitou_list">
+			<div class="select_yitou">
+            	<form method="post"  action="<{:U('jifen/gold')}>">
+                    <span>请选择时间：</span>
+                    <input  name = 'stime' value="<{$stime}>" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"/><span>到</span><input name = 'ltime' type="text" value="<{$ltime}>"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+                    <select name="status">
+                    <option value="0" <if condition="$status eq 0"> selected="selected" </if>>全部</option>
+                        <option value="2" <if condition="$status eq 2"> selected="selected" </if>>积分支出</option>
+                        <option value="1" <if condition="$status eq 1"> selected="selected" </if>>积分收入</option>
+                    </select>
+                    <input class="queding sy_queding" type="submit" value="确定" />
+                 </form>
+                 
+				
+			</div>
+             <if condition="$list">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				 <tbody>
+					<tr>
+						<th width="10%">ID</th>
+						<th width="30%">积分变化</th>
+						<th width="35%">日志记录</th>						
+						<th width="25%">时间</th>						
+					</tr>								 
+					 <foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.log_id}></td>
+                            <td><{$var.number}></td>
+                            <td><{$var.log}></td>
+                            <td><{$var.dateline|date="Y-m-d H:i:s",###}></td>
+                        </tr>
+                    </foreach>
+				</tbody>
+			</table>
+			<else/>
+			<div class="yitou_none">
+				<img src="__TMPL__statics/images/member/jilu_none.jpg" alt="暂时没有记录" title="暂时没有记录" />
+			</div>
+            </if>
+				<div class="select_page us_center"><{$page}></div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+<include file="public:footer"/>

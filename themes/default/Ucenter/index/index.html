@@ -1,0 +1,52 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title"><{$MEMBER['name']}></div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+  <div class="u_top">
+      <div class="u_top_t">
+          <div class="u_top_t_img"><img src="__ROOT__/attachs/<{$MEMBER.face}>"></div>
+          <div class="u_top_t_text">
+              <span class="m_name"><{$MEMBER['name']}></span>
+              <span class="m_account">账户余额：¥ <{$MEMBER.price}></span>
+              <span class="m_btn">
+                <a href="<{:U('ucenter/member/priceup')}>">充值</a>
+                <a href="<{:U('ucenter/member/pricedown')}>">提现</a>
+              </span>
+          </div>
+          <div class="msg_btn">
+              <a href="<{:U('message/news')}>"><i class="iconfont icon-xiaoxi"></i></a>
+              <!-- <a href="<{:U('member/qiandao/qiandao')}>"><i class="iconfont icon-yonghu_qiandao"></i></a> -->
+          </div>
+      </div>
+      <div class="u_top_b"></div>
+  </div>
+  
+  <div class="u_indexlist">
+      <ul>
+        <li><a href=""><em><i><{$MEMBER[dong_price]/100}></i> 元</em>已冻结</a></li>
+        <li><a href="<{:U('order/lists')}>"><em><i><{$count02|default='0'}></i> 个</em>订单</a></li>
+        <li><a href="<{:U('message/follow_p')}>"><em><i><{$count03|default='0'}></i> 个</em>关注</a></li>
+        <li><a href=""><em><i><{$MEMBER.gold}></i> 分</em>积分</a></li>        
+      </ul>
+  </div>
+  <div class="floor_fg"></div>
+  <div class="basicList">
+    <ul class="menu_dl">
+      <li class="grzx"><a href="<{:U('ucenter/member/index')}>"><i class="iconfont icon-shouye"></i>会员中心</a></li>
+      <li class="xmfl"><a href="<{:U('ucenter/project/crowd_canyu')}>"><i class="iconfont icon-xiangmuxiaoxi"></i>项目管理</a></li>
+      <li class="ddgl"><a href="<{:U('ucenter/order/index')}>"><i class="iconfont icon-dingdan"></i>订单管理</a></li>
+        
+      <li class="fxgl"><a href="<{:U('ucenter/fenxiao/lists')}>"><i class="iconfont icon-fenxiang"></i>我的邀请</a></li>
+      <li class="xxgl"><a href="<{:U('ucenter/message/index')}>"><i class="iconfont icon-xiaoxi1"></i>消息管理</a></li>
+      <li class="jbsz"><a href="<{:U('ucenter/set/set')}>"><i class="iconfont icon-shezhi"></i>设置</a></li>
+    </ul>
+  </div>
+  <div class="basicBtn"> <a href="<{:U('mobile/passport/logout')}>" class="btn">退出账号</a> </div>
+</section>
+<include file="public:footersmall"/> 

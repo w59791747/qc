@@ -1,0 +1,20 @@
+<div class="zcjiluTit">
+  <table>
+    <tr>
+      <th>参与人</th>
+      <th>众筹金额</th>
+      <th class="time">众筹时间</th>
+    </tr>
+  </table>
+</div>
+<div class="zcjiluList">
+  <table>
+    <foreach name='lists_select' key='key' item='val'>
+      <tr>
+        <td><{:zhu_name($memberlistcount[$val[uid]][mobile])}></td>
+        <td>￥<{:zhu_int($val[price]/100)}></td>
+        <td class="time"><{$val.dateline|date="Y-m-d",###}></td>
+      </tr>
+    </foreach>
+  </table>
+</div>

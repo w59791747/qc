@@ -1,0 +1,97 @@
+<include  file='public:header'/>
+<div class="pad">
+<div class="breadNav">
+  <div class="flt breadNav_text"> <span>功能</span><i></i><span>积分商城</span><i></i><span>添加商品</span> </div>
+</div>
+<form  target="zhuchuang_frm" action="<{:U('product/create')}>" method="post">
+  <table class="table_data" cellpadding="0" cellspacing="0">
+    <tr>
+      <th class="alginRt w-100"> <font class="pointcl">*</font> 标题 </th>
+      <td><input type="text" name="data[title]" value="<{$detail.title|default=''}>" class="text w-200" /></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-200"> 商品图片</th>
+      <td><div class="fileBox w-200"> <img id="photo_img"  src="__ATTACHS__/<{$detail.photo|default='default.jpg'}>" /> </div>
+        <input type="hidden" name="data[photo]" value="<{$detail.photo}>" id="data_photo" />
+        <input class="file"  id="photo_file" name="photo_file" type="file" multiple="true" value="" /></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-200"> 商品分类 </th>
+      <td><select name='data[cate_id]' class="text w-200">
+          <foreach name='catelist' item='val'> <option  
+            <if condition="$detail[cate_id] eq $val[cate_id]"> selected="selected" </if>
+             value='<{$val.cate_id}>'><{$val.cate_name}>
+            </option>
+          </foreach>
+        </select>
+    </tr>
+    <tr>
+      <th class="alginRt w-100"> <font class="pointcl">*</font> 需要积分 </th>
+      <td><input type="text" name="data[jifen]" value="<{$detail.jifen|default=''}>" class="text w-200" /></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-100"> 运费 </th>
+      <td><input type="text" name="data[freight]" value="<{$detail.freight|default=''}>" class="text w-200" /></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-100"> <font class="pointcl">*</font> 库存 </th>
+      <td><input type="text" name="data[store]" value="<{$detail.store|default=''}>" class="text w-200" /></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-100"> 已购买 </th>
+      <td><input type="text" name="data[buys]" value="<{$detail.buys|default=''}>" class="text w-200" /></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-100"> 审核 </th>
+      <td><label class="radio"> <input type="radio" name="data[audit]" value="1" 
+          <if condition="$detail.audit eq 1"> checked="checked" </if>
+          >
+          审核</label>
+        <label class="radio"> <input type="radio" name="data[audit]" value="0" 
+          <if condition="$detail.audit neq 1"> checked="checked" </if>
+          >
+          待审</label></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-200">详情 </th>
+      <td class="wsNormal"><script type="text/plain"  style="width:100%;height:360px;" id="data_details" name="data[content]"><{$detail.content}></script></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-100" style="z-index:1000"> </th>
+      <td><input type="submit" value="添加商品" class="pub_btn" /></td>
+    </tr>
+  </table>
+  </div>
+</form>
+<link rel="stylesheet" href="__PUBLIC__/umeditor/themes/default/css/umeditor.min.css" type="text/css">
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/umeditor/umeditor.config.js"></script> 
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/umeditor/umeditor.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/umeditor/lang/zh-cn/zh-cn.js"></script> 
+<script>
+                    um = UM.getEditor('data_details', {
+                        imageUrl: "<{:U('up/upload/editor')}>",
+                        imagePath: '__ROOT__/attachs/editor/',
+                        lang: 'zh-cn',
+                        langPath: UMEDITOR_CONFIG.UMEDITOR_HOME_URL + "lang/",
+                        focus: false
+                    });
+        </script> 
+<script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js?t=<{$nowtime}>"></script>
+<link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+<script>
+        $("#photo_file").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"product_thumb"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '上传商品图片',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+			//'debug' : true,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo").val(data);
+                $("#photo_img").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+
+    </script> 
+<include  file='public:footer'/> 

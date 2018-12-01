@@ -1,0 +1,95 @@
+<include  file='public:header'/>
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>设置</span><i></i><span>基本设置</span><i></i><span>权限设置</span>
+            
+            </div>
+          </div>
+		<form target="zhuchuang_frm" action="<{:U('setting/power')}>" method="post">
+           <div class="daemonTable">
+              	<table class="table_data" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th class="alginRt w-200"> 验证码开启关闭: </th>
+                        <td>
+                        	
+                              <label class="checkbox">
+                                <input type="checkbox" name="data[reg]" <eq name="CONFIG.power.reg"  value="on" >checked="checked"</eq>>
+                                注册</label>
+                              <label class="checkbox">
+                                <input type="checkbox" name="data[login]" <eq name="CONFIG.power.login"  value="on">checked="checked"</eq>>
+                                登录</label>
+                             
+                              <label class="checkbox"> 
+                                <input type="checkbox" name="data[admin]" <eq name="CONFIG.power.admin"  value="on">checked="checked"</eq>>
+                                后台</label>
+                        </td>
+                    </tr>
+                    
+                    
+                    
+                    <tr>
+                        <th class="alginRt w-200"> 审核功能: </th>
+                      	 
+                        <td>
+                        	
+                              <label class="checkbox">
+                                <input type="checkbox" name="data[audit_comments]" <eq name="CONFIG.power.audit_comments"  value="on">checked="checked"</eq>>
+                                评论审核</label>
+                                <label class="checkbox">
+                               
+                        </td>
+                        
+                        
+                    </tr>
+                    
+                    <tr>
+                        <th class="alginRt w-200"> 积分商城开启关闭: </th>
+                      	 
+                        <td>
+                        	
+                              <label class="checkbox">
+                                <input type="checkbox" name="data[product]" <eq name="CONFIG.power.product"  value="on">checked="checked"</eq>>
+                                积分商城</label>
+                        </td>
+                    </tr>
+                    
+                    
+                    
+                   
+                    <tr>
+                        <th class="alginRt w-200">  一天最多注册用户: </th>
+                        <td><input type="text"  name="data[fabu_reg]" value="<{$CONFIG.power.fabu_reg}>" class="text w-200 " /><span class="comm">次</span></td>
+                    </tr>
+                     <tr>
+                        <th class="alginRt w-200">  注册用户间隔: </th>
+                        <td><input type="text"  name="data[reg_jiange]" value="<{$CONFIG.power.reg_jiange}>" class="text w-200 " /><span class="comm">分钟</span></td>
+                    </tr>
+                    
+                     <tr>
+                        <th class="alginRt w-200">  预约间隔: </th>
+                        <td><input type="text"  name="data[yuyue_jiange]" value="<{$CONFIG.power.yuyue_jiange}>" class="text w-200 " /><span class="comm">分钟</span></td>
+                    </tr>
+                     <tr>
+                        <th class="alginRt w-200">  一天最多短信: </th>
+                        <td><input type="text"  name="data[fabu_sms]" value="<{$CONFIG.power.fabu_sms}>" class="text w-200 " /><span class="comm">次</span></td>
+                    </tr>
+                    <tr>
+                        <th class="alginRt w-200">  短信间隔: </th>
+                        <td><input type="text"  name="data[sms_jiange]" value="<{$CONFIG.power.sms_jiange}>" class="text w-200 " /><span class="comm">分钟</span></td>
+                    </tr>
+                    
+                      <tr>
+                        <th class="alginRt w-100"> </th>
+                        <td>
+                        <input type="submit" value="确认保存" class="pub_btn" />
+                        </td>
+                      </tr>
+                </table>
+           </div>
+        </form>  
+        
+ 
+
+<include  file='public:footer'/>           
+      

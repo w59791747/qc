@@ -1,0 +1,54 @@
+<include  file='public:header'/>
+
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>功能</span><i></i><span>反馈管理</span><i></i><span>反馈查看</span>
+            </div>
+          </div>
+           <form target="zhuchuang_frm"  action="<{:U('feedback/edit',array('feedback_id'=>$detail['feedback_id']))}>" method="post">
+           <div class="daemonTable">
+              	<table class="table_data" cellpadding="0" cellspacing="0">
+                   
+                    <tr>
+                       
+                        <th class="alginRt w-200"> 联系电话 </th>
+                        <td>
+                        	<{$detail.mobile|default=''}>
+                        </td>
+                        <th class="alginRt w-200"> 内容 </th>
+                        <td>
+                        	<{$detail.content|default=''}>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                     
+                    <th class="alginRt w-200"> 状态 </th>
+                        <td>
+                        	 	<label class="radio">
+                                <input type="radio" name="data[status]" value="1" <if condition="$detail.audit eq 1"> checked="checked" </if>>
+                                已处理</label>
+                              <label class="radio">
+                                <input type="radio" name="data[status]" value="0" <if condition="$detail.audit neq 1"> checked="checked" </if>>
+                                未处理</label>
+                        </td>
+                     <th class="alginRt w-200"> 添加时间 </th>
+                        <td>
+                        	<{$detail.dateline|date="Y-m-d H:i:s",###}>
+                        </td>
+                     </tr>
+                    
+                      <tr>
+                        <th class="alginRt w-100"> </th>
+                        <td  colspan="3">
+                        <input type="submit" value="确定编辑" class="pub_btn" />
+                        </td>
+                      </tr>
+                </table>
+           </div>
+        </form>  
+<include  file='public:footer'/>    
+
+      
+

@@ -1,0 +1,48 @@
+<include  file='public:header'/>
+<div class="pad">
+  <div class="breadNav">
+    <div class="flt breadNav_text"> <span>功能</span><i></i><span>反馈管理</span><i></i><span>反馈管理</span> </div>
+    <div class="clear"></div>
+  </div>
+<form target="zhuchuang_frm" method="post">
+<div class="daemonTable">
+  <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+    <tr>
+      <th class="w-100"> ID </th>
+      <th>电话</th>
+      <th>内容</th>
+      <th>状态</th>
+      <th>反馈时间</th>
+      <th class="w-150"> 操作 </th>
+    </tr>
+    <foreach name="list" item="var">
+      <tr>
+        <td><label class="checkbox">
+            <input class="child_feedback_id" type="checkbox" name="feedback_id[]" value="<{$var.feedback_id}>" />
+            <{$var.feedback_id}></label></td>
+        <td><{$var.mobile}></td>
+        <td class="wsNormal"><{$var[content]}></td>
+        <td><if condition="$var.status eq 0">
+          <span class="red">[未处理]
+          <else/>
+          <span class="green">[已处理]
+          </if>
+          </span></td>
+        <td><{$var.dateline|date="Y-m-d H:i:s",###}></td>
+        <td><{:ROLE('feedback/edit',array("feedback_id"=>$var["feedback_id"]),'编辑','','pub_btn')}>
+          <{:ROLE('feedback/delete',array("feedback_id"=>$var["feedback_id"]),'删除','act','pub_btn grayBtn')}> </td>
+      </tr>
+    </foreach>
+  </table>
+</div>
+<div class="daemonBot">
+  <div class="flt daemonBot_cz">
+    <label class="checkbox">
+      <input type="checkbox" class="checkAll" rel="feedback_id">
+      全选</label>
+    <{:ROLE('feedback/delete','','批量删除','list','pub_btn grayBtn')}> </div>
+  <div class="frt daemonPage"> <{$page}> </div>
+  <div class="clear"></div>
+</div>
+</div>
+<include  file='public:footer'/> 

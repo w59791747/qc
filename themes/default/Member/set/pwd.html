@@ -1,0 +1,63 @@
+<include file="public:header"/>
+
+<div class="uc_mid_r yitou_list">
+			<ul class="cz_tit">
+				<li><a href="<{:U('member/set/passwd')}>">修改密码</a></li>
+				<li ><a href="<{:U('member/set/renzheng')}>">账号认证</a></li>
+				<li class="cz_cur"><a href="<{:U('member/set/pwd')}>">支付密码</a></li>
+				<li><a href="<{:U('member/set/card')}>">绑定银行卡</a></li>
+				<li><a href="<{:U('member/set/adress')}>">收货地址</a></li>
+			</ul>
+			<div class="xgzl">
+             <form method="post"  action="<{:U('set/pwd')}>"  target="chuang_frm">
+				<p><span>手机号</span><input readonly="readonly" value="<{$MEMBER[mobile]}>" type="text"  class="mima_box" /><a id="jq_send" class="get_tell">获取验证码</a></p>
+                <input type="hidden" id='mobile' value="<{$MEMBER[mobile]}>">
+				<p><span>验证码</span><input name="yzm" id="yzm" type="text" class="mima_box" /></p>
+				<p><span>支付密码</span><input name="pwd"  type="password" class="mima_box" /></p>
+
+                <input type="submit" class="cz_but" value="确认修改">
+             </form>
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+<script type="text/javascript">
+        var mobile_timeout;
+        var mobile_count = 100;
+        var mobile_lock = 0;
+        $(function () {
+            $("#jq_send").click(function () {
+                if (mobile_lock == 0) {
+                    mobile_lock = 1;
+                    $.post("<{:U('set/sendsms2')}>",{mobile:$("#mobile").val()},function(data){
+                        if(data.status == 'success'){
+                            mobile_count = 60;
+                            layer.msg(data.msg,{icon:1});
+                            BtnCount();
+                        }else{
+                            mobile_lock = 0;
+                            layer.msg(data.msg,{icon:2});
+                        }
+                    },'json');
+                }
+
+            });
+        });
+		
+		
+        function BtnCount () {
+            if (mobile_count == 0) {
+                $('#jq_send').val("重新发送");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+            }
+            else {
+                mobile_count--;
+                $('#jq_send').val("重新发送(" + mobile_count.toString() + ")秒");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+            }
+        };
+    </script> 
+<include file="public:footer"/>

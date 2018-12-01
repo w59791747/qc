@@ -1,0 +1,40 @@
+<include  file='public:header'/>
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>支付设置</span><i></i><span>支付方式</span><i></i><span>安装</span>
+           
+            </div>
+          </div>
+		<form target="zhuchuang_frm"  action="<{:U('payment/install',array('payment_id'=>$detail['payment_id']))}>" method="post">
+           <div class="daemonTable">
+              	<table class="table_data" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th class="alginRt w-200"> 支付方式 </th>
+                        <td><img src="__PUBLIC__/images/<{$detail.logo}>" /></td>
+                    </tr>
+                    <tr>
+                        <th class="alginRt w-200"> 支付方式介绍 </th>
+                         <td class="wsNormal"><{$detail.contents}></td>
+                    </tr>
+                    
+                   
+                    
+                    <tr>
+                        <th class="alginRt w-200"> <font class="pointcl">*</font> 商家号 </th>
+                        <td> <input type="text" name="data[zhifu_code]" value="<{$detail.setting.zhifu_code}>" class="text w-400" /></td>
+                    </tr>
+                    
+                      <tr>
+                        <th class="alginRt w-100"> </th>
+                        <td>
+                        <input type="submit" value="确认保存" class="pub_btn" />
+                        </td>
+                      </tr>
+                </table>
+           </div>
+        </form>  
+        
+ 
+
+<include  file='public:footer'/>           

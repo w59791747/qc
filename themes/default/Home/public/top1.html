@@ -1,0 +1,51 @@
+<!--头部-->
+<body>
+<div class="top">
+	<div class="reg">
+		<div class="top_reg_wrap">
+			<p class="rexian">官方客服热线：<span><{$CONFIG[site][tel]}></span>&nbsp;&nbsp;&nbsp;官方交流群：<span><{$CONFIG[site][qqqun]}></span></p>
+            <if condition="empty($MEMBER)">
+			<p class="zhuce"><a href="<{:U('home/passport/reg')}>">注册</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<{:U('home/passport/login')}>">登录</a>
+            <else/>
+            <p class="zhuce">欢迎您，<{$MEMBER.name}>&nbsp;&nbsp;&nbsp;&nbsp;<a  target="chuang_frm" href="<{:U('home/passport/logout')}>">退出</a>
+            </if>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<span class="wap_but"><a href="javascript:void(0);">手机版</a></span>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+			<div class="wap_erweima"><img src="https://www.kuaizhan.com/common/encode-png?large=true&&bg=ffffff&fg=000000&w=300&data=<{$CONFIG['site'][host]}>/mobile" alt="手机版" /></div>
+		</div>
+	</div>
+	<div class="header">
+		<div class="logo">
+			<a href="<{:U('home/index/index')}>"><img src="__ATTACHS__/<{$CONFIG[site][logo]|default='__PUBLIC__/images/logo.png'}>" alt="助创cms汽车众筹系统" /></a>
+		</div>
+
+		<div class="nav">
+			<ul>
+                <foreach name="DAOHANG" item="var">
+                  <if condition="$var.parent_id eq 0"> <li><a 
+                      
+                    <if condition="$ctl eq $var[link]"> class="cur_nav" </if>
+                    href="<{:U('/'.$var['link'])}>" ><{$var.title}></a>
+                    </li>
+                  </if>
+               </foreach>
+                
+			</ul>
+		</div>
+		 <div class="account">
+			<a href="#">我的账号</a>
+			<div class="account_cont">
+				<ul>
+					 <if condition="$MEMBER">  
+                        <li>欢迎你：<{$MEMBER.name}></li>
+                    <else/>
+                    <li><a href="<{:U('home/passport/login')}>">请登录</a></li>
+                    </if>
+					<li><a href="<{:U('member/index/index')}>">个人中心</a></li>
+					<li><a href="<{:U('member/project/crowd_canyu')}>">我的投资</a></li>
+					<li><a href="<{:U('member/member/priceup')}>">我的余额</a></li>
+					<li><a target="chuang_frm" href="<{:U('home/passport/logout')}>" style="border:none">退出登录</a></li>
+				</ul>	
+			</div>
+		</div>
+        
+     

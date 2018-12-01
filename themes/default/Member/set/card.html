@@ -1,0 +1,54 @@
+<include file="public:header"/>
+
+<div class="uc_mid_r yitou_list">
+			<ul class="cz_tit">
+				<li><a href="<{:U('member/set/passwd')}>">修改密码</a></li>
+				<li ><a href="<{:U('member/set/renzheng')}>">账号认证</a></li>
+				<li><a href="<{:U('member/set/pwd')}>">支付密码</a></li>
+				<li class="cz_cur"><a href="<{:U('member/set/card')}>">绑定银行卡</a></li>
+				<li><a href="<{:U('member/set/adress')}>">收货地址</a></li>
+			</ul>
+			<div class="select_yitou">
+				<a href="<{:U('set/card_create')}>" class="queding yhk">+ 新建银行卡</a>
+			</div>
+             <if condition="$list">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				 <tbody>
+                 	 
+					<tr>
+                    	<th width="10%">卡类型</th>
+						<th width="15%">持卡人姓名</th>
+						<th width="15%">银行卡号</th>
+						<th width="15%">银行名称</th>						
+						<th width="20%">银行支行</th>
+						<th width="10%">添加时间</th>
+						<th width="15%">操作</th>
+					</tr>
+								 
+						<foreach name="list" item="var">
+                        <tr>
+                         <if condition="$var[code]">
+                        	<td>对公</td>
+                         <else/><td>私人</td></if>
+                          <td><{$var.name}></td>
+                          <td><{:cardstr($var[card])}></td>
+                          <td><{$var.bank}></td>
+                          <td><{$var.zhihang}></td>
+                          <td><{$var.dateline|date="Y-m-d",###}></td>
+                          <td><a target="chuang_frm" class="quxiao" mini="confirm" href="<{:U('set/card_delete',array('card_id'=>$var['card_id']))}>">删除</a></td>
+                        </tr>
+                      </foreach>
+				</tbody>
+			</table>
+            <else/>
+			<div class="yitou_none">
+				<img src="__TMPL__statics/images/member/jilu_none.jpg" alt="暂时没有记录" title="暂时没有记录" />
+			</div>
+            </if>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+<include file="public:footer"/>

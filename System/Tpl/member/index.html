@@ -1,0 +1,93 @@
+<include  file='public:header'/>
+<div class="pad">
+<div class="breadNav">
+  <div class="flt breadNav_text"> <span>会员</span><i></i><span>会员管理</span><i></i><span>会员管理</span> </div>
+  <div class="frt breadNav_other">
+    <div class="bn_input theme-pop-btn">
+      <form method="post" action="<{:U('member/index')}>">
+        <div class="bn_input">用户名：
+          <input type="text" name="name" value="<{$name}>" class="text">
+          类型：
+          <select name="from" class="text">
+            <option  value="1" 
+            <if condition="1 eq $from"> selected="selected" </if>
+            >全部
+            </option>
+            <foreach name="fromlist" key='key' item="val"> <option  value="<{$key}>" 
+              <if condition="$key eq $from"> selected="selected" </if>
+              ><{$val}>
+              </option>
+            </foreach>
+          </select>
+        </div>
+        <div class="bn_input">
+          <input type="submit" class="pub_btn" value="搜索">
+        </div>
+      </form>
+      <div class="bn_input"> <{:ROLE('member/create','','添加用户','','pub_btn')}></div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<form target="zhuchuang_frm" method="post">
+<div class="daemonTable">
+  <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+    <tr>
+      <th> 序号 </th>
+      <th> 会员名 </th>
+      <th > 实名 </th>
+      <th> 手机 </th>
+      <th> 积分 </th>
+      <th> 资金 </th>
+      <th> 状态 </th>
+      <th class="w-300"> 操作 </th>
+    </tr>
+    <foreach name="list" item="var">
+      <tr>
+        <td class="w-50"><label class="checkbox">
+            <input class="child_uid" type="checkbox" name="uid[]" value="<{$var.uid}>" />
+<{$var.uid}></label></td>
+        <td width="100"><{$var.name}></td>
+        <td ><{$var.detail.realname}><br />
+          <if condition="$var.verify eq 4 || $var.verify eq 5 || $var.verify eq 6 || $var.verify eq 7">
+          <span class="green">[已验证]
+          <else/>
+          <span class="red">[未验证]
+          </if>
+          </span></td>
+        <td  ><{$var.mobile}><br />
+          <if condition="$var.verify eq 2 || $var.verify eq 3 || $var.verify eq 6 || $var.verify eq 7">
+          <span class="green">[已验证]
+          <else/>
+          <span class="red">[未验证]
+          </if>
+          </span></td>
+        <td width="100"><{$var.gold}>  <span class="czjia czjf" title="充值积分"><{:ROLE('member/gold',array("uid"=>$var["uid"]),'+','load','',600,330)}></span></td>
+        <td width="100"><{$var.price}> <span class="czjia" title="充值资金"><{:ROLE('member/price',array("uid"=>$var["uid"]),'+','load','',600,330)}></span></td>
+        <td width="100"><span class="green">
+          <if condition="$var.xuni eq 1">
+          [虚拟账号]
+		  <else/>
+		  [正常]
+          </if>
+		  </span>
+          </td>
+        <td class="w-300"><a target="_blank" href="<{:U('member/manage',array('uid'=>$var['uid']))}>" class="pub_btn">管理</a> <{:ROLE('member/detail',array("uid"=>$var["uid"]),'查看','','pub_btn')}>
+          <{:ROLE('member/edit',array("uid"=>$var["uid"]),'编辑','','pub_btn')}>
+          <{:ROLE('member/delete',array("uid"=>$var["uid"]),'删除','act','pub_btn grayBtn')}> </td>
+      </tr>
+    </foreach>
+  </table>
+</div>
+<div class="daemonBot">
+  <div class="flt daemonBot_cz">
+    <label class="checkbox">
+      <input type="checkbox" class="checkAll" rel="uid">
+      全选</label>
+    <{:ROLE('member/audit','','批量审核','list','pub_btn')}>
+    <{:ROLE('member/delete','','批量删除','list','pub_btn grayBtn')}> </div>
+  <div class="frt daemonPage"> <{$page}> </div>
+  <div class="clear"></div>
+</div>
+</div>
+<include  file='public:footer'/> 

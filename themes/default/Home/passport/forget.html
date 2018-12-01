@@ -1,0 +1,72 @@
+<include file="public:header" /><include file="public:top" />
+<!--中间内容部分-->
+
+<div class="loginBackground">
+  <div class="pagewd clearfix">
+    <div class="registBox flt">
+      <p class="black9">请选择以下任何一种方式找回密码，输入已验证的手机或已验证的邮箱！</p>
+      <div class="findpswd_tit"> <span>验证的手机</span> <span>验证的邮箱</span> </div>
+      <form  action="<{:U('passport/newpwd')}>" method="post" target="chuang_frm">
+        <div class="regGroup clearfix">
+          <label><font class="pointcl">*</font>用户名</label>
+          <div class="control_txt">
+            <input type="text" class="text" name='name' placeholder="请输入用户名">
+          </div>
+        </div>
+        <div class="regGroup clearfix">
+          <label><font class="pointcl">*</font>验证的手机</label>
+          <div class="control_txt">
+            <input type="text" class="text" name="mobile" placeholder="请输入手机号">
+            <input type="hidden" class="text" name='way'  value="2">
+          </div>
+        </div>
+        <div class="regGroup clearfix">
+          <label></label>
+          <div class="control_txt">
+            <input type="submit" class="btn" value="提交">
+          </div>
+        </div>
+      </form>
+      <form  action="<{:U('passport/newpwd')}>" method="post" target="chuang_frm">
+        <div class="regGroup clearfix">
+          <label><font class="pointcl">*</font>用户名</label>
+          <div class="control_txt">
+            <input type="text" class="text" name='name' placeholder="请输入用户名">
+          </div>
+        </div>
+        <div class="regGroup clearfix">
+          <label><font class="pointcl">*</font>验证的邮箱</label>
+          <div class="control_txt">
+            <input type="text" class="text" name='mail' placeholder="请输入邮箱">
+            <input type="hidden" class="text" name='way'  value="1">
+          </div>
+        </div>
+        <div class="regGroup clearfix">
+          <label></label>
+          <div class="control_txt">
+            <input type="submit" class="btn" value="提交">
+          </div>
+        </div>
+      </form>
+      <div class="fdpswd_reg"><a href="<{:U('passport/reg')}>">如需注册，请点击这里！</a></div>
+    </div>
+  </div>
+</div>
+<script>
+  	$(document).ready(function(){
+		$(".registBox .findpswd_tit span").click(function () {
+			var index = $(this).index();
+			$(".registBox .findpswd_tit span").each(function (a) {
+				if (a == index) {
+					$(this).addClass('current');
+					$('.registBox').find('form').eq(a).show();
+				} else {
+					$(this).removeClass('current');
+					$('.registBox').find('form').eq(a).hide();
+				}
+			})
+		});
+		$(".registBox .findpswd_tit span").eq(0).click();
+	  });
+  </script> 
+<include file="public:footer" /> 

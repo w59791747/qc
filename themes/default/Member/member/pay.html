@@ -1,0 +1,41 @@
+<include file="public:header"/>
+
+<div class="uc_mid_r">
+			<ul class="cz_tit">
+				<li class="cz_cur"><a href="<{:U('member/priceup')}>">线上充值</a></li>
+				<li ><a href="<{:U('member/priceup2')}>">线下充值</a></li>
+			</ul>
+			<div class="cz_cont">
+             <if  condition="$code eq lianlian">
+             	<form method="post"  action="<{:U('payment/order')}>">
+               
+             
+             <else/>
+            	<form method="post"  action="<{:U('payment/order')}>" target="chuang_frm">
+            </if>
+				<p><span>请确认以下支付信息：</span></p>
+				<p><span>充值来源：</span><{$types[$from]}></p>
+                <p><span>充值方式：</span><{$payment[$code][name]}></p>
+				<p><span>充值金额：</span>¥<{$number}></p>
+                <if  condition="$log['jifen'] gt 0">
+                <p><span>使用积分：</span><{$log.jifen}></p>
+                <p><span>实际支付：</span>¥<{$log[actual_pay]/100}></p>
+                </if>
+                <input type="hidden" name="data[order_id]" value="<{$order_id}>" />
+                <input type="hidden" name="data[code]" value="<{$code}>" />
+                
+                
+                <if  condition="$code eq money">
+                <p><span>支付密码：</span><input type="password" name="data[pwd]" ></p>
+                </if>
+				<input type="submit" class="cz_but" value="立刻支付">
+                </form>
+             	
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+<include file="public:footer"/>

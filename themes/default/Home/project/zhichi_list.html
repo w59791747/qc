@@ -1,0 +1,10 @@
+<div class="zcjiluTit">
+    <table>
+        <tr><th class="xuhao">序号</th><th>参与人</th><th>众筹金额</th><th>众筹时间</th><th>回款金额</th><th>众筹状态</th></tr>
+        <foreach name='lists_select' key='key' item='val'>
+
+        <tr><td class="xuhao"><{$val[list_id]}></td><td><{:zhu_name($memberlistcount[$val[uid]][mobile])}></td><td>￥<{:zhu_int($val[price]/100)}></td><td><{$val.dateline|date="Y-m-d",###}></td><td>￥<{:zhu_int($val[shouyi]/100)}></td><td><{$status_list[$project[status]]}></td></tr>
+     </foreach>  
+    </table>
+  </div>
+          

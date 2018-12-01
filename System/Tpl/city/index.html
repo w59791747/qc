@@ -1,0 +1,59 @@
+<include  file='public:header'/>
+
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>后台管理</span><i></i><span>区域设置</span><i></i><span>城市管理</span>
+           
+            </div>
+            <div class="frt breadNav_other">
+           
+                <div class="bn_input theme-pop-btn">
+                
+                   <div class="bn_input"> <{:ROLE('city/create','','添加城市','load','pub_btn',500,300)}></div>
+                </div>
+            <div class="clear"></div>
+          </div>
+          </div>
+		<form target="zhuchuang_frm" method="post">
+             <div class="daemonTable">
+              <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+                
+                <tr>
+                	<th class="w-100">
+                    序号
+                    </th>
+                    <th>省份名称</th>
+                    <th>城市名称</th>
+                    <th>排序</th>
+                    <th class="w-150">
+                    操作
+                    </th>
+                </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><{$var["city_id"]}></td>
+                            <td><{$province[$var[province_id]][province_name]}></td>
+                            <td><{$var.city_name}></td>
+                            <td><{$var.orderby}></td>
+                            <td>
+                                <{:ROLE('city/edit',array("city_id"=>$var["city_id"]),'编辑','load','pub_btn',500,300)}>
+                                <{:ROLE('city/delete',array("city_id"=>$var["city_id"]),'删除','act','pub_btn grayBtn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+
+                </table>
+           </div>
+              <div class="daemonBot">
+                <div class="flt daemonBot_cz">
+                </div>
+                <div class="frt daemonPage">
+                   <{$page}>
+                </div>
+                <div class="clear"></div>
+              </div>
+          </div>    
+          
+
+<include  file='public:footer'/>

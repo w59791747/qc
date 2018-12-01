@@ -1,0 +1,22 @@
+<include file="public:header"/>
+<div class="ucenterCont_frt frt">
+  <div class="tabList"> <a href="#" class="current">投票</a> </div>
+  <div class="ucenterBox introForm">
+    <div class="tpTitle"><span class="black9">项目标题：</span><{$project.title}></div>
+    <div class="tpTitle"><span class="black9">筹资金额：</span>￥<{$project[fund_raising]/100}></div>
+    <div class="tpTitle"> <span class="black9">出售支付定金：</span>￥<{$chushou[dingjin]/100}> </div>
+    <div class="tpTitle"> <span class="black9">出售价格：</span>￥<{$chushou[amount]/100}></div>
+    <div class="zcVote">
+      <div class="zcVoteList"> <span><{$zancheng}>票</span><a class="btn"  mini='act' href="<{:U('project/toupiao',array('project_id'=>$project['project_id'],'status'=>'1'))}>">赞成</a> </div>
+      <div class="zcVoteList"><span><{$fandui}>票</span><a class="btn nobtn"  mini='act' href="<{:U('project/toupiao',array('project_id'=>$project['project_id'],'status'=>'-1'))}>">不赞成</a> </div>
+      <div class="zhu">
+        <p class="pointcl">注:</p>
+        <p> 1.投票结果采取少数服从多数的原则,赞成(或不赞成)投票人数超过众筹总人数的<{$project.tpbfb}>%即视为当次投票通过(或未通过) </p>
+        <p>2.众筹人在投票截止日期到期之后仍未参与投票的,系统将默认判定其为投"赞成"票,该投票截止时间：<{$project.toultime|date='Y-m-d H:i:s',###}></p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<include file="public:footer"/>

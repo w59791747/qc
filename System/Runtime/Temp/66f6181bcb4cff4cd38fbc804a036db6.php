@@ -1,0 +1,3 @@
+<?php
+//000000086400a:4:{s:7:"default";a:5:{s:11:"template_id";s:1:"4";s:4:"name";s:12:"默认模版";s:5:"theme";s:7:"default";s:5:"photo";s:9:"index.jpg";s:10:"is_default";s:1:"1";}s:10:"color_rose";a:5:{s:11:"template_id";s:2:"14";s:4:"name";s:6:"玫红";s:5:"theme";s:10:"color_rose";s:5:"photo";s:9:"index.jpg";s:10:"is_default";s:1:"0";}s:9:"zhongchou";a:5:{s:11:"template_id";s:2:"15";s:4:"name";s:15:"众筹网模版";s:5:"theme";s:9:"zhongchou";s:5:"photo";s:9:"index.jpg";s:10:"is_default";s:1:"0";}s:2:"V1";a:5:{s:11:"template_id";s:2:"16";s:4:"name";s:8:"V1模版";s:5:"theme";s:2:"V1";s:5:"photo";s:9:"index.jpg";s:10:"is_default";s:1:"0";}}
+?>

@@ -1,0 +1,55 @@
+<include file="public:header" /> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.forg {
+	color: #ff6600; font-size:14px;
+}
+.wxlogin {
+	text-align: center; padding:20px 10px 0px 10px;
+}
+.tips {
+	font: 22px/44px 'Microsoft Yahei';
+	margin: 12px 0 58px;
+}
+.wxfooter {
+	text-align: center;
+	border-top: 1px dashed #adadad;
+	margin: 58px auto 0;
+	padding: 5px 0 0;
+	font-size: 18px;
+}
+.f28{ font-size:24px;}
+</style>
+</head>
+<input type="hidden" id="order_id" value="<{$order_id}>">
+<body>
+
+
+
+<div class="wxlogin">
+  <div class="tips" id="tip">支付金额<span class="f28 farial forg" id="ordermoney">￥<{$amount}></span>, 
+  请使用微信扫描下方二维码完成支付 </div>
+  <img src="https://www.kuaizhan.com/common/encode-png?large=true&bg=ffffff&fg=000000&w=300&data=<{$codeurl}>"  class="erweima"/>
+  <div class="farial forg" id='show' ></div>
+  <div class="wxfooter"><{$CONFIG.site.sitename}></div>
+</div>
+<script type="text/javascript">
+(function(){
+	var interval = setInterval(function(){
+		var link = "<{:U('payment/paycheck',array('order_id'=>$order_id))}>";
+
+		$.post(link, function (data) {
+			if (data.status == 'success') {
+				$('#show').html(data.msg);
+				clearInterval(interval);
+				window.location.href = "<{:U('member/order/lists')}>";
+			} else {
+			}
+		}, 'json');
+		
+	
+}, 3000);
+})();
+</script>
+</body>
+</html>

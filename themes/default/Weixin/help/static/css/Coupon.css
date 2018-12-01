@@ -1,0 +1,52 @@
+/* CSS Document by jacy use in vipcard */
+body{ padding:0; margin:0; max-width:640px; margin:0 auto;}
+img{ font-size:0;}
+.fl{float:left;}
+.fr{float:right;}
+.clear{ height:0; line-height:0; font-size:0; clear:both;}
+/*微助力开始*/
+.voucherPage{ padding-bottom:40px;}
+.weiHelp_cont .join_anniu{ text-align:center; margin:20px 0;}
+.weiHelp_cont .join_anniu .butn{ display:inline-block; font-size:16px; height:35px; line-height:35px;  width:110px; text-align:center;background: url(../img/btnbg.png) center center no-repeat; color:#E47236; margin:0px 5px; font-weight:bold;}
+.weiHelp_cont .join_anniu .grayButn{background: url(../img/btngraybg.png) center center no-repeat;}
+.weiHelp_cont .join_anniu .butn em{ padding:10px; background:url(../img/help_ico.png) no-repeat center top; background-size:100% auto; font-size:0; line-height:0; vertical-align:middle; margin-right:5px;}
+.weiHelp_cont .join_anniu .cjButn{ background:#ff9000; color:#7b0007;}
+.weiHelp_cont .join_anniu .cjButn em{background:url(../img/help_ico2.png) no-repeat center top;  background-size:100% auto; font-size:0; line-height:0;}
+.weiHelp_mine{ background:#fdfeb8; border-radius:50px; padding:10px 15px 5px 15px; margin:10px; overflow:hidden;}
+.weiHelp_mine .img{ width:50px; height:50px; border-radius:100%; overflow:hidden;}
+.weiHelp_mine .img img{ width:100%; height:100%;}
+.weiHelp_mine .wz{ margin-left:60px;}
+.weiHelp_mine .wz p{font-size:12px; line-height:20px; color:#656364;}
+.weiHelp_mine .wz .name{font-size:14px; color:#950008;}
+.weiHelp_mine .wz>.fl{ width:40%;}
+.weiHelp_mine .wz>.fr{ width:60%; text-align:right; overflow:hidden;}
+.weiHelp_mine_num{ display:inline-block; text-align:center; margin:0 2px;}
+.weiHelp_mine_num .num{ display:inline-block; padding:0 8px; color:#fff; line-height:20px; font-size:12px;}
+
+.shakePage_tab{padding-top:30px;}
+.shakePage_tab_list{ display:block; float:left; width:23%; margin-left:1.6%;}
+.shakePage_tab_list:last-child{ margin-right:0;}
+.shakePage_tab_list a{ display:block; background:#ffe53a; text-align:center; font-size:14px; line-height:34px; height:34px; color:#fff;}
+.shakePage_tab_list a em{ padding:8px; background:url(../img/tabIco_white.png) no-repeat center top; background-size:100% auto; font-size:0; line-height:0; vertical-align:middle; margin-right:2px;}
+.shakePage_tab_list a em.ico_1{ background-position:center 0;}
+.shakePage_tab_list a em.ico_2{ background-position:center -16px;}
+.shakePage_tab_list a em.ico_3{ background-position:center -32px;}
+.shakePage_tab_list a em.ico_4{ background-position:center -48px;}
+.shakePage_tab_list.on a{background:#ffb018;}
+.shakePage_list_box{min-height:300px;}
+.shakePage_list{ display:none;}
+.shakePage_intro{ margin:10px 1.6%; padding:10px; background:#FDFEB8; border-radius:3px; font-size:14px;}
+.shakePage_intro p{font-size:12px; line-height:24px;}
+
+.winRecord_list_box{ padding:10px;}
+.winRecord_list{ display:block; padding:10px; background:#FDFEB8; margin-bottom:10px; border-radius:3px;}
+.winRecord_list .img{ width:50px; height:50px;}
+.winRecord_list .img img{ width:100%; height:100%;}
+.winRecord_list .wz{ margin-left:60px;}
+.winRecord_list .wz p{font-size:12px; line-height:20px; color:#999;}
+.winRecord_list .wz .bt{font-size:14px; color:#333;}
+
+.share_pop{ position:fixed; left:0px; top:0px; text-align:center; padding-top:20%; width:100%; height:100%;background:rgba(0,0,0,0.8);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000,endColorstr=#BF000000);}
+
+/*微助力结束*/
+.footer_copy{ position:fixed; left:0; bottom:0; width:100%;font-size: 14px; line-height: 40px; color: #333; text-align: center; margin: 20px 0 0; background-color:#fff;}

@@ -1,0 +1,75 @@
+<include  file='public:header'/>
+
+<div class="pad">
+          <div class="selectNav">
+          	<div class="flt selectNav_text">选择项目</div>
+           
+            <div class="frt breadNav_other">
+           
+                <div class="bn_input theme-pop-btn">
+                	<form method="post" action="<{:U('project/select',array('show'=>$show))}>">
+                        <div class="bn_input">
+                        类型：
+                        <select name="type" class="text">
+                        <option  value="1" <if condition="1 eq $from"> selected="selected" </if>>全部</option>
+                            <foreach name="typelist" key='key' item="val">
+                                <option  value="<{$key}>" <if condition="$key eq $from"> selected="selected" </if>><{$val}></option>
+                            </foreach>
+                        </select>
+                        </div>
+                        <div class="bn_input"><input type="submit" class="pub_btn" value="搜索"></div>
+                     </form>
+                
+                   <div class="bn_input"></div>
+                </div>
+            <div class="clear"></div>
+          </div>
+          </div>
+         <form method="post" action="<{:U('project/select',array('show'=>$show))}>">
+             <div class="daemonTable">
+              <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+                  <tr>
+                	  <th> 标题 </th>
+                      <th> 类型 </th>
+                      <th> 联系人 </th>
+                      <th> 电话 </th>
+                </tr>
+                    <foreach name="list" item="var">
+                         <tr>
+                            <td class="w-50"><label><input type="radio" name="project_id"   rel="<{$var.title}>" value="<{$var.project_id}>" /><{$var.title}></label></td>
+                            <td width="100"><{$typelist[$var[type]]}></td>
+                            
+                            <td width="100"><{$var[name]}></td>
+                            <td width="100"><{$var[mobile]}></td>
+                        </tr>
+                    </foreach>
+
+                </table>
+           </div>
+              <div class="daemonBot">
+                <div class="flt daemonBot_cz">
+                  <input  id="select_btn" class="pub_btn" value="确定选择" />
+                </div>
+                <div class="frt daemonPage">
+                   <{$page}>
+                </div>
+                <div class="clear"></div>
+              </div>
+          </div>    
+          
+
+<script>
+    $(document).ready(function (e) {
+        $("#select_btn").click(function () {
+            $("input[name='project_id']").each(function (a) {
+                if ($(this).prop("checked") == true) {
+                    parent.selectCallBack('project_id', 'title', $(this).val(), $(this).attr('rel'));
+                }
+            });
+        });
+
+    });
+</script>
+<include  file='public:footer'/>  
+
+

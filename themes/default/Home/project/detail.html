@@ -1,0 +1,276 @@
+<include file="public:header" /><include file="public:top" />
+</div>
+</div>
+
+<div class="item_top">
+  <div class="item_top_wrap">
+    <div class="imgplay">
+      <div class="jqzoom"> <img src="__ATTACHS__/<{$project['project_photos'][0]}>" style="width:500px; height:313px;" alt="" jqimg="__ATTACHS__/<{$project['project_photos'][0]}>" id="bigImg"/> </div>
+      <div class="ctrl_play">
+        <ul>
+          <foreach name="project['project_photos']" key='key' item="item">
+            <li><img src="__ATTACHS__/<{$item}>" alt="" /></li>
+          </foreach>
+        </ul>
+        <p class="play_prev"><img src="__TMPL__statics/images/cp/prev.png" alt="上一张" /></p>
+        <p class="play_next"><img src="__TMPL__statics/images/cp/next.png" alt="下一张" /></p>
+      </div>
+    </div>
+    <div class="item_top_right">
+      <h1>【第<{$project.project_id}>期】<{$project.title}></h1>
+      <div class="jindu">
+        <if condition="$project[status] eq 0 ">
+          <div></div>
+          <elseif condition="$project[status] eq 1 "/>
+          <div class="cur_jindu" style="width:<{:zc_int($project[have_price]/$project[fund_raising]*100)}>%"></div>
+          <elseif condition="$project[status] gt 1 "/>
+          <div class="end_jindu"></div>
+        </if>
+        <div class="jindu_num">众筹进度：<{:zc_int($project[have_price]/$project[fund_raising]*100)}>%</div>
+      </div>
+      <div class="canshu">
+        <p>众筹目标：<span>¥<{:zhu_int($project[fund_raising]/100)}></span>&nbsp;&nbsp;剩余可投：¥<{:zhu_int(($project[fund_raising]-$project[have_price])/100)}></p>
+        <ul>
+          <li><span><{$project.have_num|default='0'}></span><br />
+            支持人数（个）</li>
+          <li><span><{:zhu_int($project[fund_raising]/100*$project[max_price]/100)}></span><br />
+            最大可投（元）</li>
+          <li><span><{:zhu_int($project[min_price])}></span><br />
+            最小可投（元）</li>
+          <li style="border:none"><span><{$project[chi_days]}></span><br />
+            持有期限（天）</li>
+        </ul>
+      </div>
+      <div class="canshu2"> 开始时间：<{$project.stime|date="Y-m-d H:i",###}><span>|</span>筹资结束:<{$project.ltime|date="Y-m-d H:i",###}> </div>
+      <div class="qc_touzi">
+        <if condition="$project[status] eq 0 ">
+          <div class="zc_ready"> <a mini='act' href="<{:U('project/follow',array('project'=>$project['project_id']))}>" class="zc_but"> 项目开始通知我</a>
+            <p>距离项目开始还剩：</p>
+            <div id="fnTimeCountDown" data-end="<{$project.stime|date='Y/m/d H:i:s',###}>"> <span class="month">00</span>月 <span class="day">00</span>天 <span class="hour">00</span>时 <span class="mini">00</span>分 <span class="sec">00</span>秒 <span class="hm">000</span> </div>
+          </div>
+          <elseif condition="$project[status] eq 1 "/>
+          <div class="zc_ing">
+            <input type="text" id='money' placeholder="请输入投资金额" class="pop_num" />
+            <a  class="zc_but" onclick="pay()">立即众筹</a>
+            <if condition="empty($MEMBER)"> <span>当前可用余额：【<a href="<{:U('home/passport/login')}>">登录</a>】后查看</span>
+              <else/>
+              <span>当前可用余额:￥<{$MEMBER[price]|default='0'}></span> </if>
+          </div>
+          <elseif condition="$project[status] gt 1 "/>
+          <div class="zc_ing">
+            <input type="text" value="请输入投资金额" class="pop_num" />
+            <a href="" class="zc_but zc_end">筹资结束</a> <span>该项目筹资已结束</span> </div>
+        </if>
+      </div>
+	 
+      
+      <if  condition="$project['status'] eq 5 || $project['status'] eq -2">
+          <div class="tuzhang">
+            <p style="margin-top:25px;"><{:zhu_msubstr($project[title],0,5)}></p>
+            <p>万元收益：<{$project[shouyi][shouyi]|ceil}>元</p>
+            <p>回款周期<{$project.shouyi.days}>天</p>
+            <p>年化收益：<?php echo ceil($project[shouyi][shouyi]*365/$project[shouyi][days])/100;?>%</p>
+          </div>
+    
+    </if>
+    </div>
+    <div class="step">
+      <if condition="$project[status] eq 0 "> 预筹中
+        <elseif condition="$project[status] eq 1 "/>
+        众筹中
+        <elseif condition="$project[status] eq 2 "/>
+        出售中
+        <elseif condition="$project[status] eq 3 "/>
+        投票中
+        <elseif condition="$project[status] eq 4 "/>
+        待回款
+        <elseif condition="$project[status] eq 5 "/>
+        已完成
+        <elseif condition="$project[status] eq -2 "/>
+        已回购 </if>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+</div>
+<div class="item_mid">
+  <div class="item_mid_tit">
+    <ul>
+      <li class="car_i"><a href="javascript:void(0);" class="car_info" id="cur_item">车辆照片</a></li>
+      <li class="car_p"><a href="javascript:void(0);" class="car_pic" >车辆信息</a></li>
+      <li class="car_r"><a href="javascript:void(0);" class="car_record">投资记录</a></li>
+      <!-- <li class="car_c"><a href="javascript:void(0);" class="car_contract">合同样本</a></li> -->
+      <li class="car_v"><a href="javascript:void(0);" class="car_vote">我要投票</a></li>
+      <li class="car_t"><a href="javascript:void(0);" class="car_comment">项目评价</a></li>
+    </ul>
+  </div>
+  <div class="item_mid_con">
+    <div class="car_con car_info_con"> <{$project.content}> </div>
+    <div class="car_con car_pic_con"> <{$project.canshu}> </div>
+    <div class="car_con car_record_con">
+      <div id="list_4"></div>
+      <div class="propage clearfix">
+        <ul>
+          <foreach name='list_arr' key='key' item='val'>
+            <li onClick="getzhichi(<{$val}>)"><{$val}></li>
+          </foreach>
+        </ul>
+      </div>
+    </div>
+    <!-- <div class="car_con car_contract_con"> <{$project.hetong}> </div> -->
+    <div class="car_con car_vote_con">
+      <if condition="$project[status] lt 3">
+      <div class="toupiaotp"><img src="__TMPL__statics/images/zwtp.jpg" /></div>
+        <else/>
+        <div class="zcVote">
+		  <div class="votetx">
+			<ul>
+			  <li>当前车辆出售价格：<{$chushou[amount]/100}>（元）</li>
+			  <li>意向客户支付定金：<{$chushou[dingjin]/100}>（元）</li>
+			</ul>
+		  </div>
+          <div class="zcVoteList"> <em class="yes"></em><span><{$zancheng}>票</span>
+            <if condition="$project[status] gt 3"><a class="btn graybtn">√ 赞成</a>
+              <else/>
+              <a class="btn"  mini='act' href="<{:U('project/toupiao',array('project_id'=>$project['project_id'],'status'=>'1'))}>">√ 赞成</a> </if>
+          </div>
+          <div class="zcVoteList"> <em class="no"></em><span><{$fandui}>票</span>
+            <if condition="$project[status] gt 3"> <a class="btn graybtn">× 反对</a>
+              <else/>
+              <a class="btn nobtn"  mini='act' href="<{:U('project/toupiao',array('project_id'=>$project['project_id'],'status'=>'-1'))}>">× 反对</a> </if>
+          </div>
+          <div class="zhu">
+            <p>备注：</p>
+            <p>1、投票结果采取少数服从多数的原则，赞成（或不赞成）投票人数超过众筹总人数的 <{$project.tpbfb}>% 即视为当次投票通过（或未通过） </p>
+            <p>2、众筹人在投票截止日期到期之后仍未参与投票的，系统将默认判定其为投“赞成”票，该投票截止时间：<{$project.toultime|date='Y-m-d H:i:s',###}></p>
+          </div>
+        </div>
+      </if>
+    </div>
+    <div class="car_con car_comment_con">
+      <div class="commentBox clearfix">
+        <form  method="post"  action="<{:U('project/comments',array('project_id'=>$project[project_id]))}>"  target="chuang_frm">
+          <!--评价左侧头像及用户名-->
+          <div class="comment_tx"> <img alt="<{$MEMBER[name]}>" src="__ATTACHS__/<{$MEMBER.face|default='default.jpg'}>">
+            <p class="name"><{$MEMBER[name]}></p>
+          </div>
+          <!--评价右侧-->
+          <div class="comment_cont">
+            <div class="star">
+              <input type="radio" id="rate5-1" name="rating" value="5">
+              <label for="rate5-1" title="Amazing">5 stars</label>
+              <input type="radio" id="rate4-1" name="rating" value="4">
+              <label for="rate4-1" title="Very good">4 stars</label>
+              <input type="radio" id="rate3-1" name="rating" value="3">
+              <label for="rate3-1" title="Average">3 stars</label>
+              <input type="radio" id="rate2-1" name="rating" value="2">
+              <label for="rate2-1" title="Not good">2 stars</label>
+              <input type="radio" id="rate1-1" name="rating" value="1">
+              <label for="rate1-1" title="Terrible">1 star</label>
+            </div>
+            <textarea name='data[content]' placeholder="输入您想要跟大家交流的内容~"></textarea>
+            <!--未登录时用灰色按钮，登录后用蓝色按钮（去掉graybtn即可）-->
+            <div class="comment_button clearfix">
+              <if condition="$MEMBER  eq ''">
+                <div class="flt black6">请登录后提问，立即 <a href="<{:U('passport/login')}>" class="fontcl1">登录</a> 或 <a href="<{:U('passport/reg')}>" class="fontcl1"> 注册 </a></div>
+                <div class="frt"> <a  class="btn graybtn">发布</a> </div>
+                <else/>
+                <div class="frt">
+                  <input type="submit" value="发布"  class="btn" />
+                </div>
+              </if>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div id="list_3"></div>
+      <div class="propage clearfix">
+        <ul>
+          <foreach name='comment_arr' key='key' item='val'>
+            <li onClick="getcomment(<{$val}>)"><{$val}></li>
+          </foreach>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="fenge"></div>
+<script type="text/javascript">
+	<!--分页-->
+	$(document).ready(function(){
+		
+		 $('.propage ul li').click(function () {
+            var _this = $(this);
+            _this.parents('.propage').find('ul li').removeClass('on');
+            _this.addClass('on');
+        });
+        $('.propage').each(function () {
+            $(this).find('ul li').eq(0).click();
+        });
+		
+	});
+</script> 
+<script type="text/javascript">
+	$(".zcDetail_left_box .zcDetail_title ul li").click(function () {
+		var index = $(this).index();
+		$(".zcDetail_left_box .zcDetail_title ul li").each(function (a) {
+			if (a == index) {
+				$(this).find('a').addClass('current');
+				$('.zcDetail_left_box .zcDetail_cont').find('.section').eq(a).fadeIn(100);
+			} else {
+				$(this).find('a').removeClass('current');
+				$('.zcDetail_left_box .zcDetail_cont').find('.section').eq(a).fadeOut(0);
+			}
+		})
+	});
+	$(".zcDetail_left_box .zcDetail_title ul li").eq(0).click();
+	
+	
+	
+	function pay(){
+		var link = "<{:U('project/zhichi',array('money'=>'123money','project_id'=>$project[project_id]))}>";
+		var money = $('#money').val();
+		var minm = parseInt('<{$project[min_price]}>');
+		var maxm = parseInt('<{$project[fund_raising]/100*$project[max_price]/100}>');
+		var shengyu = parseInt('<{$project[fund_raising]/100-$project[have_price]/100}>');
+		var uid = '<{$MEMBER[uid]}>';
+		var verify = '<{$MEMBER[verify]}>';
+		if(!isNaN(money) && money>0){
+			if(money < minm){
+				parent.bmsg("不能小于最小金额","",3000);		
+			}else if(money > maxm){
+				parent.bmsg("不能大于最大金额","",3000);		
+			}else if(money > shengyu){
+				parent.bmsg("不能超过剩余金额","",3000);		
+			}else if(!uid){
+				parent.bmsg("请先登录","<{:U('home/passport/login')}>",3000);		
+			}else if(verify < 6){
+				parent.bmsg("请先通过实名验证和手机验证","<{:U('member/set/name')}>",3000);		
+			}else{
+				window.location = link.replace('123money',money);
+			}
+		}else{
+			parent.bmsg("金额不合法","",3000);
+		}
+	}
+	
+	
+	
+	function getzhichi(p){
+		var link = "<{:U('project/zhichi_list',array('project_id'=>$project[project_id],'p'=>'page'))}>";
+		$("#list_4").load(link.replace("page",p));
+	}
+	
+	
+	
+	function getcomment(p){
+		var link = "<{:U('project/comment_list',array('project_id'=>$project[project_id],'p'=>'page'))}>";
+		$("#list_3").load(link.replace("page",p));
+	}
+	//头部标题定位效果
+	(function(K, $){  
+		getzhichi(1);
+		getcomment(1);
+	})(window.KT, window.jQuery)  
+	
+	</script> 
+<include file="public:footer" /> 

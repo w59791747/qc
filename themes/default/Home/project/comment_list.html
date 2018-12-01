@@ -1,0 +1,17 @@
+<foreach name='comment' key='key' item='val'>
+          <div class="comment_list">
+            <div class="comment_tx">
+              <if condition="$memberlist[$val[uid]][from] eq member"> <a href="<{:U('user/detail',array('uid'=>$val[uid]))}>"> <img src="__ATTACHS__/<{$memberlist[$val[uid]][face]|default=$CONFIG['attachs'][member_face]}>"> </a>
+                <else/>
+                <img src="__ATTACHS__/<{$memberlist[$val[uid]][face]|default='default.jpg'}>"> </if>
+            </div>
+            <div class="comment_cont">
+              <if condition="$memberlist[$val[uid]][from] eq member"> <a class="name" href="<{:U('user/detail',array('uid'=>$val[uid]))}>"> <{$memberlist[$val[uid]][name]}> </a>
+                <else/>
+                <span class="name"><{$memberlist[$val[uid]][name]}></span> </if>
+              <em class="plxing grayXing"><em w="<{$val[score]/5*100|ceil}>" class="xing"></em></em>
+              <p class="pjcont"><{$val['content']}></p>
+              <div class="bot black9"> <span ><{$val.dateline|date="Y-m-d H:i:s",###}></span></div>
+            </div>
+          </div>
+        </foreach>

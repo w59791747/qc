@@ -1,0 +1,72 @@
+<include file="public:header" /> 
+<include file="public:top" /> 
+<section class="contentWrapper">
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">忘记密码</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+    <section class="page_ucenter_box">
+    	<div class="registBox">
+       	<div class="findpswd_tit">
+        	<span>验证的手机</span>
+       		 <span>验证的邮箱</span>
+        </div>
+        
+        
+        
+        <form class="loginForm" action="<{:U('passport/newpwd')}>" method="post" target="chuang_frm">
+        <div class="loginForm_input"> <i class="user"></i>
+          <input type="text" class="text"  name='name' placeholder="请输入用户名">
+        </div>
+        <div class="loginForm_input"> <i class="phone"></i>
+          <input type="text" class="text" name="mobile" placeholder="请输入手机号">
+          <input type="hidden" class="text" name='way'  value="2">
+        </div>
+        <div class="loginForm_btn">
+          <input class="btn" type="submit" value="下一步">
+        </div>
+      </form> 
+       <form class="loginForm" action="<{:U('passport/newpwd')}>" method="post" target="chuang_frm">
+       <div class="loginForm_input"><i class="user"></i>
+          <input type="text" class="text"  name='name' placeholder="请输入用户名">
+        </div>
+        <div class="loginForm_input"> <i class="email"></i>
+          <input type="text" class="text" name='mail' placeholder="请输入邮箱">
+                 <input type="hidden" class="text" name='way'  value="1">
+        </div>
+        <div class="loginForm_btn">
+          <input class="btn" type="submit" value="下一步">
+        </div>
+      </form> 
+      <div class="loginForm_agreement clearfix">
+          <div class="fl ">
+            <a href="<{:U('passport/reg')}>" class="reg">如需注册，请点击这里！</a>
+          </div>
+        </div>
+      </div>  
+       <script>
+  	$(document).ready(function(){
+		$(".registBox .findpswd_tit span").click(function () {
+			var index = $(this).index();
+			$(".registBox .findpswd_tit span").each(function (a) {
+				if (a == index) {
+					$(this).addClass('current');
+					$('.registBox').find('form').eq(a).show();
+				} else {
+					$(this).removeClass('current');
+					$('.registBox').find('form').eq(a).hide();
+				}
+			})
+		});
+		$(".registBox .findpswd_tit span").eq(0).click();
+	  });
+  </script>    
+		<div class="otherLogin_title"> <span>您还可以通过三方登录</span> </div>
+      <div class="openIconList"> <!--<a href="<{:U('passport/wxlogin')}>" class="weixin" title="微信登录"></a>--> <a href="<{:U('passport/qqlogin')}>" class="qq" title="QQ登录"></a> <a href="<{:U('passport/wblogin')}>" class="weibo" title="微博登录"></a> </div>
+    </section>
+  </section>
+<include file="public:footersmall" /> 
+
+     

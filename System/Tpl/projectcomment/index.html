@@ -1,0 +1,67 @@
+<include  file='public:header'/>
+<div class="pad">
+<div class="breadNav">
+  <div class="flt breadNav_text"> <span>项目</span><i></i><span>评论管理</span><i></i><span>评论管理</span> </div>
+  <div class="frt breadNav_other">
+    <div class="bn_input theme-pop-btn">
+      <form method="post" action="<{:U('projectcomment/index')}>">
+        <div class="bn_input">评论者ID：
+          <input type="text" name="uid" value="<{$uid}>" class="text">
+          项目ID：
+          <input type="text" name="project_id" value="<{$project_id}>" class="text">
+        </div>
+        <div class="bn_input">
+          <input type="submit" class="pub_btn" value="搜索">
+        </div>
+      </form>
+      <div class="bn_input"></div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<form target="zhuchuang_frm" method="post">
+<div class="daemonTable">
+  <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+    <tr>
+      <th class="w-100"> 序号 </th>
+      <th>评论者</th>
+      <th>项目</th>
+      <th>评分</th>
+      <th>内容</th>
+      <th>是否审核</th>
+      <th>评论时间</th>
+      <th class="w-150"> 操作 </th>
+    </tr>
+    <foreach name="list" item="var">
+      <tr>
+        <td><label class="checkbox">
+            <input class="child_comment_id" type="checkbox" name="comment_id[]" value="<{$var.comment_id}>" />
+            <{$var.comment_id}></label></td>
+        <td><{$memberlist[$var['uid']]['name']}>【<a class="linkcl" target="main_frm" href="<{:U('member/index',array('uid'=>$var['uid']))}>" >UID:<{$var.uid}></a>】</td>
+        <td class="wsNormal w-200"><{$projectlist[$var['project_id']]['title']}></td>
+        <td><{$var.score}></td>
+        <td class="wsNormal w-300"><{$var[content]}></td>
+        <td><if condition="$var.audit eq 0">
+          <span class="red">[未审核]
+          <else/>
+          <span class="green">[已审核]
+          </if>
+          </span></td>
+        <td><{$var.dateline|date="Y-m-d H:i:s",###}></td>
+        <td><{:ROLE('projectcomment/delete',array("comment_id"=>$var["comment_id"]),'删除','act','pub_btn grayBtn')}> </td>
+      </tr>
+    </foreach>
+  </table>
+</div>
+<div class="daemonBot">
+  <div class="flt daemonBot_cz">
+    <label class="checkbox">
+      <input type="checkbox" class="checkAll" rel="comment_id">
+      全选</label>
+    <{:ROLE('projectcomment/audit','','批量审核','list','pub_btn')}>
+    <{:ROLE('projectcomment/delete','','批量删除','list','pub_btn grayBtn')}> </div>
+  <div class="frt daemonPage"> <{$page}> </div>
+  <div class="clear"></div>
+</div>
+</div>
+<include  file='public:footer'/> 

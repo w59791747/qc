@@ -1,0 +1,73 @@
+<include  file='public:header'/>
+
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>会员</span><i></i><span>收货地址</span><i></i><span>收货地址</span>
+           
+            </div>
+            <div class="frt breadNav_other">
+           
+                <div class="bn_input theme-pop-btn">
+                	<form method="post" action="<{:U('memberaddr/index')}>">
+                        <div class="bn_input">用户ID：<input type="text" name="uid" value="<{$uid}>" class="text">
+                        
+                        </div>
+                        <div class="bn_input"><input type="submit" class="pub_btn" value="搜索"></div>
+                     </form>
+                
+                   <div class="bn_input"> <{:ROLE('memberaddr/create','','添加收货地址','','pub_btn')}></div>
+                </div>
+            <div class="clear"></div>
+          </div>
+          </div>
+		<form target="zhuchuang_frm" method="post">
+             <div class="daemonTable">
+              <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+                
+                <tr>
+                	<th class="w-100">
+                    序号
+                    </th>
+                    <th>用户ID</th>
+                    <th>联系人</th>
+                    <th>地址</th>
+                    <th>电话</th>
+                    <th>是否默认</th>
+                    <th class="w-150">
+                    操作
+                    </th>
+                </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.addr_id}></td>
+                            <td>
+                            <{$memberlist[$var['uid']]['name']}>【<a class="linkcl" target="main_frm" href="<{:U('member/index',array('uid'=>$var['uid']))}>" >UID:<{$var.uid}></a>】
+                            </td>
+                            <td><{$var.contact}></td>
+                            <td class="wsNormal"><{$var.addr}></td>
+                            <td><{$var.phone}></td>
+                             <td>
+                             <if condition="$var.default eq 1"><span class="red">[默认]</if></span>
+                             </td>
+                            <td>
+                                <{:ROLE('memberaddr/edit',array("addr_id"=>$var["addr_id"]),'编辑','','pub_btn')}>
+                                <{:ROLE('memberaddr/delete',array("addr_id"=>$var["addr_id"]),'删除','act','pub_btn grayBtn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+
+                </table>
+           </div>
+              <div class="daemonBot">
+                <div class="flt daemonBot_cz">
+                </div>
+                <div class="frt daemonPage">
+                   <{$page}>
+                </div>
+                <div class="clear"></div>
+              </div>
+          </div>    
+          
+
+<include  file='public:footer'/>

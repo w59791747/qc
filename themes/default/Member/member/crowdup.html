@@ -1,0 +1,70 @@
+<include file="public:header"/>
+<div class="uc_mid_r">
+  <ul class="cz_tit">
+    <li class="cz_cur"><a href="<{:U('member/priceup')}>">众筹支付</a></li>
+  </ul>
+  <form method="post"  action="<{:U('member/crowdpay')}>"  target="chuang_frm">
+    <div class="cz_cont">
+    <p><span>支付金额</span>
+      <if condition="$order">
+        <input readonly="readonly"  type="hidden" name="data[order_id]"  value="<{$order[order_id]}>" />
+        <input readonly="readonly"  type="text" name="data[number]"  value="<{$order[amount]/100}>" class="text" />
+        <span class="zhushi">单位人民币</span>
+        <else/>
+        <input  type="text" name="data[number]"  value="<{$order[amount]/100}>" class="text" />
+        <span class="zhushi">单位人民币</span> </if>
+      <input type="hidden" name="data[actual_pay]" id='actual_pay' value="0">
+      <input type="hidden" name="data[project_id]" value="<{$project[project_id]}>">
+      <input type="hidden" id='bili' value="<{$CONFIG['integral'][bili]}>">
+    </p>
+    <if  condition="$project['is_gold'] eq 1">
+      <p><span>积分：
+        <input type="text" id='jifen' class="text allTxt" onchange='change(this.value)' name='data[jifen]' value="0" placeholder="使用积分">
+        当前拥有积分<{$MEMBER.gold}></p>
+    </if>
+    <p><span>请选择支付方式：</span></p>
+    <ul>
+    <foreach name="payment" item="var">
+    <eq name="var.is_open" value="1">
+    <li>
+    <label>
+    <input class="pay_int" value="<{$var.code}>" name="data[code]" type="radio" />
+    <img src="__PUBLIC__/images/<{$var.logo}>" alt="" />
+    <label>
+    </li>
+    </eq>
+    </foreach>
+    </ul>
+    <input type="submit" class="cz_but" value="确认充值">
+  </form>
+</div>
+</div>
+<div style="clear:both"></div>
+</div>
+</div>
+<script type="text/javascript">
+
+function  change(value)
+{
+	if( value> parseInt('<{$MEMBER.gold}>')){
+			value	= parseInt('<{$MEMBER.gold}>');
+			$('#jifen').val(value);
+			
+	}
+	var bili = $('#bili').val();
+	var amount = parseInt('<{$order[amount]}>')/100-value/bili;
+	if(amount<1){
+		$('#jifen').val('0');
+		 parent.bmsg("使用积分最少要支付1元","",3000);		
+	}else{
+		$('#amount').html('￥'+amount.toFixed(2));
+		$('#actual_pay').val(amount.toFixed(2));
+	}
+	
+}
+$(document).ready(function(){
+	//选择其它支持项
+	$('#jifen').val('0');
+});
+</script> 
+<include file="public:footer"/>

@@ -1,0 +1,96 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+  <header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">实名认证</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+  <div class="tabList tabList_two clearfix"><span> <a href="<{:U('ucenter/member/name')}>" class="current">实名认证</a></span><span> <a href="<{:U('ucenter/member/mobile')}>">手机认证</a></span> </div>
+      <if condition="$MEMBER.verify eq 4 || $MEMBER.verify eq 5 || $MEMBER.verify eq 6|| $MEMBER.verify eq 7">
+        <div class="warning">已经通过实名认证：<span class="fontcl2"><{$MEMBER.detail.realname}></span> </div>
+        <elseif condition="$renzheng eq 1"/>
+        <div class="warning">实名认证已经提交 等待后台审核。 </div>
+        <else/>
+       <div class="introForm">
+          <form method="post"  action="<{:U('member/name')}>"  target="chuang_frm">
+            <div class="regGroup clearfix">
+              <label class="title">真实姓名</label>
+              <div class="control_txt">
+                <input  class="text" name="data[realname]"  type="text" placeholder="姓名" />
+              </div>
+            </div>
+            <div class="regGroup clearfix">
+              <label class="title">身份证号码</label>
+              <div class="control_txt">
+                <input  class="text" name="data[card]"  type="text" placeholder="18位身份证号码"/>
+              </div>
+            </div>
+           
+            <div class="regGroup clearfix">
+              
+                <input type="submit" class="btn" value="立刻认证">
+             
+            </div>
+          </form>
+        </div>
+      </if>
+    </div>
+  </div>
+  <script type="text/javascript" src="__TMPL__statics/js/ajaxfileupload.js"></script>
+<script>
+	function ajaxupload() {
+		
+			$.ajaxFileUpload({
+				url: '<{:U("up/upload/upload",array("model"=>"member_thumb"))}>',
+				type: 'post',
+				fileElementId: 'fileToUpload',
+				dataType: 'text',
+				secureuri: false, //一般设置为false
+				success: function (data, status) {
+					$("#data_photo").val(data);
+					$("#photo_img").attr('src', '__ATTACHS__/' + data).show();
+					$("#fileToUpload").unbind('change');
+					$("#fileToUpload").change(function () {
+						ajaxupload();
+					});
+				}
+			});
+		
+	}
+	
+	function ajaxupload1() {
+		
+			$.ajaxFileUpload({
+				url: '<{:U("up/upload/upload",array("model"=>"member_thumb"))}>',
+				type: 'post',
+				fileElementId: 'fileToUpload1',
+				dataType: 'text',
+				secureuri: false, //一般设置为false
+				success: function (data, status) {
+					$("#data_photo1").val(data);
+					$("#photo_img1").attr('src', '__ATTACHS__/' + data).show();
+					$("#fileToUpload1").unbind('change');
+					$("#fileToUpload1").change(function () {
+						ajaxupload1();
+					});
+				}
+			});
+		
+	}
+
+	$(document).ready(function () {
+		$("#fileToUpload").change(function () {
+			ajaxupload();
+		});
+		$("#fileToUpload1").change(function () {
+			ajaxupload1();
+		});
+	   
+
+	});
+</script>
+</section>
+<include file="public:footersmall"/>

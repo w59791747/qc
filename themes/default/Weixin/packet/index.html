@@ -1,0 +1,141 @@
+<include file="public:headerpacket"/>
+<title>查看红包</title>
+</head><body>
+<div class="redBg">
+  <div class="redBag"> <img src="__TMPL__packet/static/images/bagBg.png" width="100%" height="auto">
+    <div class="redBagCont">
+      <div class="redBagChai">
+        <div class="nr">
+           <a href="javascript:void(0)" class="btn theme-login">抢红包</a>
+        </div>
+        <img src="__TMPL__packet/static/images/bag.png" width="100%" height="auto"> </div>
+    </div>
+    <div class="ggk_tab">
+      <ul>
+        <li class="ggk_tab_list on"><a href="javascript:;">活动介绍</a></li>
+        <li class="ggk_tab_list"><a href="javascript:;">兑奖记录</a></li>
+        <li class="ggk_tab_list"><a href="javascript:;">中奖记录</a></li>
+        <li class="ggk_tab_list"><a href="javascript:;">我的中奖</a></li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+    <div class="ggk_list_box">
+      <div class="ggk_list" id='info' style="display:block;">
+        <div class="ggk_intro">
+          <div class="intro">
+            <p><{$detail.desc}></p>
+          </div>
+          <div class="title"><span class="bt">活动规则说明</span></div>
+          <div class="intro"><{$detail.info}></div>
+        </div>
+        <div> </div>
+      </div>
+      <div class="ggk_list">
+        <div class="bagList" id='is_packet'> </div>
+      </div>
+      <div class="ggk_list" id='packet'>
+        <div class="bagList"  id='all_packet'> </div>
+      </div>
+      <div class="ggk_list" >
+        <div class="bagList" id='my_packet'> </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="theme-popover" id="theme-popover">
+  <div class="articleBox" id = 'txt'></div>
+</div>
+<div class="theme-popover-mask" id="theme-popover-mask"></div>
+<div class="footer_copy">&copy;<{$CONFIG.site.sitename}></div>
+<script language="javascript">
+
+
+$(document).ready(function(e) {
+	getResult();
+	get_is_packet();
+	<if condition = "$page eq 0">
+		get_all_packet('1');
+	<else/>
+		get_all_packet('<{$page}>','1');
+	</if>
+	$('.ggk_tab_list').each(function (e) {
+		$(this).click(function(){
+			$('.ggk_tab_list').removeClass("on");
+			$(this).addClass("on");
+			$(".ggk_list_box .ggk_list").each(function(i){
+				if(e==i){
+					$(".ggk_list_box .ggk_list").hide();
+					$(this).show();
+				}
+				else{
+					$(this).hide();
+				}
+			});
+		});
+	});
+	$('.duiForm .btn').click(function(){
+		$(this).parents(".grayBg").find(".duiForm").hide();
+	});
+});
+jQuery(document).ready(function($) {
+	$('.theme-login').click(function(){
+		var link = '<{:U('packet/show', array('id'=>$detail['id']))}>';
+		 $.getJSON(link, function(ret){
+				
+				$('#txt').html(ret.msg);
+				$('.theme-popover-mask').fadeIn(100);
+				$('.theme-popover').slideDown(200);
+				
+	            setTimeout("codefans()",3000);
+        });
+		
+	});
+	
+});
+	
+	
+function get_all_packet(page,n){
+	var link = '<{:U('packet/all_packet', array('id'=>$detail['id']))}>';
+	$("#all_packet").load(link.replace("#page", page));
+	if(n >0){
+		$(".ggk_tab li").eq(2).addClass("on");
+		$(".ggk_tab li").eq(0).removeClass("on");
+		$("#packet").css('display','block'); 
+		$("#info").css('display','none'); 
+	}
+	
+	
+}
+
+function get_is_packet(){
+	var link = '<{:U('packet/is_packet', array('id'=>$detail['id']))}>';
+	
+	$("#is_packet").load(link);
+	
+}
+
+
+function getResult(){
+	var link = '<{:U('packet/my_packet', array('id'=>$detail['id']))}>';
+	
+	$("#my_packet").load(link);
+	
+}
+
+function codefans(){
+	var box=document.getElementById("theme-popover");
+	var boxbg=document.getElementById("theme-popover-mask");
+	box.style.display="none"; 
+	boxbg.style.display="none"; 
+	
+	}
+	//setTimeout("codefans()",3000);
+	
+	//function codefans(){
+//
+//		location.reload();
+//	}
+
+</script>
+</body>
+</html>

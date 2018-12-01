@@ -1,0 +1,107 @@
+<include file="public:header" /> <include file="public:top" />
+<section class="contentWrapper">
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">众筹支持</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_center_box">
+<div class="bintroForm">
+  <form method="post"  action="<{:U('project/crowdpay')}>" target="chuang_frm">
+    <div class="bregGroup">
+      <label class="title">姓名</label>
+      <div class="control_txt">
+        <input class="text" type="text" name='data[contact]' value="<{$MEMBER.detail.realname}>" placeholder="姓名">
+      </div>
+    </div>
+    <div class="bregGroup">
+      <label class="title">手机号</label>
+      <div class="control_txt">
+        <input class="text" type="text"   name='data[phone]' value="<{$MEMBER.mobile}>" placeholder="手机号">
+      </div>
+    </div>
+    <if  condition="$project['is_gold'] eq 1">
+      <div class="bregGroup">
+        <label class="title">积分抵扣</label>
+        <div class="control_txt">
+          <input type="text" id='jifen' class="text allTxt" onchange='change(this.value)' name='data[jifen]' value="0" placeholder="使用积分">
+          <div class="muqianJifen">可用积分：<font class="fontcl"><{$MEMBER.gold}></font>&nbsp;（<{$CONFIG['integral'][bili]}>积分=1元）</div>
+        </div>
+      </div>
+    </if>
+    <h2 class="supportit">支付方式</h2>
+    <div class="control_txt">
+      <foreach name="payment" item="var">
+        <eq name="var.is_open" value="1">
+        <if  condition="$var['is_open'] eq 1 && $var['is_mobile_only'] eq 1">
+          <label class="radio">
+          <div class="payfs">
+            <input class="radio" value="<{$var.code}>" name="data[code]" type="radio" />
+            <img src="__PUBLIC__/images/<{$var.logo}>" /> </div>
+          </label>
+        </if>
+      </foreach>
+    </div>
+    <input type="hidden" name="data[number]"  value="<{$money}>">
+    <input type="hidden" name="data[actual_pay]" id='actual_pay' value="0">
+    <input type="hidden" name="data[project_id]" value="<{$project[project_id]}>">
+    <input type="hidden" id='bili' value="<{$CONFIG['integral'][bili]}>">
+    <p class="polyPrice">支付<big class="fontcl1" id = 'amount'>￥<{:zhu_int($money)}></big></p>
+    <input class="button" type="submit" value="提交订单">
+  </form>
+</div>
+<script type="text/javascript">
+
+function  change(value)
+{
+	if( value> parseInt('<{$MEMBER.gold}>')){
+			value	= parseInt('<{$MEMBER.gold}>');
+			$('#jifen').val(value);
+			
+	}
+	var bili = $('#bili').val();
+	var amount = '<{$money}>'-value/bili;
+	if(amount<1){
+		$('#jifen').val('0');
+		 parent.bmsg("使用积分最少要支付1元","",3000);		
+	}else{
+		$('#amount').html('￥'+amount.toFixed(2));
+		$('#actual_pay').val(amount.toFixed(2));
+	}
+	
+}
+$(document).ready(function(){
+	//选择其它支持项
+	$('#jifen').val('0');
+	$('.otherZfx a').click(function(){
+		$('.zorderAll_support').slideToggle();
+	
+	
+	
+	});
+	//input框获得焦点
+	$('.yzmdl_box input').focus(function(){
+ 		 $(this).addClass('focus'); 
+	  });
+	  	$('.yzmdl_box input').blur(function(){
+ 		 $(this).removeClass('focus'); 
+	  });
+	  
+	//数量加减
+	$("[quantity]").click(function(){
+	var quantity = parseInt($("#cart_product_num").val(), 10);
+	if($(this).attr("quantity") == '+'){
+		quantity += 1;
+	}else{
+		quantity -= 1;
+	}
+	if(quantity < 1){
+		quantity = 1;
+	}
+	$("#cart_product_num").val(quantity);
+	});
+});
+
+</script> 
+<include file="public:footer" /> 

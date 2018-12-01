@@ -1,0 +1,90 @@
+<include  file='public:header'/>
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>会员</span><i></i><span>会员管理</span><i></i><span>编辑会员</span>
+           
+            </div>
+          </div>
+		<form target="zhuchuang_frm"  action="<{:U('member/edit',array('uid'=>$detail['uid']))}>" method="post">
+           <div class="daemonTable">
+              	<table class="table_data" cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="alginRt w-200"><font class="pointcl">*</font> 用户名 </th>
+                        <td>
+                        	<input type="text" name="data[name]" value="<{$detail.name|default=''}>" class="text w-400" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="alginRt w-200"><font class="pointcl">*</font> 密码 </th>
+                        <td>
+                        	<input type="text" name="data[passwd]" value="******" class="text w-400" />
+                        </td>
+                    </tr>
+                    
+                   
+                    
+                   
+                    <?PHP $str = $detail[from].'_face'; ?>
+                    
+                     <tr>
+                        <th class="alginRt w-200"> 头像 </th>
+                        <td><div class="fileBox w-200">
+                        
+                         <img id="photo_img"  src="__ATTACHS__/<{$detail.face|default=$CONFIG[attachs][$str]}>" />
+                        </div>
+                          <input type="hidden" name="data[face]" value="<{$CONFIG.face}>" id="data_photo" />
+                          <input class="file"  id="photo_file" name="photo_file" type="file" multiple="true" value="" />
+                         </td>
+                      </tr>
+                    <tr>
+                        <th class="alginRt w-200"> 邮箱 </th>
+                        <td>
+                        	<input type="text" name="data[mail]" value="<{$detail.mail|default=''}>" class="text w-400" />
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th class="alginRt w-200"> 状态 </th>
+                        <td>
+                        	<select name="data[closed]" class="text w-200">
+                                <foreach name="closed" key='key' item="val">
+                                    <option  value="<{$key}>" <if condition="$key eq $detail[closed]"> selected="selected" </if>><{$val}></option>
+                                </foreach>
+                            </select>
+                        </td>
+                    </tr>
+                    
+                    
+                   
+                    
+                      <tr>
+                        <th class="alginRt w-100"> </th>
+                        <td>
+                        <input type="submit" value="确认保存" class="pub_btn" />
+                        </td>
+                      </tr>
+                </table>
+           </div>
+        </form>  
+   <script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js?t=<{$nowtime}>"></script>
+     
+  <link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+    <script>
+        $("#photo_file").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"member_thumb"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '上传头像',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+			//'debug' : true,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo").val(data);
+                $("#photo_img").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+
+    </script>   
+
+<include  file='public:footer'/>           

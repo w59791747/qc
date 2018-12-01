@@ -1,0 +1,116 @@
+<include file="public:header" />
+<body class="reg_wrap">
+
+<div class="reg_logo">
+	<a href="<{:U('/index')}>"><img src="__ATTACHS__/<{$CONFIG[site][loginlogo]}>" /> </a>
+    
+</div>
+
+<div class="reg_form">
+	<div class="change_reg"><a href="<{:U('passport/reg2')}>">切换到手机注册</a></div>
+	<div class="account_reg">
+		 <form  action="<{:U('passport/reg')}>" method="post" target="chuang_frm" onsubmit="return check_from()">
+			<input type="text"  name="name" id='name'  class="user_name yhm" placeholder="请输入用户名"/>
+			<input type="password" id='passwd'   name="data[passwd]" class="user_name mima" placeholder="请输入密码"/>
+			<input type="password" id='password2'  name="password2" class="user_name mima" placeholder="请确认密码"/>
+             <if condition="$CONFIG[power][reg] eq on">
+			<p><input type="text" name="yzm" id='yzm'  class="user_name yzm" placeholder="请输入验证码"/><span class="yzmImg" >
+				<img class="vail" src="__ROOT__/index.php?g=home&m=verify&a=index&mt=<{:time()}>" /> 
+            </span></p>
+            </if>
+             <input type="submit" class="user_name reg_but" value="立即注册">
+		</form>
+		<div class="tixing">
+			<ul>
+				<li id='nam_show'>请填写用户名</li>
+				<li id='pwd_show'>请填写密码</li>
+				<li id='pwd2_show'>请再次输入密码</li>
+				<li id='yzm_show'></li>
+			</ul>
+		</div>
+	</div>
+	<div class="zc_note">已经有账号了? 去 <a href="<{:U('passport/login')}>">登录</a></div>
+</div>
+
+<script>
+  	$(document).ready(function(){
+		$(".registBox .findpswd_tit span").click(function () {
+			var index = $(this).index();
+			$(".registBox .findpswd_tit span").each(function (a) {
+				if (a == index) {
+					$(this).addClass('current');
+					$('.registBox').find('form').eq(a).show();
+				} else {
+					$(this).removeClass('current');
+					$('.registBox').find('form').eq(a).hide();
+				}
+			})
+		});
+		$(".registBox .findpswd_tit span").eq(0).click();
+	  });
+  </script> 
+<script type="text/javascript">
+ 
+ $("#name").blur(function(){
+  	var name  = $('#name').val();
+	$.post("<{:U('passport/check_name')}>",{name:name},function(data){
+		if(data != 'success'){
+			$("#nam_show").css('display','block'); 
+			$('#nam_show').html(data);
+		}else{
+			$('#nam_show').html('');
+		}
+	})
+ });
+ 
+ $("#passwd").blur(function(){
+  	var passwd  = $('#passwd').val();
+	if(passwd.length < 6){
+		$('#pwd_show').css('display','block');
+		$('#pwd_show').html('密码不能小于6个字符');
+	}else{
+		$('#pwd_show').html('');
+	}
+ });
+ 
+ $("#password2").blur(function(){
+  	var passwd  = $('#passwd').val();
+	var passwd2  = $('#password2').val();
+	if(passwd2.length < 6){
+		$('#pwd2_show').css('display','block');
+		$('#pwd2_show').html('密码不能小于6个字符');
+	}else if(passwd != passwd2){
+		$('#pwd2_show').css('display','block');
+		$('#pwd2_show').html('2次输入密码不一致');
+	}else{
+		$('#pwd2_show').html('');
+	}
+ });
+ 
+ $("#yzm").blur(function(){
+  	var yzm  = $('#yzm').val();
+	$.post("<{:U('passport/check_yzm')}>",{yzm:yzm},function(data){
+		if(data != 'success'){
+			$('#yzm_show').css('display','block');
+			$('#yzm_show').html(data);
+		}else{
+			$('#yzm_show').html('');
+		}
+	})
+ });
+ 
+ function check_from(){
+	if($('#nam_show').html() == '' && $('#pwd_show').html() == '' && $('#pwd2_show').html() == '' && $('#yzm_show').html() == ''){
+		return true;	
+	}else{
+		return false;	
+	} 
+ }
+
+	$('.account_reg .tixing ul li:eq(0)').css({position:'absolute',top:'20px',left:'0px'});
+	$('.account_reg .tixing ul li:eq(1)').css({position:'absolute',top:'80px',left:'0px'});
+	$('.account_reg .tixing ul li:eq(2)').css({position:'absolute',top:'140px',left:'0px'});
+	$('.account_reg .tixing ul li:eq(3)').css({position:'absolute',top:'200px',left:'0px'});
+	
+</script> 
+<include file="public:sfooter" />

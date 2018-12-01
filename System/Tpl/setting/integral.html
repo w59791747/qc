@@ -1,0 +1,62 @@
+ <include  file='public:header'/>
+<div class="pad">
+<div class="breadNav">
+  <div class="flt breadNav_text"> <span>设置</span><i></i><span>基本设置</span><i></i><span>积分设置</span> </div>
+</div>
+<form target="zhuchuang_frm" action="<{:U('setting/integral')}>" method="post">
+  <div class="daemonTable">
+    <table class="table_data" cellpadding="0" cellspacing="0">
+      <tr>
+        <th class="alginlt"  colspan="2" > 积分充值比例 </th>
+      </tr>
+      <tr>
+        <th class="alginRt w-200"> 充值比例: </th>
+        <td><input type="text" name="data[bili]" value="<{$CONFIG.integral.bili|default='0'}>" class="text w-200" /><span class="comm">单位资金充值获得积分数，如1元=200积分</span></td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200"> 提现手续费: </th>
+        <td><input type="text" name="data[shouxufei]" value="<{$CONFIG.integral.shouxufei|default='0'}>" class="text w-200" /><span class="comm">提现时扣除资金</span></td>
+      </tr>
+      
+      <tr>
+        <th class="alginRt w-200"> 最低提款金额: </th>
+        <td><input type="text" name="data[min]" value="<{$CONFIG.integral.min|default='0'}>" class="text w-200" /></td>
+      </tr>
+      
+      <tr>
+        <th class="alginlt"  colspan="2" > 积分获取 </th>
+      </tr>
+	   <tr>
+        <th class="alginRt w-200"> 签到: </th>
+        <td><input type="text" name="data[qiandao]" value="<{$CONFIG.integral.qiandao|default='0'}>" class="text w-200" /></td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200"> 消费金额: </th>
+        <td><input type="text" name="data[xiaofei]" value="<{$CONFIG.integral.xiaofei|default='0'}>" class="text w-200" /><span class="comm">消费金额返积分比例，如设置0.1，投资10000元，则获得10000*0.1=1000积分</span></td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200"> 注册并验证通过: </th>
+        <td><input type="text" name="data[reg]" value="<{$CONFIG.integral.reg}>" class="text w-200" /></td>
+      </tr>
+     
+      <tr>
+        <th class="alginRt w-200">发表评论并审核通过: </th>
+        <td><input type="text" name="data[comment]" value="<{$CONFIG.integral.comment}>" class="text w-200" /></td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200">分享好友并注册验证通过: </th>
+        <td><input type="text" name="data[fenxiang_reg]" value="<{$CONFIG.integral.fenxiang_reg}>" class="text w-200" /></td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200">分享好友返消费积分: </th>
+        <td><input type="text" name="data[fenxiang_xiaofei]" value="<{$CONFIG.integral.fenxiang_xiaofei}>" class="text w-200" /><span class="comm">如设置为1，分享用户投资10000元，则推广员获得10000*1=10000积分</span></td>
+      </tr>
+      
+      <tr>
+        <th class="alginRt w-100"> </th>
+        <td><input type="submit" value="确认保存" class="pub_btn" /></td>
+      </tr>
+    </table>
+  </div>
+</form>
+<include  file='public:footer'/> 

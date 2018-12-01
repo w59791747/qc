@@ -1,0 +1,46 @@
+<include file="public:header" /> 
+<include file="public:top" /> 
+ <section class="contentWrapper">
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">登录</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+       
+       <form class="loginForm" id="login_frm"  action="<{:U('passport/login')}>" method="post" target="chuang_frm">
+        <div class="loginForm_input"> <i class="user"></i>
+          <input type="text" name="name"   class="text" placeholder="用户名">
+        </div>
+        <div class="loginForm_input"> <i class="pswd"></i>
+          <input type="password" name="passwd" class="text" placeholder="密码">
+        </div>
+          <input type="hidden" name="backurl" value="<{$backurl}>">
+
+        <if condition="$CONFIG[power][login] eq on">
+         	
+             <div class="loginForm_input loginForm_yzm">
+              <i class="yzm"></i>
+                <input type="text" name="yzm" class="text" placeholder="验证码">
+              <div class="yzmImgM"><img src="__ROOT__/index.php?g=mobile&m=verify&a=index&mt=<{:time()}>" /></div>
+            </div>
+        
+           
+        </if>
+       
+        <div class="loginForm_btn">
+          <input class="btn" type="submit" value="登录">
+        </div>
+        
+      </form>  
+      <div class="loginForm_agreement clearfix">
+          <div class="fl ">
+            <a href="<{:U('passport/reg')}>" class="reg">注册新用户</a>
+          </div>
+          <div class="fr"> <a href="<{:U('passport/forget')}>">忘记密码？</a> </div>
+        </div>     
+      <div class="otherLogin_title"></div>
+    </section>
+  </section>
+<include file="public:footersmall" /> 

@@ -1,0 +1,60 @@
+<include  file='public:header'/>
+<div class="pad">
+  <div class="breadNav">
+    <div class="flt breadNav_text"> <span>功能管理</span><i></i><span>微信应用</span><i></i><span>红包</span> </div>
+    <div class="frt breadNav_other">
+      <div class="bn_input theme-pop-btn">
+      
+      <div class="bn_input">
+      
+      <div class="bn_input"> <{:ROLE('weixinpacket/create','','添加红包','','pub_btn')}></div> </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<form target="zhuchuang_frm" method="post">
+<div class="daemonTable">
+  <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>活动名称</th>
+        <th>二维码图片</th>
+        <th>红包类型</th>
+        <th>红包属性</th>
+        <th>领取人数</th>
+        <th>领取次数</th>
+        <th>活动时间</th>
+        <th>是否开启</th>
+        <th>操作</th>
+    </tr>
+ 
+                    
+    <foreach name="list" item="var">
+      <tr>
+        <td><{$var.title}></td>
+        <td>
+        <img width="120px;" src="https://www.kuaizhan.com/common/encode-png?large=true&bg=ffffff&fg=000000&w=300&data=<{$var['url']}>"   class="erweima"/>
+         <td><if condition="($var['packet_type'] elt 1)">手气红包<else/>普通红包</if></td>
+        <td>发放个数：<{$item.item_num}><br /><if condition="$var['packet_type'] elt 8">总金额：<{$item.item_sum}><br />面额上限：<{$var['item_max']}><else/>单个面额：<{$item.item_unit}></if> </td>
+        <td><{$var.people}><if condition="($var['pcount'] gt 0)">已领：<{$var['pcount']}>人</if></td>
+        <td><{$var.get_number}></td>
+        <td><{$var.start_time}> 至 <{$var.end_time}></td>
+        <td><if condition="($var['is_open'] elt 1)">已开启<else/>未开启</if></td>
+         
+         <td>
+          <{:ROLE('weixinpacket/edit',array("id"=>$var["id"]),'修改','','pub_btn')}>
+           <{:ROLE('weixinpacket/logs',array("id"=>$var["id"]),'兑换','','pub_btn')}>
+            <{:ROLE('weixinpacket/sn',array("packet_id"=>$var["id"]),'领取','','pub_btn')}>
+          <{:ROLE('weixinpacket/delete',array("id"=>$var["id"]),'删除','act','pub_btn grayBtn')}>
+         </td>
+      </tr>
+    </foreach>
+  </table>
+</div>
+<div class="daemonBot">
+  <div class="flt daemonBot_cz"> </div>
+  <div class="frt daemonPage"> <{$page}> </div>
+  <div class="clear"></div>
+</div>
+</div>
+<include  file='public:footer'/>
+

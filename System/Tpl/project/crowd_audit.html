@@ -1,0 +1,27 @@
+<div class="theme-poptit"><span>售出操作</span> <a href="javascript:;" title="关闭" class="close">×</a> </div>
+						<div class="theme_popover_table">
+                          <form  target="zhuchuang_frm" action="<{:U('project/crowd_audit',array('project_id'=>$detail['project_id']))}>" method="post">
+							<table class="table_data" cellpadding="0" cellspacing="0">
+                         
+                            <th class="alginRt w-100"> <font class="pointcl">*</font> 支付定金 </th>
+                            <td>
+                            	<input type="text" name="data[dingjin]" value="<{$detail.dingjin|default=''}>" class="text w-200" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="alginRt w-100"> <font class="pointcl">*</font> 实际金额 </th>
+                            <td>
+                           <input type="text" name="data[amount]" value="<{$detail.amount|default=''}>" class="text w-200"  />
+                            </td>
+                          </tr>
+                           
+                          
+                           <tr>
+                                <th class="alginRt w-100"> </th>
+                                <td>
+                                <input type="submit" value="确定编辑" class="pub_btn" />
+                                </td>
+                              </tr>
+                          
+                          </table>
+						</div>

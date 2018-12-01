@@ -1,0 +1,49 @@
+<include  file='public:header'/>
+    <div class="pad">
+      <div class="breadNav">
+        <div class="flt breadNav_text"> <span>管理员管理</span><i></i><span>角色管理</span><i></i><span>角色权限</span> </div>
+        <div class="frt">当前用户组：<{$detail.role_name}></p>
+        <div class="clear"></div>
+      </div>
+      </div>
+      <div class="daemonAdd">
+      <form  target="zhuchuang_frm" action="<{:U('role/auth',array('role_id'=>$role_id))}>" method="post">
+        <table class="table_data" cellpadding="0" cellspacing="0">
+          
+          
+          
+           <foreach name="menus" item="var">
+                    <if condition="($var.parent_id eq 0) and ($var.is_show eq 1) ">  
+                        <foreach name="menus" item="var2">
+                            <eq name="var2.parent_id" value="$var.menu_id">
+                            <if condition="$var2.is_show eq 1">   
+                                <tr>
+                                	<th class="alginRt w-200"> 
+                                    	<label class="cbtitle"><input type="checkbox" class="checkAll" rel="<{$var2.menu_id}>" value="" /><b><{$var.menu_name}></b> > <{$var2.menu_name}></label>
+                                    </th>
+                                    <td>
+                                     <foreach name="menus" item="var3">
+                                        <eq name="var3.parent_id" value="$var2.menu_id">
+                                        <label  class="checkbox"> <input class="child_<{$var2.menu_id}>" type="checkbox" name="menu_id[]" <in name="var3.menu_id" value="$menuIds">checked="checked"</in> value="<{$var3.menu_id}>" /> <{$var3.menu_name}></label>
+                                        </eq>
+                                    </foreach> 
+                                    </td>  
+                                </tr>
+                            </if>     
+                            </eq>
+                        </foreach>       
+                    </if>
+                </foreach> 
+         
+          <tr>
+            <th class="alginRt w-200"> </th>
+            <td><input class="pub_btn" type="submit" value="确定授权"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+</form>
+<include  file='public:footer'/>       
+
+
+

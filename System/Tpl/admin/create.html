@@ -1,0 +1,46 @@
+<div class="theme-poptit"><span>添加管理员</span> <a href="javascript:;" title="关闭" class="close">×</a> </div>
+						<div class="theme_popover_table">
+                          <form  target="zhuchuang_frm" action="<{:U('admin/create')}>" method="post">
+							<table class="table_data" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <th class="alginRt w-100"> <font class="pointcl">*</font> 用户名 </th>
+                            <td>
+                            	<input type="text" name="data[admin_name]" value="<{$detail.admin_name|default=''}>" class="text w-200" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="alginRt w-100"> <font class="pointcl">*</font> 密码 </th>
+                            <td>
+                           <input type="text" name="data[password]" value="<{$detail.password|default=''}>" class="text w-200"  />
+                            </td>
+                          </tr>
+                           
+                         
+                          <tr>
+                            <th class="alginRt w-100"> <font class="pointcl">*</font> 角色 </th>
+                            <td>
+                                <select name="data[role_id]" class="text w-200" style="display: inline-block;" onchange="check(this.value)">
+                                    <foreach name="roles" item="var">
+                                        <option value="<{$var.role_id}>"><{$var.role_name}></option>
+                                    </foreach>
+                                </select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="alginRt w-100"> <font class="pointcl">*</font> 手机 </th>
+                            <td>
+                                <input type="text" name="data[mobile]" value="<{$detail.mobile|default=''}>" class="text w-200" />
+                            </td>
+                          </tr>
+                          
+                           <tr>
+                                <th class="alginRt w-100"> </th>
+                                <td>
+                                <input type="submit" value="创建管理员" class="pub_btn" />
+                                </td>
+                              </tr>
+                          
+                          </table>
+						</div>
+
+

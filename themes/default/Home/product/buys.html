@@ -1,0 +1,106 @@
+<include file="public:header" /><include file="public:top" />
+</div>
+</div>
+
+<div class="tjdd">
+  <div class="zorderWrap">
+    <h1><{$detail.title}></h1>
+    <div class="step1">
+      <ul class="steptit">
+        <li class="cur_step">提交订单</li>
+        <li>确认支付信息</li>
+        <li>支付成功</li>
+      </ul>
+      <ul class="stepzf">
+        <li class="cur_zf">收货信息</li>
+      </ul>
+      <div class="zf_wrap">
+        <form  method="post"  action="<{:U('product/pay')}>" target="chuang_frm">
+          <div class="xregGroup clearfix">
+            <label>姓名：</label>
+            <div class="control_txt">
+              <input type="text " class="text allTxt" name='data[contact]' value="<{$addr.contact}>" placeholder="姓名">
+            </div>
+          </div>
+          <div class="xregGroup clearfix">
+            <label>手机号：</label>
+            <div class="control_txt">
+              <input type="text " class="text allTxt" name='data[phone]' value="<{$addr.phone}>" placeholder="手机号">
+            </div>
+          </div>
+          <div class="xregGroup clearfix">
+            <label>城市：</label>
+            <div class="control_txt">
+              <input type="text " class="text allTxt" name='data[city]' value="<{$addr.city}>" placeholder="城市">
+            </div>
+          </div>
+          <div class="xregGroup clearfix">
+            <label>详细地址：</label>
+            <div class="control_txt">
+              <input type="text " class="text allTxt" name='data[addr]' value="<{$addr.addr}>" placeholder="详细地址">
+            </div>
+          </div>
+          <input type="hidden" name="data[product_id]" value="<{$detail[product_id]}>">
+          <input type="hidden" name="data[buys]" value="<{$buys}>">
+          <input type="hidden" name="data[amount]" value="<{$detail[freight]+$detail[jifen]*$buys}>">
+          <div class="xregGroup clearfix">
+            <label>单价：</label>
+            <div class="control_txt"> <span class="fujf"><{$detail[jifen]}></span><small class="ml5 black9">积分/件</small> </div>
+          </div>
+          <div class="xregGroup clearfix">
+            <label>数量：</label>
+            <div class="control_txt"> <span class="fujf"><{$buys}></span><small class="ml5 black9">件</small> </div>
+          </div>
+          <div class="xregGroup clearfix">
+            <label>运费：</label>
+            <div class="control_txt"> <span class="fujf"><{$detail[freight]}></span><small class="ml5 black9">积分</small> </div>
+          </div>
+          <div class="xregGroup clearfix">
+            <label>实付积分：</label>
+            <div class="control_txt"> <span class="fuje pointcl"><{$detail[freight]+$detail[jifen]*$buys}></span><small class="ml5 pointcl">积分</small> </div>
+          </div>
+          <div class="xregGroup clearfix">
+          <label></label>
+          <div class="control_txt">
+            <input class="btn" type="submit" value="提交订单">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	//选择其它支持项
+	$('.otherZfx a').click(function(){
+		$('.zorderAll_support').slideToggle();
+	
+	
+	
+	});
+	//input框获得焦点
+	$('.yzmdl_box input').focus(function(){
+ 		 $(this).addClass('focus'); 
+	  });
+	  	$('.yzmdl_box input').blur(function(){
+ 		 $(this).removeClass('focus'); 
+	  });
+	  
+	//数量加减
+	$("[quantity]").click(function(){
+	var quantity = parseInt($("#cart_product_num").val(), 10);
+	if($(this).attr("quantity") == '+'){
+		quantity += 1;
+	}else{
+		quantity -= 1;
+	}
+	if(quantity < 1){
+		quantity = 1;
+	}
+	$("#cart_product_num").val(quantity);
+	});
+});
+
+</script> 
+<include file="public:footer" /> 

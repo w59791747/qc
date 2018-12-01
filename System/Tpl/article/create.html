@@ -1,0 +1,114 @@
+<include  file='public:header'/>
+<div class="pad">
+<div class="breadNav">
+  <div class="flt breadNav_text"> <span>运营</span><i></i><span>文章内容</span><i></i><span>文章添加</span> </div>
+</div>
+<form target="zhuchuang_frm"  action="<{:U('article/create')}>" method="post">
+  <div class="daemonTable">
+    <table class="table_data" cellpadding="0" cellspacing="0">
+      <tr>
+        <th class="alginRt w-100"> <font class="pointcl">*</font> 标题 </th>
+        <td><input type="text" name="data[title]" value="<{$detail.title|default=''}>"  class="text w-300"  /></td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200"><font class="pointcl">*</font> 分类 </th>
+        <td><select name="parent_id" id="parent_id" class="text w-100" style="display: inline-block; margin-right: 10px;">
+            <option value="0">请选择...</option>
+            <foreach name="cates" item="var">
+              <eq name="var.parent_id" value="0">
+                <option value="<{$var.cate_id}>"><{$var.title}></option>
+              </eq>
+            </foreach>
+          </select>
+          <select id="cate_id" name="data[cate_id]" class="text" style="display: inline-block;">
+          </select>
+          <script>
+                            $(document).ready(function (e) {
+                                $("#parent_id").change(function () {
+                                    var url = '<{:U("articlecate/child",array("parent_id"=>"0000"))}>';
+                                    if ($(this).val() > 0) {
+                                        var url2 = url.replace('0000', $(this).val());
+                                        $.get(url2, function (data) {
+                                            $("#cate_id").html(data);
+                                        }, 'html');
+                                    }
+                                });
+
+                            });
+                        </script></td>
+      </tr>
+     
+      <tr>
+        <th class="alginRt w-100"> 链接地址 </th>
+        <td><input type="text" name="data[linkurl]" value="<{$detail.linkurl|default=''}>"  class="text w-200"  /></td>
+      </tr>
+      <tr>
+        <th class="alginRt w-100"> 排序 </th>
+        <td><input type="text" name="data[orderby]" value="<{$detail.orderby|default=''}>"  class="text w-200"  /></td>
+      </tr>
+      <tr>
+        <th class="alginRt w-100"> 是否审核 </th>
+        <td><label class="radio">
+            <input type="radio" name="data[audit]" value="1" checked="checked">
+            审核 </label>
+          <label class="radio">
+            <input type="radio" name="data[audit]" value="0" >
+            待审</label></td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200">摘要 </th>
+        <td class="wsNormal"><textarea name="data[desc]"><{$detail.desc}></textarea></td>
+      </tr>
+      <tr>
+        <th class="alginRt w-200">详情 </th>
+        <td class="wsNormal"><script type="text/plain"  style="width:100%;height:360px;" id="data_details" name="data[details]"><{$detail.details}></script></td>
+      </tr>
+      <tr>
+        <th class="alginRt w-100"> </th>
+        <td><input type="submit" value="确认添加" class="pub_btn" /></td>
+      </tr>
+    </table>
+  </div>
+</form>
+<link rel="stylesheet" href="__PUBLIC__/umeditor/themes/default/css/umeditor.min.css" type="text/css">
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/umeditor/umeditor.config.js"></script> 
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/umeditor/umeditor.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/umeditor/lang/zh-cn/zh-cn.js"></script> 
+<script>
+                    um = UM.getEditor('data_details', {
+                        imageUrl: "<{:U('up/upload/editor')}>",
+                        imagePath: '__ROOT__/attachs/editor/',
+                        lang: 'zh-cn',
+                        langPath: UMEDITOR_CONFIG.UMEDITOR_HOME_URL + "lang/",
+                        focus: false
+                    });
+        </script> 
+<script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js?t=<{$nowtime}>"></script> 
+<script type="text/javascript" src="__PUBLIC__/js/area.js?t=<{$nowtime}>"></script>
+<link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+<script>
+        $("#photo_file").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"adv"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '缩略图',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+			//'debug' : true,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo").val(data);
+                $("#photo_img").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+
+    </script> 
+<script type="text/javascript">_init_area();</script> 
+<script type="text/javascript">
+		var Gid  = document.getElementById ;
+		var showArea = function(){
+			Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" + 	
+			Gid('s_city').value + " - 县/区" + 
+			Gid('s_county').value + "</h3>"
+									}
+		</script> 
+<include  file='public:footer'/> 

@@ -1,0 +1,85 @@
+<include file="public:header"/>
+
+
+<div class="uc_mid_r yitou_list">
+			<ul class="cz_tit">
+				<li><a href="<{:U('member/set/passwd')}>">修改密码</a></li>
+				<li class="cz_cur"><a href="<{:U('member/set/renzheng')}>">账号认证</a></li>
+				<li><a href="<{:U('member/set/pwd')}>">支付密码</a></li>
+				<li><a href="<{:U('member/set/card')}>">绑定银行卡</a></li>
+				<li><a href="<{:U('member/set/adress')}>">收货地址</a></li>
+			</ul>
+          <if condition="$MEMBER.verify eq 4 || $MEMBER.verify eq 5 || $MEMBER.verify eq 6|| $MEMBER.verify eq 7">
+          	  <div class="warning"> <i></i>已经通过实名认证：<span class="fontcl2"><{$MEMBER.detail.realname}></span>
+             </div>
+          <elseif condition="$renzheng eq 1"/>
+             <div class="warning"> <i></i>您好，您的实名认证已经提交，请耐心等待后台审核…
+             </div>
+          <else/>
+           <form method="post"  action="<{:U('set/name')}>"  target="chuang_frm">
+			<div class="xgzl">
+				<p><span>真实姓名</span><input type="text" name="data[realname]"   class="mima_box" /></p>
+				<p><span>身份证号码</span><input type="text" name="data[card]"   class="mima_box" /></p>
+				
+             
+				
+                <!--<p class="sfz">
+                  <span>身份证正面</span>
+                  <div class="control_txt">
+                    <img id="photo_img" width="100px;"  src="__ATTACHS__/<{$MEMBER.detail.card_zhen|default='default.jpg'}>" />
+                    <input type="hidden" name="data[card_zhen]" value="<{$MEMBER.detail.card_zhen}>" id="data_photo" />
+                    <input class="xg_touxiang"  id="photo_file" name="photo_file" type="file" multiple="true" value="" />
+                  </div>
+                </p>
+                
+                 <p class="sfz">
+                  <span>身份证反面</span>
+                  <div class="control_txt">
+                    <img id="photo_img1" width="100px;"  src="__ATTACHS__/<{$MEMBER.detail.card_fan|default='default.jpg'}>" />
+                    <input type="hidden" name="data[card_fan]" value="<{$MEMBER.detail.card_fan}>" id="data_photo1" />
+                    <input class="xg_touxiang"  id="photo_file1" name="photo_file1" type="file" multiple="true" value="" />
+                  </div>
+                </p>-->
+                    
+              <input type="submit" class="cz_but" value="立即认证">
+              </form>
+			</div>
+          </if>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+  
+  <script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js?t=<{$nowtime}>"></script>
+
+    <link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+  
+    <script type="text/javascript">
+      	 $("#photo_file").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"member_thumb"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '上传正面',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo").val(data);
+                $("#photo_img").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+		$("#photo_file1").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"member_thumb"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '上传反面',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo1").val(data);
+                $("#photo_img1").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+    </script>
+  
+<include file="public:footer"/>

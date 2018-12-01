@@ -1,0 +1,128 @@
+<include file="public:header" /> <include file="public:top" />
+</div>
+</div>
+<div class="tjdd">
+	<h1><{$project.title}></h1>
+	<div class="step1">
+		<ul class="steptit">
+			<li class="cur_step">提交订单</li>
+			<li>确认支付</li>
+			<li>投资成功</li>
+		</ul>
+		<ul class="stepzf">
+			<li class="cur_zf">线上支付</li>
+			<li>线下支付</li>
+		</ul>
+         <form  method="post"  action="<{:U('project/crowdpay')}>" target="chuang_frm">
+         <input type="hidden" name='data[contact]' value="<{$MEMBER.detail.realname}>">
+         <input type="hidden" name='data[phone]' value="<{$MEMBER.mobile}>">
+		<div class="zf_wrap">
+			<div class="xszf">
+				<div class="zffs">
+					<p>请选择支付方式：</p>
+					<ul class="zffs_cont">
+                    	<foreach name="payment" item="var">
+                          <eq name="var.is_open" value="1">
+                              
+                              <li><label><input type="radio" name="data[code]" value="<{$var.code}>" /><img src="__PUBLIC__/images/<{$var.logo}>" alt="<{$var.code}>" /></label></li>
+                          </eq>
+                        </foreach>
+					</ul>
+				</div>
+                
+                <input type="hidden" name="data[number]"  value="<{$money}>">
+                <input type="hidden" name="data[actual_pay]" id='actual_pay' value="0">
+                <input type="hidden" name="data[project_id]" value="<{$project[project_id]}>">
+                
+                <input type="hidden" id='bili' value="<{$CONFIG['integral'][bili]}>">
+                
+                <if  condition="$project['is_gold'] eq 1">
+                     <p>使用积分抵扣：</p>
+                        <input type="text" id='jifen' class="text" onchange='change(this.value)' name='data[jifen]' value="0" placeholder="使用积分"><span class="ml10">当前拥积分：<font class="fontcl"><{$MEMBER.gold}></font>&nbsp;（<font class="black9"><{$CONFIG['integral'][bili]}>积分 = 1元</font>）</span>
+        
+                </if>
+				
+				<div class="zffs">
+					<p>实际投资金额：&nbsp;<b  id = 'amount'>¥<{:zhu_int($money)}></b></p>					
+				</div>
+				<input class="btn" type="submit" value="提交订单">
+			</div>
+            </form>
+             <form  method="post"  action="<{:U('project/crowdpay')}>" target="chuang_frm">
+            <input readonly="readonly"  type="hidden" name="data[type]"  value="2" class="text" />
+            <input type="hidden" name='data[contact]' value="<{$MEMBER.detail.realname}>">
+             <input type="hidden" name='data[phone]' value="<{$MEMBER.mobile}>">
+			<div class="xxzf">
+				<div class="zffs">
+					<p>请选择支付方式：</p>
+					<ul class="zffs_cont">
+						<foreach name="payment2" item="var">
+                          <eq name="var.is_open" value="1">
+                              
+                              <li><label><input type="radio" name="data[code]" value="<{$var.code}>" /><img src="__PUBLIC__/images/<{$var.logo}>" alt="<{$var.code}>" /></label></li>
+                          </eq>
+                        </foreach>
+					</ul>
+				</div>
+                 <input type="hidden" name="data[number]"  value="<{$money}>">
+                <input type="hidden" name="data[actual_pay]" id='actual_pay2' value="0">
+                <input type="hidden" name="data[project_id]" value="<{$project[project_id]}>">
+                
+                <input type="hidden" id='bili' value="<{$CONFIG['integral'][bili]}>">
+                
+                <if  condition="$project['is_gold'] eq 1">
+                      <p>使用积分抵扣：</p>
+                        <input type="text" id='jifen2' class="text" onchange='change2(this.value)' name='data[jifen]' value="0" placeholder="使用积分"><span class="ml10">当前拥积分：<font class="fontcl"><{$MEMBER.gold}></font>&nbsp;（<font class="black9"><{$CONFIG['integral'][bili]}>积分 = 1元</font>）</span>
+        
+                </if>
+				<div class="zffs">
+					<p>实际投资金额：&nbsp;<b id = 'amount2'>¥<{:zhu_int($money)}></b></p>					
+				</div>
+				<input class="btn" type="submit" value="提交订单">
+			</div>
+		</div>
+        </form>		
+	</div>
+</div>
+
+<script>
+function  change(value)
+{
+	if( value> parseInt('<{$MEMBER.gold}>')){
+			value	= parseInt('<{$MEMBER.gold}>');
+			$('#jifen').val(value);
+			
+	}
+	var bili = $('#bili').val();
+	var amount = '<{$money}>'-value/bili;
+	if(amount<1){
+		$('#jifen').val('0');
+		 parent.bmsg("使用积分最少要支付1元","",3000);		
+	}else{
+		$('#amount').html('￥'+amount.toFixed(2));
+		$('#actual_pay').val(amount.toFixed(2));
+	}
+	
+}
+
+function  change2(value)
+{
+	if( value> parseInt('<{$MEMBER.gold}>')){
+			value	= parseInt('<{$MEMBER.gold}>');
+			$('#jifen2').val(value);
+			
+	}
+	var bili = $('#bili').val();
+	var amount = '<{$money}>'-value/bili;
+	if(amount<1){
+		$('#jifen2').val('0');
+		 parent.bmsg("使用积分最少要支付1元","",3000);		
+	}else{
+		$('#amount2').html('￥'+amount.toFixed(2));
+		$('#actual_pay2').val(amount.toFixed(2));
+	}
+	
+}
+</script>
+
+<include file="public:footer" /> 

@@ -1,0 +1,83 @@
+<include  file='public:header'/>
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>支付设置</span><i></i><span>支付方式</span><i></i><span>安装</span>
+           
+            </div>
+          </div>
+		<form target="zhuchuang_frm"  action="<{:U('payment2/install',array('payment_id'=>$detail['payment_id']))}>" method="post">
+           <div class="daemonTable">
+              	<table class="table_data" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th class="alginRt w-200"> 支付方式 </th>
+                        <td><img src="__PUBLIC__/images/<{$detail.logo}>" /></td>
+                    </tr>
+                    <tr>
+                        <th class="alginRt w-200"> 支付方式介绍 </th>
+                        <td class="wsNormal"><{$detail.contents}></td>
+                    </tr>
+                    
+                   
+        
+                    <tr>
+                        <th class="alginRt w-200"> <font class="pointcl">*</font> 支付宝账号 </th>
+                        <td> <input type="text" name="data[alipay_partner]" value="<{$detail.setting.alipay_partner}>" class="text w-400" /></td>
+                    </tr>
+                    
+                    <tr>
+                        <th class="alginRt w-200"> <font class="pointcl">*</font> 公司名称 </th>
+                        <td> <input type="text" name="data[alipay_company]" value="<{$detail.setting.alipay_company}>"  class="text w-400" /></td>
+                    </tr>
+                    
+                    
+                    	 <tr>
+                    <th class="alginRt w-200"> 二维码 </th>
+                    <td><div class="fileBox w-200">
+                    
+                     <img id="photo_img"  src="__ATTACHS__/<{$detail.setting.alipay_erweima|default='default.jpg'}>" />
+                    </div>
+                      <input type="hidden" name="data[alipay_erweima]" value="<{$detail.setting.alipay_erweima}>" id="data_photo" />
+                      <input class="file"  id="photo_file" name="photo_file" type="file" multiple="true" value="" />
+                     </td>
+                  </tr>
+                    <tr>
+                        <th class="alginRt w-200"> <font class="pointcl">*</font> 到账时间 </th>
+                        <td> <input type="text" name="data[alipay_daozhang]" value="<{$detail.setting.alipay_daozhang}>"  class="text w-400" /></td>
+                    </tr>
+                    
+                    <tr>
+                        <th class="alginRt w-200"> <font class="pointcl">*</font> 备注 </th>
+                        <td> <input type="text" name="data[alipay_beizhu]" value="<{$detail.setting.alipay_beizhu}>"   class="text w-400" /></td>
+                    </tr>
+                   
+                    
+                      <tr>
+                        <th class="alginRt w-100"> </th>
+                        <td>
+                        <input type="submit" value="确认保存" class="pub_btn" />
+                        </td>
+                      </tr>
+                </table>
+           </div>
+        </form>  
+        
+ <script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js?t=<{$nowtime}>"></script>
+
+    <link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+    <script>
+        $("#photo_file").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"setting"))}>',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '支付宝二维码',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo").val(data);
+                $("#photo_img").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+		</script>
+
+<include  file='public:footer'/>           

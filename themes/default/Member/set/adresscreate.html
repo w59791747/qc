@@ -1,0 +1,44 @@
+<include file="public:header"/>
+
+<div class="uc_mid_r yitou_list">
+			<ul class="cz_tit">
+				<li><a href="<{:U('member/set/passwd')}>">修改密码</a></li>
+				<li ><a href="<{:U('member/set/renzheng')}>">账号认证</a></li>
+				<li><a href="<{:U('member/set/pwd')}>">支付密码</a></li>
+				<li><a href="<{:U('member/set/card')}>">绑定银行卡</a></li>
+				<li class="cz_cur"><a href="<{:U('member/set/adress')}>">收货地址</a></li>
+			</ul>
+			<div class="xgzl">
+            <form method="post"  action="<{:U('set/adresscreate')}>"  target="chuang_frm">
+				<p><span>姓名</span><input name="data[contact]" value="<{$detail.contact|default=$MEMBER[detail][realname]}>" type="text" class="mima_box" /></p>
+				<p><span>电话</span><input  name="data[phone]" value="<{$detail.phone|default=$MEMBER[mobile]}>" type="text" class="mima_box" /></p>
+				<p><span>城市</span>
+                	<select id="s_province" name="s_province" class="text short">
+                    </select>
+                    <select id="s_city" name="s_city" class="text short">
+                    </select>
+                    <select id="s_county" name="data[city]" class="text short">
+                    </select>
+               </p>
+				<p><span>地址</span><input name="data[addr]" value="<{$detail.addr|default=''}>" type="text" class="mima_box" /></p>
+                <input type="submit" class="cz_but" value="创建收货地址">
+                </form>
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+  
+  <script type="text/javascript" src="__PUBLIC__/js/area.js?t=<{$nowtime}>"></script> 
+ <script type="text/javascript">_init_area();</script>
+      
+      <script type="text/javascript">
+		//var Gid  = document.getElementById ;
+		var showArea = function(){
+			$('#show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" + 	
+			$('#s_city').value + " - 县/区" + 
+			$('#s_county').value + "</h3>"
+									}
+		</script>
+<include file="public:footer"/>

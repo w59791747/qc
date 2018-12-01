@@ -1,0 +1,140 @@
+<include  file='public:header'/>
+<script src="__PUBLIC__/js/highcharts/highcharts.js"></script>
+<script src="__PUBLIC__/js/highcharts/modules/exporting.js"></script>
+
+<div class="pad">
+  <div class="breadNav">
+    <div class="flt breadNav_text"> <span>后台管理</span><i></i><span>项目</span><i></i><span>项目统计</span> </div>
+    </div>
+    <div class="breadNav">
+    <form method="get" action="<{:U('tongjiproject/index')}>">
+    <div class="flt breadNav_other">
+      <div class="bn_input theme-pop-btn">
+        
+          <div class="bn_input">选择时间：
+            <input type="text" id='b_time' name="b_time" value="<{$b_time|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text" />
+            至
+            <input type="text" id='e_time' name="e_time" value="<{$e_time|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text" />
+           
+            对比：<input  type="checkbox" id='is_check' 
+            <notempty  name="d_b_time"> checked="checked" </notempty>
+            /> <span id='d_time' style="display:none;"> 对比时间：
+            <input type="text" name="d_b_time" id="d_b_time"  value="<{$d_b_time|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text" />
+            <notempty  name="d_b_time"> 至
+              <input  disabled="disabled" type="text"  value="<{$d_e_time|default=''}>"  class="text" />
+              <else/>
+              <font class="pointcl">选择起始时间,点击搜索即可匹配截止时间 </font></notempty>
+            </span>
+            
+          </div>
+        
+      </div>
+    </div><div class="frt breadNav_other ">
+    <div class="bn_input">
+            <input type="submit" class="pub_btn" value="确定"></div></div></form>
+    <div class="clear"></div>
+  </div>
+  <div class=" breadTjlist"> <a target="main_frm" href="<{:U('tongjiproject/index',array('status'=>1))}>" >本日统计</a> <a target="main_frm" href="<{:U('tongjiproject/index',array('status'=>2))}>" >昨日统计</a> <a target="main_frm" href="<{:U('tongjiproject/index',array('status'=>3))}>" >三天统计</a> <a target="main_frm" href="<{:U('tongjiproject/index',array('status'=>4))}>" >本周统计</a> <a target="main_frm" href="<{:U('tongjiproject/index',array('status'=>5))}>" >上周统计</a> <a target="main_frm" href="<{:U('tongjiproject/index',array('status'=>6))}>" >本月统计</a> <a target="main_frm" href="<{:U('tongjiproject/index',array('status'=>7))}>" >上月统计</a> </div>
+  <div> </div>
+  <script>
+		
+		$("#is_check").change(function(){
+			if($("#is_check").prop("checked")){
+				var btime = $('#b_time').val();
+				var etime = $('#e_time').val();
+				if(btime && etime){
+					$('#d_time').css('display','inline-block'); 
+				}else{
+					$('#d_time').css('display','none'); 
+				}
+			}else{
+				
+				$('#d_time').css('display','none'); 
+			}
+		});
+		<notempty  name="d_b_time">
+		$(document).ready(function(){
+		  	$('#d_time').css('display','inline-block'); 
+		});
+		</notempty>
+		
+    $(function () {
+		var mycars=new Array()
+		<notempty  name="d_b_time">
+			<foreach name='tongji[x1]' key="key" item="val">
+				mycars[<{$key}>]=<{$val}>;
+			</foreach>
+		</notempty>
+	
+    $('#container').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: '<{$title}>'
+        },
+        
+        xAxis: {
+            categories: [<{$tongji[x]}>]
+        },
+		x1Axis: {
+            categories: [<{$tongji[x]}>]
+        },
+        yAxis: {
+            title: {
+                text: '项目数量'
+            },
+            
+        },
+        tooltip: {
+            crosshairs: true,
+            shared: true,
+			<notempty  name="d_b_time">
+			formatter: function() {
+                var content = '';
+				for (var i = 0; i < 2; i++) {
+					if(i==0){
+					content += '<span style="color: ' + this.points[i].series.color + '">' + this.points[i].x+ '</span>: ' + this.points[i].y + '个项目<br/>';
+					}else{
+					content += '<span style="color: ' + this.points[i].series.color + '">' + mycars[this.points[i].x]+ '</span>: ' + this.points[i].y + '个项目<br/>';
+					}
+				};
+				
+				return content;
+			}
+			</notempty>
+            
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    radius: 4,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            }
+        },
+        series: [{
+            name: '<{$new.1}>',
+            marker: {
+                symbol: 'square'
+            },
+            data: [<{$tongji[y1]}>]
+
+        }, 
+		<notempty  name="d_b_time">
+		{
+            name: '<{$new.2}>',
+            marker: {
+                symbol: 'diamond'
+            },
+            data: [<{$tongji[y2]}>]
+        }
+		</notempty>
+		]
+    });
+});				
+        </script>
+  <div id="container"> </div>
+</div>
+<include  file='public:footer'/> 

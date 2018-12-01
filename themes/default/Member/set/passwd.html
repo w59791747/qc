@@ -1,0 +1,24 @@
+<include file="public:header"/>
+
+<div class="uc_mid_r yitou_list">
+			<ul class="cz_tit">
+				<li  class="cz_cur"><a href="<{:U('member/set/passwd')}>">修改密码</a></li>
+				<li><a href="<{:U('member/set/renzheng')}>">账号认证</a></li>
+				<li><a href="<{:U('member/set/pwd')}>">支付密码</a></li>
+				<li><a href="<{:U('member/set/card')}>">绑定银行卡</a></li>
+				<li><a href="<{:U('member/set/adress')}>">收货地址</a></li>
+			</ul>
+			<div class="xgzl">
+              <form method="post"  action="<{:U('set/passwd')}>"  target="chuang_frm">
+				<p><span>原密码</span><input name="oldpwd" type="password" class="mima_box" /></p>
+				<p><span>新密码</span><input name="newpwd"  type="password" class="mima_box" /></p>
+				<p><span>请确认</span><input name="pwd2"  type="password" class="mima_box" /></p>
+                <input type="submit" class="cz_but" value="确认修改">
+              </form>
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+	
+<include file="public:footer"/>

@@ -1,0 +1,64 @@
+<include file="public:header" /><include file="public:top" />
+<!--面包屑导航-->
+</div>
+</div>
+
+<div class="zx_list">
+	<div class="zx_list_wrap">
+		<div class="zx_list_l">
+			<ul>
+           		<foreach name="list" key='key' item="item">
+                 	<if condition="112 eq $item['cate_id'] || 148 eq $item['cate_id'] ">
+                    	 <foreach name="item.child"  item="val">
+                         <?php
+                        $url2 = U('article/detail',array('article_id'=>$val[article_id]));
+                    ?>
+                    	<li><a <if condition="$detail['article_id'] eq $val['article_id'] "> class="cur_zx_list" </if> href="<{$val[linkurl]|default=$url2}>"><{$val.title}></a></li>
+                        </foreach>
+                    <else/>
+                    <li><a <if condition="$cate_id eq $item['cate_id'] "> class="cur_zx_list" </if> href="<{:U('article/index',array('cate_id'=>$item['cate_id']))}>"><{$item.title}></a></li>
+                    </if>
+                </foreach>
+				 <li><a  href="<{:U('cheshang/index')}>">合作车商</a></li>
+			</ul>
+		</div>
+		<div class="zx_list_r">
+			<div class="article_tit">
+				<h1><{$detail.title}></h1>
+				<span>发布时间:<{$detail.dateline|date="Y-m-d",###}>&nbsp;&nbsp;&nbsp;点击数：<{$detail.views}></span>
+			</div>
+			<div class="article_con">
+				<{$detail.details}>
+                 <?php
+                        $url = U('article/detail',array('article_id'=>$up[article_id]));
+                        $url2 = U('article/detail',array('article_id'=>$down[article_id]));
+                    ?>
+				<p>上一篇：<a href="<{$up[linkurl]|default=$url}>"><{$up.title}></a></p>
+				<p>下一篇：<a href="<{$down[linkurl]|default=$url3}>"><{$down.title}></a></p>
+			</div>
+			<div class="relate_wz">
+				<p>其他文章</p>
+                <foreach name='about' item='item'>
+                	 <?php
+                        $url4 = U('article/detail',array('article_id'=>$item[article_id]));
+                    ?>
+                    <if condition="$key%3 eq 0">
+                       <ul> 
+                      </if>
+                <li><a href="<{$item[linkurl]|default=$url4}>"><{$item.title}></a></li>
+                
+                <if condition="$key%3 eq 2">
+                       </ul> 
+                      </if>
+                </foreach>
+				
+				<div style="clear:both"></div>
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+<div class="fenge"></div>
+
+<include file="public:footer" /> 

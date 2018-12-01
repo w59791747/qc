@@ -1,0 +1,102 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">订单详情</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+  <form method="post"  action="<{:U('order/orderdetail',array('order_id'=>$detail[order_id]))}>"  target="chuang_frm">
+    <div class="ucenter_table">
+      <table width="100%" cellpadding="0" cellspacing="0">
+	  	  <if condition="$detail[type] eq crowd">
+
+	   <tr>
+        <th> 标题 </th>
+        <td><a href="<{:U('mobile/project/detail',array('project_id'=>$project[project_id]))}>"><{$project.title}></a></td>
+      </tr>
+	  </if>
+        <tr>
+          <th> 订单ID </th>
+          <td><{$detail.order_id}></td>
+        </tr>
+        <tr>
+          <th> 订单号 </th>
+          <td><{$detail.order_no|default='0'}></td>
+        </tr>
+        <tr>
+          <th> 类型 </th>
+          <td><{$typelist[$detail[type]]}></td>
+        </tr>
+        <tr>
+          <th> 价格 </th>
+          <td>￥<{$detail.amount|default='0'}></td>
+        </tr>
+        <if condition="$detail[addr_id] gt 0">
+          <tr>
+            <th> 联系人 </th>
+            <td><{$addr.contact}></td>
+          </tr>
+          <tr>
+            <th> 电话 </th>
+            <td><{$addr.phone|default='0'}></td>
+          </tr>
+          <tr>
+            <th> 城市 </th>
+            <td><{$addr.city}></td>
+          </tr>
+          <tr>
+            <th> 地址 </th>
+            <td><{$addr.addr|default='--'}></td>
+          </tr>
+        </if>
+        <tr>
+          <th> 购买状态 </th>
+          <td><{$statuslist[$detail[pay_status]]}></td>
+        </tr>
+        <tr>
+          <th> 购买时间 </th>
+          <td ><{$detail.dateline|date="Y-m-d H:i:s",###}></td>
+        </tr>
+        <if condition="$detail[pay_status] lt 1">
+          <tr>
+            <th>操作</th>
+            <td><a class=" btn" href="<{:U('member/orderpay',array('order_id'=>$detail['order_id']))}>">立即支付</a></td>
+          </tr>
+         <elseif condition="$detail.pay_status eq 1 && $detail['log'][status] eq 0"/>
+         	<tr>
+        <th>状态</th>
+          <td class="uc_pr_btn">订单完成</td>
+        </tr>
+        <elseif condition="$detail.pay_status eq 1 && $detail.type neq crowd"/>
+        <tr>
+        <th>状态</th>
+          <td  class="uc_pr_btn"><a class="btn graybtn">已支付</a></td>
+        </tr>
+        <elseif condition="$detail.pay_status eq 1 && $detail.type eq crowd"/>
+        <tr><th>状态</th>
+          <td colspan="3" class="uc_pr_btn"> 
+           <if condition="$detail[log][status] eq 1">
+          	 <font class="fontcl">已支付,等待众筹结束统一发货</font>
+           <elseif condition="$detail[log][status] eq 2"/>
+           	  <a target="chuang_frm" class="btn" href="<{:U('order/shouhuo',array('log_id'=>$detail['log']['log_id']))}>">确认收货</a>
+              <a class="btn" href="<{:U('order/tousu_c',array('log_id'=>$detail['log']['log_id']))}>">投诉</a>
+              
+           <elseif condition="$detail[log][status] eq 3"/>
+           	  已收货
+           <elseif condition="$detail[log][status] eq -2"/>
+           	  未中奖
+           <elseif condition="$detail[log][status] eq -1"/>
+           	  投诉中,卖家会和你联系  <a target="chuang_frm" class="btn" href="<{:U('order/shouhuo',array('log_id'=>$detail['log']['log_id']))}>">确认收货</a>
+              
+           </if>
+        
+         </if>
+      </table>
+    </div>
+     </if>
+  </form>
+</section>
+<include file="public:footersmall"/> 

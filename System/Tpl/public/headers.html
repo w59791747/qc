@@ -1,0 +1,128 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><{$CONFIG.site.title}>管理后台</title>
+
+<link href="<{$admin_statics}>/css/public.css" type="text/css" rel="stylesheet">
+<link href="<{$admin_statics}>/css/style.css" type="text/css" rel="stylesheet">
+<script>var PUBLIC = '__PUBLIC__';var ROOT = '__ROOT__';</script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+<script src="__PUBLIC__/js/admin.js"></script>
+<script src="__PUBLIC__/js/jquery-ui.min.js"></script>
+<script src="__PUBLIC__/js/my97/WdatePicker.js"></script>
+
+</head>
+<body>
+<iframe id="zhuchuang_frm" name="zhuchuang_frm" style="display:none;"></iframe>
+<body>
+<header class="header"> <a href="#" class="logo"> <img src="<{$admin_statics}>/images/logo.png"> </a>
+  <nav class="navbar">
+    <div class="topNav flt">
+      <ul>
+      	<foreach name="menuList" item="var">
+            <if condition="($var.parent_id eq 0) and ($var.is_show eq 1) ">
+                <li><a href="javascript:void(0);" class='change_menu'  rel="<{$var.menu_id}>"><{$var.menu_name}></a></li>
+            </if>
+        </foreach>
+      </ul>
+    </div>
+    <div class="topUsed frt">
+      <p>欢迎您，<b><{$admin.admin_name}></b>！<a target="main_frm" href="<{:U('clean/cache')}>">更新缓存</a><a href="<{:U('login/logout')}>">退出</a></p>
+      <p><a href="/">网站首页</a><a href="<{:U('/admin')}>" target="_blank">后台首页</a></p>
+      
+    </div>
+  </nav>
+</header>
+<div class="wrapper">
+  <aside class="left_side">
+    <ul class="sidebar_menu">
+   	<foreach name="menuList" item="var">
+        <if condition="($var.parent_id eq 0) and ($var.is_show eq 1) ">  
+            <foreach name="menuList" item="var2">
+                <eq name="var2.parent_id" value="$var.menu_id">
+                    <if condition="$var2.is_show eq 1">
+                         <li class="active" rel="<{$var.menu_id}>"><a href="javascript:void(0);"><i class="fa"></i> <{$var2.menu_name}></a>
+                         	 <ul class="treeview_menu">
+                                   <foreach name="menuList" item="var3">
+                                        <eq name="var3.parent_id" value="$var2.menu_id">
+                                            <if condition="$var3.is_show eq 1">   
+                                                <li><i class="fa_dbrt"></i><a href="<{:U($var3['menu_action'])}>" target="main_frm"> <{$var3.menu_name}></a></li>
+                                            </if>
+                                        </eq>
+                                    </foreach>    
+                            </ul>
+                        </li>
+                    </if>     
+                </eq>
+            </foreach>       
+        </if>
+    </foreach>
+     </ul>
+  </aside>
+
+<script type="text/javascript">
+<!--头部和左部公共JS-->
+$(document).ready(function(){
+	$('.right_side').height($(window).height()-60);
+	$(".sidebar_menu > li.active a").click(function(){
+		var thisli = $(this);
+	    if(thisli.parent().find('.treeview_menu').is(':hidden')){
+			thisli.parent().addClass('current');
+			thisli.parent().find('ul.treeview_menu').slideDown(300);	
+			thisli.parent().find("a i.fa").addClass('pull_right');
+		}else{
+			thisli.parent().removeClass('current');
+			thisli.parent().find('ul.treeview_menu').slideUp(100);	
+			thisli.parent().find("a i.fa").removeClass('pull_right');
+		}
+	});
+	$('.treeview_menu li').click(function(){
+		$('.treeview_menu li').removeClass('on');
+		$(this).addClass('on');
+	});
+	
+});
+
+</script>
+
+<script>
+	$(document).ready(function (e) {
+		$(".change_menu").click(function () {
+			var rel = $(this).attr('rel');
+			$(".change_menu").removeClass('current');
+			$(this).addClass('current');
+			$(".sidebar_menu .active").each(function (a) {
+				if ($(this).attr('rel') == rel) {
+					$(this).show();
+				} else {
+					$(this).hide();
+				}
+			});
+		});
+		
+		$(".topNav li").eq(0).find('.change_menu').click();
+	});
+</script>
+
+
+	<style type="text/css">  
+	  .ui-layout-pane { 
+		padding: 0px; 
+		background: #efecdd; 
+		border-top: 5px solid #BBB;
+		border-bottom: 0px solid #BBB;
+		}
+	
+       .ui-layout-content {   
+           padding:    10px;   
+           position:   relative;    
+           overflow:   auto;   
+       }  
+		
+		.middle-center {
+			border-width:0px;
+			overflow:   auto; 
+		}
+
+	</style> 

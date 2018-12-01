@@ -1,0 +1,38 @@
+<include file="public:header" /><include file="public:top" />
+</div>
+</div>
+
+
+ 
+   
+  <div class="tjdd">
+    <h1><{$types[$from]}></h1>
+    <div class="step1">
+      <ul class="steptit qdzf1">
+        <li>提交订单</li>
+        <li class="cur_step">确认支付</li>
+        <li>投资成功</li>
+      </ul>
+      <div class="zf_wrap qdzf">
+	   <if  condition="$code eq lianlian">
+      <form method="post"  action="<{:U('member/payment/order')}>">
+     
+       <else/>
+        <form method="post"  action="<{:U('member/payment/order')}>" target="chuang_frm">
+       
+</if>
+          <p>投资支付方式：&nbsp;<b><{$payment[$code][name]}></b></p>
+          <p>实际投资金额：&nbsp;<b>¥<{:zhu_int($log[actual_pay]/100)}></b></p>
+          <if  condition="$code eq money">
+            <p>输入支付密码：&nbsp;
+              <input type="password"  name="data[pwd]" />
+              <a href="<{:U('member/set/pwd')}>" target="_blank">如果未设置，点击这里</a></p>
+          </if>
+          <input type="hidden" name="data[order_id]" value="<{$order_id}>" />
+          <input type="hidden" name="data[code]" value="<{$code}>" />
+          <input  type="submit" class="btn" value="立刻支付">
+        </form>
+      </div>
+    </div>
+  </div>
+<include file="public:footer" /> 

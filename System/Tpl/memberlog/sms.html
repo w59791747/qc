@@ -1,0 +1,57 @@
+<include  file='public:header'/>
+
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>会员</span><i></i><span>会员日志</span><i></i><span>短信日志</span>
+           
+            </div>
+            <div class="frt breadNav_other">
+           
+                <div class="bn_input theme-pop-btn">
+                	
+                
+                   <div class="bn_input"></div>
+                </div>
+            <div class="clear"></div>
+          </div>
+          </div>
+		<form target="zhuchuang_frm" method="post">
+             <div class="daemonTable">
+              <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+                
+                <tr>
+                	<th class="w-100">
+                    序号
+                    </th>
+                    <th class="w-100">电话</th>
+                    <th >内容</th>
+                    <th class="w-50">状态</th>
+                    <th class="w-200">发送时间</th>
+                    
+                </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.log_id}></td>
+                            <td><{$var.mobile}></td>
+                            <td class="wsNormal"><{$var.content}></td>
+                            <td><if condition="$var.status eq 1"><span class="green">[成功]<else/><span class="red">[失败]</span></if></td>
+                            <td><{$var.dateline|date="Y-m-d H:i:s",###}></td>
+                            
+                        </tr>
+                    </foreach>
+
+                </table>
+           </div>
+              <div class="daemonBot">
+                <div class="flt daemonBot_cz">
+                </div>
+                <div class="frt daemonPage">
+                   <{$page}>
+                </div>
+                <div class="clear"></div>
+              </div>
+          </div>    
+          
+
+<include  file='public:footer'/>

@@ -1,0 +1,37 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">关注项目</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+  <form method="post"   target="chuang_frm">
+    <foreach name="list" item="var">
+      <div class="ucenter_table">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <th> ID </th>
+            <td><{$var.follow_id}></td>
+          </tr>
+          <tr>
+            <th> 关注项目 </th>
+            <td><{$projectlist[$var[project]][title]}></td>
+          </tr>
+          <tr>
+            <th> 时间 </th>
+            <td><{$var.dateline|date="Y-m-d H:i:s",###}></td>
+          </tr>
+          <tr>
+            <th> 操作 </th>
+            <td><a target="chuang_frm" class="btn deleteBtn" mini="confirm" href="<{:U('message/deletefollow_p',array('follow_id'=>$var['follow_id']))}>">删除</a></td>
+          </tr>
+        </table>
+      </div>
+    </foreach>
+  </form>
+  <div class="page"> <{$page}> </div>
+</section>
+<include file="public:footersmall"/> 

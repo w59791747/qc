@@ -1,0 +1,79 @@
+<include file="public:header" /><include file="public:top" />
+</div></div>
+<div class="prode_bg">
+  <div class="pagewd">
+    <div class="flt productDetail">
+      <div class="progallery clearfix">
+        <div class="flt progaImg"> <img alt="" src="__ATTACHS__/<{$detail.photo|default='default.jpg'}>"> </div>
+        <div class="frt progaText">
+          <h1> <{$detail.title}></h1>
+          <div class="ductPrice ">
+          <div class="showprice clearfix"><span class="dt">所需积分</span><big><{$detail.jifen}>积分</big></div>
+          <div class="showprice clearfix"><span class="dt">运费所需积分</span><font class="f14"><{$detail.freight}>积分</font></div>
+          </div>
+          <div class="ductlist"><span class="dt">所属类别</span><font class="f14"><{$catelist[$detail[cate_id]][cate_name]}></font></div>
+           <div class="ductlist"><span class="dt">兑换人数</span><font class="f14"><{$detail.buys}>人</font></div>
+            <div class="ductlist ductlist_kucun"><span class="dt">数量</span><div class="dd"><div class="kucun">
+    					<a class="amountBtn minus" href="javascript:;" quantity="-">-</a>
+    					<input type="text" id="cart_product_num" class="amount" onchange="check(this.value);" value="1" /><a class="amountBtn plus" href="javascript:;"  quantity="+">+</a>
+                       </div>
+                        <font class="f14">库存<{$detail.store}>件</font>
+</div></div>
+             <div class="ductlist ductlist_btn"><span class="dt"></span><a  onclick="buy()" class="btn">立即兑换</a></div>
+        </div>
+      </div>
+      <div class="productIntro"><span class="introtitle">商品详情</span>
+      <div class="productIntro_box">
+      	<div class="article"><{$detail.content}></div>
+      </div>
+      </div>
+    </div>
+    <div class="frt productOther">
+      <div class="protherTit"> 热门排行 </div>
+      <ul>
+      	<calldata mdl="product" where="`audit`=1" limit="0,4" cache="21600" format='true' order="dateline desc">
+            <li class="opacity"> <a href="<{:U('product/detail',array('product_id'=>$item['product_id']))}>"><img alt="" src="__ATTACHS__/<{$item.photo|default='default.jpg'}>"/> </a>
+              <h3><a target="_blank" href="<{:U('product/detail',array('product_id'=>$item['product_id']))}>"><{$detail.title}></a> </h3>
+            </li>
+        </calldata>
+        
+        
+      </ul>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<script>
+function check(value){
+	if(value<1){
+		$("#cart_product_num").val('1');
+	}else if(value > <{$detail.store}>){
+		$("#cart_product_num").val('<{$detail.store}>');
+	}
+}
+$("[quantity]").click(function(){
+var quantity = parseInt($("#cart_product_num").val(), 10);
+if($(this).attr("quantity") == '+'){
+    quantity += 1;
+}else{
+    quantity -= 1;
+}
+if(quantity < 1){
+    quantity = 1;
+}
+
+if(quantity > <{$detail.store}>){
+    quantity = <{$detail.store}>;
+}
+$("#cart_product_num").val(quantity);
+});
+
+function buy()
+{
+	var link = "<{:U('product/buys',array('product_id'=>$detail[product_id],'buys'=>'123buys'))}>";
+	var num = $("#cart_product_num").val();
+	window.location = link.replace("123buys", num);
+}
+
+</script>
+<include file="public:footer" />

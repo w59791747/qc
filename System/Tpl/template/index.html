@@ -1,0 +1,33 @@
+<include  file='public:header'/>
+<div class="pad">
+  <div class="breadNav">
+    <div class="flt breadNav_text"> <span>设置</span><i></i><span>模版管理</span><i></i><span>网站风格</span> </div>
+  </div>
+<form target="zhuchuang_frm" method="post">
+<div class="daemonTable">
+  <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+    <tr>
+      <th class="w-300"> 模版名称 </th>
+      <th>图片</th>
+      <th class="w-300"> 操作 </th>
+    </tr>
+    <foreach name="template" item="var">
+      <tr>
+        <td class="leftnone"><{$var.name}> </td>
+        <td><img class="w-100"   src="__ROOT__/themes/<{$var.theme}>/<{$var.photo}>" /></td>
+        <td><if condition="!empty($themes[$var['theme']])"> <{:ROLE('template/uninstall',array("theme"=>$var["theme"]),'卸载','act','pub_btn grayBtn')}>
+            <if condition="!$themes[$var['theme']]['is_default']"> <{:ROLE('template/df',array("theme"=>$var["theme"]),'设置为默认','act','pub_btn')}> </if>
+            <else />
+            <{:ROLE('template/install',array("theme"=>$var["theme"]),'安装','act','pub_btn')}> </if>
+          <a target="_blank" href="/index.php?theme=<{$var['theme']}>" class="pub_btn">预览模版</a></td>
+      </tr>
+    </foreach>
+  </table>
+</div>
+<div class="daemonBot">
+  <div class="flt daemonBot_cz"> </div>
+  <div class="frt daemonPage"> <{$page}> </div>
+  <div class="clear"></div>
+</div>
+</div>
+<include  file='public:footer'/> 

@@ -1,0 +1,106 @@
+<include  file='public:header'/>
+<div class="pad">
+<div class="breadNav">
+  <div class="flt breadNav_text"> <span>项目</span><i></i><span>积分商城</span><i></i><span>查看订单</span> </div>
+  <div class="frt breadNav_other">
+    <div class="clear"></div>
+  </div>
+</div>
+<form target="zhuchuang_frm" method="post">
+<div class="daemonTable">
+  <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+     <tr>
+                        <th class="alginRt w-200"> 用户 </th>
+                        <td>
+                        	<{$detail.uid}><a target="main_frm" href="<{:U('member/index',array('uid'=>$detail['uid']))}>" >[<{$member['name']}>]</a></span>
+                        </td>
+                         <th class="alginRt w-200"> 商品 </th>
+                        <td>
+                        	<{$product['title']}>
+                        </td>
+                    </tr>
+                  
+                   
+                    <tr>
+                     <th class="alginRt w-200"> 联系人 </th>
+                        <td>
+                        	<{$detail.name|default='0'}>
+                        </td>
+                        <th class="alginRt w-200"> 电话 </th>
+                        <td>
+                        	<{$detail.mobile|default='0'}>
+                        </td>
+                    </tr>
+                     <tr>
+                      <th class="alginRt w-200"> 单价 </th>
+                        <td>
+                        	<{$detail.danjia|default='0'}>
+                        </td>
+                        <th class="alginRt w-200"> 数量 </th>
+                        <td>
+                       <{$detail.num|default='0'}>
+                        </td>
+                    </tr>
+                    
+                     <tr>
+                      
+                        <th class="alginRt w-200"> 运费 </th>
+                        <td>
+                       <{$detail.yunfei|default='0'}>
+                        </td>
+                        <th class="alginRt w-200"> 总价 </th>
+                        <td>
+                        	<{$detail.amount|default='0'}>
+                        </td>
+                    </tr>
+                   
+                    <tr>
+                        <th class="alginRt w-200"> 地址 </th>
+                        <td>
+                        	<{$detail.addr|default=''}>
+                        </td>
+                         <th class="alginRt w-200"> 购买状态 </th>
+                        <td>
+                        	<{$zhifu_list[$detail[payed]]}>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th class="alginRt w-200"> 发货状态 </th>
+                         <td>
+                        	<{$status_list[$detail[status]]}>
+                        </td>
+                        <th class="alginRt w-200"> 支付时间 </th>
+                        <td>
+                        	
+                           <{$detail.payedtime|date="Y-m-d H:i:s",###}>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        
+                         <th class="alginRt w-200"> 提交订单时间 </th>
+                        <td>
+                        	<{$detail.dateline|date="Y-m-d H:i:s",###}>
+                        </td>
+                        
+                         <th class="alginRt w-200"> 操作 </th>
+                        <td>
+                        	<if condition="$detail['status'] eq 0 && $detail['payed'] eq 1">
+                        	<{:ROLE('productbuy/fahuo',array("buy_id"=>$detail["buy_id"]),'发货','act','pub_btn')}>
+                            <elseif condition="$detail['status'] eq 1 && $detail['payed'] eq 1"/>
+                            已发货
+                            </if>
+                        </td>
+                    </tr>
+                    
+                   
+  </table>
+</div>
+<div class="daemonBot">
+  <div class="flt daemonBot_cz"> </div>
+  <div class="frt daemonPage"> </div>
+  <div class="clear"></div>
+</div>
+</div>
+<include  file='public:footer'/>

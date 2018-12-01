@@ -1,0 +1,68 @@
+/*头部*/
+.basicTop{ padding:0.15rem 0.1rem; position:relative; height:0.56rem; color:#fff;filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#5695FD,endColorStr=#5090F9); /*IE*/ 
+background:-moz-linear-gradient(top,#5695FD,#5090F9);/*火狐*/ 
+background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#5695FD), to(#5090F9));/*谷歌*/ 
+background-image: -webkit-gradient(linear,left bottom,left top,color-start(0, #5695FD),color-stop(1, #5090F9));/* Safari & Chrome*/ 
+filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#5695FD', endColorstr='#5090F9'); /*IE6 & IE7*/ 
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#5695FD', endColorstr='#5090F9')"; /* IE8 */ box-shadow:1px 0 5px rgba(0,0,0,.2); }
+.basicTop:after{ content:''; position:absolute; right:0.08rem; top:0.32rem; width:0.2rem; height:0.2rem; background:url(../images/ucenterIco.png) no-repeat; background-size:0.2rem auto;} 
+.basicTop .bsImg img{ width:0.5rem; height:0.5rem; border-radius:0.5rem; border:0.03rem solid #fff;}
+.bsIntro{ margin-left:0.7rem;}
+.bsIntro h3{ color:#fff; line-height:0.3rem;}
+.bsIntro .rzlist span{ display:inline-block; width:0.16rem; height:0.16rem; background:url(../images/ucenterIco.png) no-repeat; background-size:0.16rem auto; margin-right:0.02rem;}
+.bsIntro .rzlist{ margin-top:0.02rem;}
+.bsIntro .rzlist span.grrz{ background-position:0px -0.16rem;}
+.bsIntro .rzlist span.telrz{ background-position:0px -0.32rem;}
+.bsIntro .rzlist span.emrz{ background-position:0px -0.48rem;}
+/*个人中心首页样式*/
+.basicSum{ background:#fff; padding:0.1rem 0; border-bottom:0.01rem solid #	;}
+.basicSum ul li{ float:left; width:50%; box-sizing:border-box; text-align:center;}
+.basicSum ul li.first{ border-right:0.01rem solid #eee;}
+.basicSum ul li h4{ font-size:0.16rem; color:#EB4F38;}
+.basicList{ border-top:0.01rem solid #e6e6e6; background:#fff; margin-top:0.1rem;}
+ul.menu_dl li{position: relative;height:0.45rem;font-weight: normal;line-height: 0.45rem;color: #474e5d;background-color:#fff; font-size:0.14rem;border-bottom:0.01rem solid #e6e6e6; padding-left:0.35rem;}
+ul.menu_dl li:after{ position:absolute; content:''; width:0.1rem; height:0.1rem; background:url(../images/navIco.png) no-repeat; top:0.2rem; right:0.1rem; background-size:0.1rem auto; background-position:0 -0.8rem;}
+ul.menu_dl li a{ display:block;}
+ul.menu_dl li i {position: absolute;left:0.05rem;top: 0.13rem;width:0.2rem;height: 0.2rem;
+background:url(../images/navIco.png) no-repeat;  background-size:0.2rem auto;}
+ul.menu_dl li.grzx i { background-position:0 0;}
+ul.menu_dl li.xmfl i { background-position:0 -0.2rem;}
+ul.menu_dl li.yygl i { background-position:0 -0.4rem;}
+ul.menu_dl li.fxgl i { background-position:0 -0.6rem;}
+ul.menu_dl li.ddgl i { background-position:0 -0.8rem;}
+ul.menu_dl li.xxgl i { background-position:0 -1rem;}
+ul.menu_dl li.jbsz i { background-position:0 -1.2rem;}
+.basicBtn{ margin:0.1rem;}
+.basicBtn a{ padding:0; width:100%; text-align:center;}
+
+/*其它页面样式*/
+ul.menu_detail_dl li{ padding-left:0.1rem;}
+.ucenter_tab{ width:90%; margin:0.1rem 5%;}
+.ucenter_tab_chose{ background:#fff; border:0.02rem solid #F5715E; height:0.3rem; line-height:0.3rem; border-radius:0.05rem; overflow:hidden;}
+.ucenter_tab_chose a{ display:inline-block; width:50%; text-align:center; float:left; color:#F5715E; font-size:0.14rem;}
+.ucenter_tab_chose a.current{ background:#F5715E; color:#fff;}
+.ucenter_table{ margin-bottom:0.1rem;} 
+.ucenter_table table{ border-top:0.01rem solid #e6e6e6;}
+.ucenter_table table tr th,.ucenter_table table tr td{ min-height:0.4rem; line-height:0.24rem; border-bottom:0.01rem solid #e6e6e6;}
+.ucenter_table table tr th{ background:#EAEDF4; border-right:0.01rem solid #e6e6e6; min-width:0.8rem; text-align:center; font-weight:normal; padding:0.05rem 0;}
+.ucenter_table table tr td{ padding:0.05rem;background:#fff;}
+.ucenter_table .uctBtn{ background:#fff; padding:0.1rem; text-align:center;border-bottom:0.01rem solid #e6e6e6;}
+.ucenter_table .uctBtn a{ display:inline-block; width:30%; background:#4285F4; color:#fff; line-height:0.3rem; border-radius:0.03rem; font-size:0.14rem;}
+.ucenter_entry{ border-top:0.01rem solid #e6e6e6; background:#fff; margin-bottom:0.1rem;}
+.ucenter_entry .idTit{ padding:0.05rem 0.1rem; font-size:0.14rem; border-bottom:0.01rem solid #e6e6e6; height:0.3rem; line-height:0.3rem;}
+.ucenter_entry .entrycont{ padding:0.05rem 0.1rem; color:#666; line-height:0.24rem;border-bottom:0.01rem solid #e6e6e6;}
+.entryBtn{ padding:0.05rem 0.1rem;border-bottom:0.01rem solid #e6e6e6; text-align:center;}
+.entryBtn a{ font-size:0.14rem; color:#4285F4; display:block; height:0.3rem; line-height:0.3rem;}
+.entryBtn a i{ display:inline-block; width:0.1rem; height:0.1rem; background:url(../images/ucenterIco.png) no-repeat; background-size:0.1rem auto; background-position:0 -0.4rem; margin-left:0.05rem;}
+
+
+
+
+
+
+
+
+
+
+
+

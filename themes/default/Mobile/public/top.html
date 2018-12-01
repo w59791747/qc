@@ -1,0 +1,26 @@
+<section class="pageWrapper">
+<!--左侧menu部分start-->
+<section class="menuWrapper">
+  <ul class="menu">
+    <foreach name="DAOHANG" item="var">
+	 <if condition="$var[link] neq baogao">	
+		  <if condition="$var.parent_id eq 0"> <li  
+				  
+			<if condition="$ctl eq $var[link]"> class=""
+			  <else/>
+			  class="a_submenu" </if>
+			>
+			  <if condition="$var[link] eq user">
+			  <a href="<{:U('/mobile/member')}>" ><{$var.title}></a></h3>
+			<else/>
+			<a href="<{:U('/mobile/'.$var['link'])}>" ><{$var.title}></a>
+			</if>
+			</li>
+		  </if>
+	  </if>
+    </foreach>
+  </ul>
+  <div class="arrow_up">
+
+  </div>
+</section>

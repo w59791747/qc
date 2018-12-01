@@ -1,0 +1,129 @@
+<include file="public:header" /> <include file="public:top" />
+<section class="contentWrapper">
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">项目列表</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<div id="search-bar">
+  <ul class="search-bar_list clearfix">
+    <li class="list list_three"><a href="javascript:void(0)"><{$catelist[$cate][cate_name]|default='分类排序'}></a></li>
+    <li class="list list_three "><a href="javascript:void(0)"><{$status_list[$status-1]|default='项目进程'}></a></li>
+    <li class="list list_three "><a href="javascript:void(0)"><{$edu[$eid]|default='筹资额度'}></a></li>
+    <li class="list list_three last"><a href="javascript:void(0)"><{$order_str|default='排序方式'}></a></li>
+  </ul>
+  <span></span>
+  <div class="search-bar_pull">
+    <div class="list_box">
+      <ul>
+        <li><a <if condition="$cate eq 0"> class="on" </if> href="<{:U('project/index',array('cate'=>0,'status'=>$status,'order'=>$order))}>">全部</a></li>
+        <foreach name='catelist' key='key' item='val'>
+          <li> <a  <if condition="$cate eq $val[cate_id]"> class="on" </if> href="<{:U('project/index',array('cate'=>$val[cate_id],'status'=>$status,'order'=>$order))}>"><{$val.cate_name}></a></li>
+        </foreach>
+      </ul>
+    </div>
+    <div class="list_box">
+      <ul>
+        <li><a <if condition="$status eq 0"> class="on" </if> href="<{:U('project/index',array('cate'=>$cate,'status'=>0,'order'=>$order))}>" >全部</a></li>
+        <foreach name='status_list' key='key' item='val'>
+          <li><a  <if condition="$status eq $key+1"> class="on" </if> href="<{:U('project/index',array('cate'=>$cate,'status'=>$key+1,'order'=>$order))}>" ><{$val}></a></li>
+        </foreach>
+      </ul>
+    </div>
+    <div class="list_box">
+      <ul>
+        <li> <a href="<{:U('project/index',array('cate'=>$cate,'status'=>$status,'eid'=>0,'order'=>$order))}>" 
+        <if condition="$eid eq 0"> class="on" </if>
+        ><i></i>不限</a> </li>
+        <foreach name='edu' key='key' item='val'>
+        <li> <a href="<{:U('project/index',array('cate'=>$cate,'status'=>$status,'eid'=>$key,'order'=>$order))}>" 
+          <if condition="$eid eq $key"> class="on" </if>
+          ><{$val}></a> </li>
+      </foreach>
+      </ul>
+    </div>
+    <div class="list_box">
+      <ul>
+        <li><a <if condition="$order eq 1"> class="on"</if> href="<{:U('project/index',array('cate'=>$cate,'status'=>$status,'order'=>1))}>">最热排行</a></li>
+        <li> <a <if condition="$order eq 2"> class="on"</if> 
+        href="<{:U('project/index',array('cate'=>$cate,'status'=>$status,'order'=>2))}>">最新上线</a> </li>
+        <li><a  <if condition="$order eq 3"> class="on"</if> 
+        href="<{:U('project/index',array('cate'=>$cate,'status'=>$status,'order'=>3))}>">金额最多</a></li>
+        <li> <a <if condition="$order eq 4"> class="on"</if> href="<{:U('project/index',array('cate'=>$cate,'status'=>$status,'order'=>4))}>">支持最多</a></li>
+        <li> <a <if condition="$order eq 5"> class="on"</if> href="<{:U('project/index',array('cate'=>$cate,'status'=>$status,'order'=>5))}>">即将结束</a> </li>
+      </ul>
+    </div>
+    <div class="mask_bg"></div>
+  </div>
+</div>
+<section class="page_center_box">
+<div class="zcList">
+  <ul class="mpubList wpicList">
+    <volist name="list"  mod="15" id="item">
+      <li> <a href="<{:U('project/detail',array('project_id'=>$item['project_id']))}>">
+        <div class="fl mpubPic"><img src="__ATTACHS__/<{$Projecttips[$item[tip_id]][img]}>" alt="<{$item.title}>" /></div>
+        <div class="mpubTxt">
+          <h4 class="overflow_clear"><{$item.title}></h4>
+          <div class="jindu">
+            <div class="lineJindu">
+              <div class="lineJindu_line" w="<{$item[have_price]/$item[fund_raising]*100|ceil}>"></div>
+            </div>
+            <div class="jdCont"><{:zc_int($item[have_price]/$item[fund_raising]*100)}>%</div>
+            <div class="jdMatter">
+              <if condition="$item['status'] eq 1">
+                众筹中
+              <else/>
+                <{$status_list[$item[status]]}>
+              </if>
+            </div>
+          </div>
+          <p>
+            <font class="black9">目标</font>￥<{:zhu_int($item[fund_raising]/100)}>
+            <em class="fg">|</em>            
+            <font class="black9">已筹</font>￥<{$item[have_price]/100|default='0'}>
+          </p>
+        </div>
+        </a> </li>
+    </volist>
+  </ul>
+  <?php if(strlen($page) > 12){?>
+    <div class="page"> <{$page}> </div>
+  <?php } ?>
+</div>
+<script>
+/*头部下来分类开始*/
+	$("#search-bar .search-bar_list .list").each(function(e){
+		$(this).click(function(){
+			if($(this).hasClass("on")){
+				$(this).parent().find(".list").removeClass("on");
+				$(this).removeClass("on");
+				$(".mask_bg").hide();
+				$("#search-bar .search-bar_pull").hide();
+			}
+			else{
+				$(this).parent().find(".list").removeClass("on");
+				$(this).addClass("on");
+				$(".mask_bg").show();
+				$("#search-bar .search-bar_pull").show();
+			}
+			$("#search-bar .search-bar_pull .list_box").each(function(i){
+				if(e==i){
+					$(this).parent().find(".list_box").hide();
+					$(this).show();
+				}
+				else{
+					$(this).hide();
+				}
+				$(this).find("li").click(function(){
+					$(this).parent().find("li").removeClass("on");
+					$(this).addClass("on");
+					$(".mask_bg").hide();
+					$("#search-bar .search-bar_pull").hide();
+					$("#search-bar .search-bar_list .list").removeClass("on");
+				});
+			});
+		});
+	});
+</script> 
+<include file="public:footer" /> 

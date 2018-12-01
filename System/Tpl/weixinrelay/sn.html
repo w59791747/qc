@@ -1,0 +1,48 @@
+<include  file='public:header'/>
+<div class="pad">
+  <div class="breadNav">
+    <div class="flt breadNav_text"> <span>功能管理</span><i></i><span>微信应用</span><i></i><span>微接力成员</span> </div>
+    <div class="frt breadNav_other">
+      <div class="bn_input theme-pop-btn">
+      
+      <div class="bn_input">
+      
+      <div class="bn_input"></div> </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<form target="zhuchuang_frm" method="post">
+<div class="daemonTable">
+  <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>微接力</th>
+        <th>用户昵称</th>
+        <th>次数</th>
+        <th>金币</th>
+        <th>创建时间</th>
+        <th>操作</th>
+    </tr>    
+ 
+    <foreach name="list" item="var">
+      <tr>
+        <td><{$detail.title}></td>
+        <td><{$var.nickname}></td>
+        <td><{$var.cishu}></td>
+        <td><{$var.gold}></td>
+        <td><{$var.dateline|date='Y-m-d H:i:s',###}></td>
+         <td>
+          <{:ROLE('weixinrelay/snlist',array("sn_id"=>$var["sn_id"]),'查看','','pub_btn')}>
+          <{:ROLE('weixinrelay/sndelete',array("sn_id"=>$var["sn_id"]),'删除','act','pub_btn grayBtn')}>
+         </td>
+      </tr>
+    </foreach>
+  </table>
+</div>
+<div class="daemonBot">
+  <div class="flt daemonBot_cz"> </div>
+  <div class="frt daemonPage"> <{$page}> </div>
+  <div class="clear"></div>
+</div>
+</div>
+<include  file='public:footer'/>

@@ -1,0 +1,28 @@
+<include file="public:header" />
+<body class="reg_wrap">
+
+<div class="reg_logo">
+	<a href="<{:U('/index')}>"><img src="__ATTACHS__/<{$CONFIG[site][loginlogo]}>" /> </a>
+    
+</div>
+
+<div class="reg_form">
+	<div class="account_reg">
+		<form  id="login_frm"  action="<{:U('passport/login')}>" method="post" target="chuang_frm">
+			<input type="text" name="name" class="user_name yhm" placeholder="请输入用户名/手机号码"/>
+			<input type="password" name="passwd" class="user_name mima" placeholder="请输入密码"/>
+			 <if condition="$CONFIG[power][login] eq on">
+			<p><input type="text" name="yzm" id='yzm'  class="user_name yzm" placeholder="请输入验证码"/><span class="yzmImg" >
+				<img class="vail" src="__ROOT__/index.php?g=home&m=verify&a=index&mt=<{:time()}>" /> 
+            </span></p>
+            </if>
+			<input type="hidden" name="backurl" value="<{$backurl}>">
+			 <input type="submit" class="user_name reg_but" value="立即登录">
+		</form>
+	</div>
+	<div class="phone_reg">
+		
+	</div>
+	<div class="zc_note"></div>
+</div>
+<include file="public:sfooter" />

@@ -1,0 +1,60 @@
+<include  file='public:header'/>
+
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>系统</span><i></i><span>管理员管理</span><i></i><span>角色管理</span>
+           
+            </div>
+            <div class="frt breadNav_other">
+           
+                <div class="bn_input theme-pop-btn">
+                <form method="post" action="<{:U('role/index')}>">
+                	<div class="bn_input">关键词：<input type="text" name="keyword" value="<{$keyword}>" class="text"></div>
+                    <div class="bn_input"><input type="submit" class="pub_btn" value="搜索"></div>
+                 </form>
+                    <div class="bn_input"><{:ROLE('role/create','','添加角色','load','pub_btn',600,220)}></div>
+                </div>
+            <div class="clear"></div>
+          </div>
+          </div>
+		<form target="zhuchuang_frm" method="post">
+             <div class="daemonTable">
+              <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+                
+                <tr>
+                	<th class="w-100">
+                   序号
+                    </th>
+                    <th>用户名</th>
+                    <th class="w-150">
+                    操作
+                    </th>
+                </tr>
+                	 <foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.role_id}></td>
+                            <td><{$var.role_name}></td>
+                            <td><eq name='var.role_id' value="1">
+                                没有可操作的
+                        <else/>
+                        <{:ROLE('role/auth',array("role_id"=>$var['role_id']),'角色权限','','pub_btn')}>
+                        <{:ROLE('role/delete',array("role_id"=>$var['role_id']),'删除','act','pub_btn grayBtn')}>
+                        </eq></td>
+                        </tr>
+                    </foreach>
+                </table>
+           </div>
+              <div class="daemonBot">
+                <div class="flt daemonBot_cz">
+                </div>
+                <div class="frt daemonPage">
+                   <{$page}>
+                </div>
+                <div class="clear"></div>
+              </div>
+          </div>    
+          
+
+<include  file='public:footer'/>
+

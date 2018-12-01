@@ -1,0 +1,63 @@
+<include  file='public:header'/>
+
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>后台管理</span><i></i><span>管理员管理</span><i></i><span>管理员管理</span>
+           
+            </div>
+            <div class="frt breadNav_other">
+                <div class="bn_input theme-pop-btn">
+                   <form method="post" action="<{:U('admin/index')}>">
+                	<div class="bn_input">关键词：<input type="text" name="keyword" value="<{$keyword}>" class="text"></div>
+                    <div class="bn_input"><input type="submit" class="pub_btn" value="搜索"></div>
+                   </form>
+                   <div class="bn_input"> <{:ROLE('admin/create','','添加管理员','load','pub_btn',800,350)}></div>
+                </div>
+            <div class="clear"></div>
+          </div>
+          </div>
+		<form target="zhuchuang_frm" method="post">
+             <div class="daemonTable">
+              <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+                
+                <tr>
+                	<th class="w-100">
+                    序号
+                    </th>
+                    <th>用户名</th>
+                    <th>角色</th>
+                    <th>手机</th>
+                    <th>最后登录时间</th>
+                    <th>最后登录IP</th>
+                    <th class="w-150">
+                    操作
+                    </th>
+                </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.admin_id}></td>
+                            <td><{$var.admin_name}> <if condition="$var.city_id gt 0"> (<{$citys[$var['city_id']]['name']}>) </if></td>
+                            <td><{$var.role_name}></td>
+                            <td><{$var.mobile}></td>
+                            <td><{$var.last_login|date="Y-m-d H:i:s",###}></td>
+                            <td><{$var.last_ip}>(<{$var.last_ip_area}>)</td>
+                            <td>
+                                <{:ROLE('admin/edit',array("admin_id"=>$var["admin_id"]),'编辑','load','pub_btn',500,350)}>
+                                <{:ROLE('admin/delete',array("admin_id"=>$var["admin_id"]),'删除','act','pub_btn grayBtn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+
+                </table>
+           </div>
+          <div class="daemonBot">
+            <div class="flt daemonBot_cz">
+            </div>
+            <div class="frt daemonPage">
+               <{$page}>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>    
+<include  file='public:footer'/>

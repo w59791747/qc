@@ -1,0 +1,21 @@
+<include file="public:header" /> 
+<include file="public:top" />
+<section class="contentWrapper">
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">意见反馈</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_center_box">
+      
+          <div class="dreamForm yjfkForm">
+            <form method="post"  action="<{:U('feedback/create')}>"  target="chuang_frm">
+             <textarea name='data[content]' class="text" placeholder="请输入反馈，我们将为您不断改进"></textarea>
+              <input type="text" name='data[mobile]' value="<{$MEMBER['mobile']}>" placeholder="请输入手机">
+              
+              <input type="submit" value="提交">
+            </form>
+            
+          </div>
+  <include file="public:footer" />       

@@ -1,0 +1,82 @@
+<include  file='public:header'/>
+<script src="__PUBLIC__/js/highcharts/highcharts.js"></script>
+<script src="__PUBLIC__/js/highcharts/modules/exporting.js"></script>
+
+<div class="pad">
+  <div class="breadNav">
+  <div class="flt breadNav_text"> <span>后台管理</span><i></i><span>会员管理</span><i></i><span>会员统计</span> </div>
+  <div class="frt breadNav_other">
+  <div class="bn_input theme-pop-btn">
+  <form method="get" action="<{:U('tongjimember/index')}>">
+    <div class="bn_input">开始时间：
+      <input type="text" name="b_time" value="<{$b_time|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text" />
+      结束时间：
+      <input type="text" name="e_time" value="<{$e_time|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text" />
+      
+    </div>
+    <div class="bn_input">
+      <input type="submit" class="pub_btn" value="搜索">
+    </div>
+    </div>
+    <div class="clear"></div>
+    </div>
+    </div>
+    <div class="daemonTable">
+    <div class="breadTjlist"> <a target="main_frm" href="<{:U('tongjimember/index',array('status'=>1))}>" >本日统计</a> <a target="main_frm" href="<{:U('tongjimember/index',array('status'=>2))}>" >昨日统计</a> <a target="main_frm" href="<{:U('tongjimember/index',array('status'=>3))}>" >三天统计</a> <a target="main_frm" href="<{:U('tongjimember/index',array('status'=>4))}>" >本周统计</a> <a target="main_frm" href="<{:U('tongjimember/index',array('status'=>5))}>" >上周统计</a> <a target="main_frm" href="<{:U('tongjimember/index',array('status'=>6))}>" >本月统计</a> <a target="main_frm" href="<{:U('tongjimember/index',array('status'=>7))}>" >上月统计</a> </div>
+  </form>
+  <script>
+          $(function () {
+            $('#container').highcharts({
+                chart: {
+                    type: 'column',
+                    margin: [ 50, 50, 100, 80]
+                },
+                title: {
+                    text: '<{$title}>'
+                },
+                xAxis: {
+                    categories: [
+                        <{$tongji[x]}>
+                    ],
+                    labels: {
+                        rotation: 0,
+                        align: 'center',
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '注册人数'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                tooltip: {
+                    pointFormat: '<b>{point.y:.1f}</b>',
+                },
+                series: [{
+                    name: 'Population',
+                    data: [<{$tongji[y]}>],
+                    dataLabels: {
+                        enabled: false,
+                        rotation: -90,
+                        color: '#FFFFFF',
+                        align: 'right',
+                        x: 4,
+                        y: 10,
+                        style: {
+                           
+                        }
+                    }
+                }]
+            });
+        });
+        </script>
+  <div id="container"> </div>
+</div>
+<include  file='public:footer'/> 

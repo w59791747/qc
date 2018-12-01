@@ -1,0 +1,56 @@
+<include  file='public:header'/>
+<div class="pad">
+<div class="breadNav">
+  <div class="flt breadNav_text"> <span>项目</span><i></i><span>车商管理</span><i></i><span>修改车商</span> </div>
+</div>
+                          <form  target="zhuchuang_frm" action="<{:U('cheshang/edit',array('cheshang_id'=>$detail['cheshang_id']))}>" method="post">
+							<table class="table_data" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <th class="alginRt w-100"> <font class="pointcl">*</font> 名称 </th>
+                            <td>
+                            	<input type="text" name="data[title]" value="<{$detail.title|default=''}>" class="text w-200" />
+                            </td>
+                          </tr>
+                          
+                           <tr>
+                            <th class="alginRt w-100"> 缩略图</th>
+                            <td><div class="fileBox w-200"> <img id="photo_img"  src="__ATTACHS__/<{$detail.img|default='default.jpg'}>" /> </div>
+                              <input type="hidden" name="data[img]" value="<{$detail.img}>" id="data_photo" />
+                              <input class="file"  id="photo_file" name="photo_file" type="file" multiple="true" value="" /></td>
+                          </tr>
+                          <tr>
+                            <th class="alginRt w-100"> <font class="pointcl">*</font> 排序 </th>
+                            <td>
+                           <input type="text" name="data[orderby]" value="<{$detail.orderby|default=''}>" class="text w-200"  />
+                            </td>
+                          </tr>
+                           
+                          
+                           <tr>
+                                <th class="alginRt w-100"> </th>
+                                <td>
+                                <input type="submit" value="确定编辑" class="pub_btn" />
+                                </td>
+                              </tr>
+                          
+                          </table>
+						</div><script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js?t=<{$nowtime}>"></script> 
+<script type="text/javascript" src="__PUBLIC__/js/area.js?t=<{$nowtime}>"></script>
+<link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+<script>
+        $("#photo_file").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"adv"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '缩略图',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+			//'debug' : true,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo").val(data);
+                $("#photo_img").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+
+    </script> 
+<include  file='public:footer'/> 

@@ -1,0 +1,67 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">评论项目</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+  <div class="ucenter_tab">
+    <div class="ucenter_tab_chose"> <a 
+      <if condition="$from eq 1">class="current"</if>
+      href="<{:U('ucenter/message/comments_project',array('from'=>'1'))}>">我的评论</a> <a 
+      <if condition="$from eq 2">class="current"</if>
+      href="<{:U('ucenter/message/comments_project',array('from'=>'2'))}>">我被评论</a></div>
+  </div>
+  	 <foreach name="list" item="var">
+	 <div class="ucenter_table">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <th> ID </th>
+          <td><{$var.comment_id}></td>
+        </tr>
+        <if condition="$from eq 2">
+        <tr>
+          <th> 用户 </th>
+          <td><{$memberlist[$var[uid]][name]}></td>
+        </tr>
+          </if>
+           <tr>
+          <th> 项目 </th>
+          <td><{$projectlist[$var[project_id]][title]}></td>
+        </tr>
+         <tr>
+          <th> 分数 </th>
+          <td><{$var.score}></td>
+        </tr>
+         <tr>
+          <th> 内容 </th>
+          <td><{$var.content}></td>
+        </tr>
+         <if condition="$from eq 1">
+         
+          <tr>
+          <th> 审核 </th>
+          <td><if condition="$var.audit eq 1"><span class="green">[已审核]<else/><span class="red">[未审核]</if></span></td>
+        </tr>
+          </if><tr>
+          <th> 时间 </th>
+          <td><{$var.dateline|date="Y-m-d H:i:s",###}></td>
+        </tr>
+        <if condition="$from eq 1">
+        <tr>
+          <th> 操作 </th>
+          <td><a target="chuang_frm" class="btn deleteBtn" mini="confirm" href="<{:U('message/commentsprojectdelete',array('comment_id'=>$var['comment_id']))}>">删除</a></td>
+        </tr>
+        
+        </if>
+        </table>
+        </div>
+
+ </foreach>
+<div class="page"> <{$page}> </div>
+</section>
+<include file="public:footersmall"/>
+               

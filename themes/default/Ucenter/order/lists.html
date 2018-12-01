@@ -1,0 +1,29 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">订单管理</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+  <form method="post"   target="chuang_frm">
+    <foreach name="list" item="var">
+      <div class="ucenter_entry">
+        <div class="idTit"><span class="fl">订单ID:<{$var.order_id}></span><span class="fr black9"><{$var.dateline|date="Y-m-d H:i:s",###}></span> </div>
+        <div class="entrycont">
+          <p><span class="black9">订单号：</span><{$var.order_no}></p>
+          <p><span class="black9">类型：</span><{$typelist[$var[type]]}></p>
+          <p><span class="black9">总金额：</span><font class="pointcl">￥<{:zhu_int($var[amount])}></font></p>
+          <p><span class="black9">支付状态：</span><{$statuslist[$var[pay_status]]}></p>
+        </div>
+        <div class="entryBtn"> <a class="btn changeBtn" href="<{:U('order/orderdetail',array('order_id'=>$var['order_id']))}>">查看</a>
+          <if condition="$var.pay_status eq 0"> <a target="chuang_frm" class="btn deleteBtn" mini="confirm" href="<{:U('order/orderdelete',array('order_id'=>$var['order_id']))}>">取消订单</a> </if>
+        </div>
+      </div>
+    </foreach>
+  </form>
+  <div class="page"> <{$page}> </div>
+</section>
+<include file="public:footersmall"/> 

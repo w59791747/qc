@@ -1,0 +1,57 @@
+<include  file='public:header'/>
+
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>后台管理</span><i></i><span>项目</span><i></i><span>车商管理</span>
+           
+            </div>
+            <div class="frt breadNav_other">
+           
+                <div class="bn_input theme-pop-btn">
+                
+                   <div class="bn_input"> <{:ROLE('cheshang/create','','添加车商','','pub_btn')}></div>
+                </div>
+            <div class="clear"></div>
+          </div>
+          </div>
+		<form target="zhuchuang_frm" method="post">
+             <div class="daemonTable">
+              <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+                
+                <tr>
+                	<th class="w-100">
+                    序号
+                    </th>
+                    <th>名称</th>
+                    <th>排序</th>
+                    <th class="w-150">
+                    操作
+                    </th>
+                </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.cheshang_id}></td>
+                            <td><{$var.title}></td>
+                            <td><{$var.orderby}></td>
+                            <td>
+                                <{:ROLE('cheshang/edit',array("cheshang_id"=>$var["cheshang_id"]),'编辑','','pub_btn')}>
+                                <{:ROLE('cheshang/delete',array("cheshang_id"=>$var["cheshang_id"]),'删除','act','pub_btn grayBtn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+
+                </table>
+           </div>
+              <div class="daemonBot">
+                <div class="flt daemonBot_cz">
+                </div>
+                <div class="frt daemonPage">
+                   <{$page}>
+                </div>
+                <div class="clear"></div>
+              </div>
+          </div>    
+          
+
+<include  file='public:footer'/>

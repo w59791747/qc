@@ -1,0 +1,83 @@
+<include file="public:header"/>
+<div class="uc_mid_r">
+			<p class="tixing">友情提醒：通过实名认证和手机认证才可以投资项目，马上 <a href="<{:U('member/set/renzheng')}>">去认证</a>！如果您使用余额支付方式，请先 <a href="<{:U('member/set/pwd')}>">设置支付密码</a>。</p>
+			<div class="uc_mid_top">
+				<ul class="yue">
+					<li>余额：<span>¥<{$MEMBER.price}></span></li>
+					<li><a href="<{:U('member/member/priceup')}>">充值</a><a href="<{:U('member/member/pricedown')}>">提现</a></li>
+				</ul>
+				<ul class="jifen">
+					<li>积分：<span><{$MEMBER.gold}></span></li>
+					<li><a href="<{:U('member/qiandao/qiandao')}>">签到送积分</a></li>
+				</ul>
+				<ul class="gonggao">
+					<li class="gg_tit">最新平台公告</li>
+                     <calldata mdl="Article" where="`closed`=0 and `audit`=1 and `cate_id`=141 " limit="0,3" cache="21600" format='true' order="dateline desc">
+                
+                        <li><a href="<{:U('home/article/detail',array('article_id'=>$item[article_id]))}>"><{$item[title]}></a></li>
+                       
+                      </calldata>
+				</ul>
+			</div>
+			<div class="uc_mid_foot">
+				<div class="uc_foot_tit"><span>已投项目</span><a href="<{:U('member/project/crowd_canyu')}>">查看更多</a></div> <if condition="$list">
+                       
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					 <tbody>
+						<tr>
+							<th width="10%">ID</th>
+							<th width="35%">项目标题</th>
+							<th width="10%">投资金额</th>						
+							<th width="15%">时间</th>
+							<th width="10%">状态</th>
+							<th width="10%">投票</th>
+							<th width="10%">回报</th>
+						</tr>
+                        <foreach name="list" item="var">
+                        <tr>
+							<td><{$var[list_id]}></td>
+							<td><a href="<{:U('home/project/detail',array('project_id'=>$var[project_id]))}>"><{$project[$var[project_id]].title}></a></td>
+							<td>¥<{$var[price]/100}></td>
+							<td><{$var.dateline|date="Y-m-d H:i:s",###}></td>
+							<td>
+                            	 	<if condition="$project[$var['project_id']][status] eq 1 ">
+                                    众筹中
+                                    <elseif condition="$project[$var['project_id']][status] eq 2 "/>
+                                    出售中
+                                    <elseif condition="$project[$var['project_id']][status] eq 3 "/>
+                                    投票中
+                                    <elseif condition="$project[$var['project_id']][status] eq 4 "/>
+                                    待回款
+                                    <elseif condition="$project[$var['project_id']][status] eq 5 "/>
+                                    已完成
+                                    <elseif condition="$project[$var['project_id']][status] eq -2 "/>
+                                    已回购
+                                  	</if>
+                            </td>
+							<td>
+                            	<if condition="$var['status'] eq 1"><font class="green">已赞成</font>
+                                <elseif condition="$var['status'] eq -1"/>
+                                <font class="red">已反对</font>
+                                <elseif condition="$project[$var['project_id']]['status'] eq 3"/>
+                                <a  class="btn changeBtn" href="<{:U('home/project/detail',array('project_id'=>$var['project_id']))}>?toupiao">投票</a>
+                                <else/>
+                                <font class="black6">等待投票</font></if>
+                            </td>
+							<td><if condition="$var['shouyi']">￥<{$var[shouyi]/100}><else/>暂无</if></td>
+						</tr>
+                        </foreach>
+							
+					</tbody>
+				</table>
+                <else/>
+				<div class="yitou_none">
+					抱歉，您还没有投资任何项目！<br /><br /><img src="__TMPL__statics/images/member/yitou_none.png" alt="您暂未投资项目" title="您暂未投资项目" />
+				</div>
+                </if>
+			</div>			
+		</div>
+		<div style="clear:both"></div>
+	</div>	
+</div>
+
+<include file="public:footer"/>

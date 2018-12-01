@@ -1,0 +1,59 @@
+<include file="public:header"/>
+<div class="uc_mid_r yitou_list">
+			<div class="yitou_data">
+				<p>收益数据概览</p>
+				<ul>
+					<li>累计收益（¥）<span><{$count1}></span></li>
+					<li>近30天投资（¥）<span><{$count2}></span></li>
+					<li>近90天投资（¥）<span><{$count3}></span></li>
+					<li style="border:none">累计投资回报（%）<span><{$count4}></span></li>
+				</ul>
+			</div>
+			<div class="select_yitou">
+				
+                <form method="post"  action="<{:U('project/shouyi')}>">
+                    <span>请选择时间：</span>
+                    <input  name = 'stime' value="<{$stime}>" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"/><span>到</span><input name = 'ltime' type="text" value="<{$ltime}>"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+                    <input class="queding sy_queding" type="submit" value="确定" />
+                 </form>
+			</div>
+             <if condition="$list">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				 <tbody>
+					<tr>
+						<th width="10%">ID</th>
+						<th width="30%">项目标题</th>
+						<th width="10%">投资金额</th>						
+						<th width="15%">投资时间</th>
+						<th width="10%">回款周期</th>
+						<th width="15%">项目收益</th>
+						<th width="10%">ROI</th>
+					</tr>
+                    
+                    <foreach name="list" item="var">
+                      <tr>
+                       <td><{$var[list_id]}></td>
+                        <td><a target="_blank" href="<{:U('home/project/detail',array('project_id'=>$var[project_id]))}>"><{$project[$var[project_id]].title}></a></td>
+                        <td>￥<{$var[price]/100}></td>
+                        <td><{$var.dateline|date="Y-m-d",###}></td>
+                        <td><{:ceil(($var['shouyitime']-$project[$var[project_id]]['stime'])/3600/24)}></td>
+                        <td>￥<{:ceil(($var['shouyi']-$var['price'])/100)}></td>
+                        <td>
+						<{:ceil(($var['shouyi']-$var['price'])/$var['price']*100)}>%
+						</td>
+                      </tr>
+                    </foreach>
+				</tbody>
+			</table>
+			<else/>
+			<div class="yitou_none">
+				<img src="__TMPL__statics/images/member/jilu_none.jpg" alt="暂时没有记录" title="暂时没有记录" />
+			</div>
+            </if>
+				<div class="select_page us_center"><{$page}></div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+<include file="public:footer"/>

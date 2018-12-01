@@ -1,0 +1,192 @@
+<include file="public:header" /><include file="public:top" />
+<!--左侧menu部分end-->
+<div class="usedFk"> 
+  <a href="<{:U('feedback')}>">
+    <i class="iconfont icon-yijianfankui"></i>
+  </a> 
+</div> 
+<section class="contentWrapper">
+<header>
+  <div class="left"><!-- <a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i> --></a></div>
+  <div class="title"><{$seo_title}></div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+</header>
+<section class="page_center_box">
+<div class="banner">
+  <div class="flexslider">
+    <ul class="slides">
+      <calldata mdl="adv" where="adv_id=101" limit="0,3" cache="21600" order="orderby asc">
+        <li><a href="<{$item.link}>" target="<{$item.target}>"><img src="__ATTACHS__/<{$item.thumb}>" /></a></li>
+      </calldata>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function () {
+		 $('.flexslider').flexslider({
+			directionNav: true,
+			pauseOnAction: false,
+	});//首页轮播js结束
+	});
+</script>
+<div class="menuCate">
+  <ul>
+    <li><a href="<{:U('mobile/project/index')}>"><i class="ico_2"></i>
+      <p>汽车众筹</p>
+      </a></li>
+    <li><a href="<{:U('mobile/guide/index')}>"><i class="ico_3"></i>
+      <p>新手指引</p>
+      </a></li>
+    <li><a href="<{:U('mobile/help/index')}>"><i class="ico_4"></i>
+      <p>帮助中心</p>
+      </a></li>
+    <li><a href="<{:U('mobile/product/index')}>"><i class="ico_5"></i>
+      <p>积分商城</p>
+      </a></li>
+  </ul>
+</div>
+<div class="index_gonggao_wrap">
+  <i class="iconfont icon-laba gg_icon"></i>
+  <div class="index_gonggao">
+      <ul>      
+       <foreach name="articlelist" key='key' item="val">
+             <if condition="$key eq 0">
+             
+               <calldata mdl="Article" where="`closed`=0 and `audit`=1 and `cate_id`={$val['cate_id']} " limit="0,5" cache="21600" format='true' order="dateline desc">
+               <li><a href="<{:U('article/detail',array('article_id'=>$item[article_id]))}>"><{$item[title]}></a></li>
+               
+              </calldata>
+             </if>
+            </foreach>    
+      </ul>
+  </div>
+</div>
+<div class="web_data">
+    <div class="data_left">        
+        <em class="data_num">¥ <{$count['count3']}></em>
+        <em class="data_text">累计金额</em>
+    </div>
+    <div class="data_right">
+        <div class="data_r_t">            
+            <em class="data_text">投资人数</em>
+            <em class="data_num"><{$count['count2']}> 个</em>
+        </div>
+        <div class="data_r_b">            
+            <em class="data_text">累计发布</em>
+            <em class="data_num"><{$count['count1']}> 个</em>
+        </div>
+    </div>
+</div>
+<div id="projectOptionBox" class="optionBox">
+  <div class="hd">
+    <ul>      
+      <if condition="$CONFIG['home']['xiangmu'] eq on">
+        <li><a href="javascript:void(0)">众筹中</a></li>
+      </if>
+      <if condition="$CONFIG['home']['yugao'] eq on">
+        <li><a href="javascript:void(0)">预筹中</a></li>
+      </if>
+      <if condition="$CONFIG['home']['success'] eq on">
+        <li><a href="javascript:void(0)">已成功</a></li>
+      </if>
+    </ul>
+    <span></span>
+  </div>
+  <div class="bd" id="tabBox-bd">
+   
+    <if condition="$CONFIG['home']['xiangmu'] eq on">
+      <div class="hot_rec_wrap" >
+        <ul>
+          <calldata mdl="project" where="`audit`=1 and `status`=1  and `closed`=0 " limit="0,4" cache="21600" format='true' order="dateline desc">
+            <li><a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>"> 
+              <img src="__ATTACHS__/<{$Projecttips[$item[tip_id]][img]}>" alt="<{$item.title}>" />
+              <div class="rectit"><{$item.title}></div>
+              <div class="htrecTxt clearfix">
+                <div class="z-raising">已筹：<em class="fontcl">￥<{$item[have_price]/100}></em></div>
+                <div class="p-outer">
+                  <div class="p-bar">
+                    <div class="p-bar-blue" style="width:<{$item[have_price]/$item[fund_raising]*100}>%"></div>
+                  </div>
+                </div>
+                <div class="item-rate clearfix"> <span class="fl"><{:zc_int($item[have_price]/$item[fund_raising]*100)}>%</span> <span class="fr black9">剩余<{$item[ltime]/3600/24-$nowtime/3600/24|ceil}>天</span> </div>
+              </div>
+              </a> 
+            </li>
+          </calldata>
+        </ul>
+      </div>
+    </if>
+     <if condition="$CONFIG['home']['yugao'] eq on">
+      <div class="hot_rec_wrap" >
+        <ul>
+          <calldata mdl="project" where="`audit`=1 and `status`=0  and `closed`=0 " limit="0,3" cache="21600" format='true' order="dateline desc">
+            <li>
+              <div class="spanbtn"><a mini='act' href="<{:U('project/follow',array('project'=>$item['project_id']))}>" title="关注"><i class="iconfont icon-xin"></i></a></div>
+              <a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>">   
+              <img src="__ATTACHS__/<{$Projecttips[$item[tip_id]][img]}>" alt="<{$item.title}>" />
+              <div class="rectit"><{$item.title}></div>
+              <div class="htrecTxt clearfix">
+                <div class="z-i-raising"><em class="fontcl">￥ <{:zhu_int($item[fund_raising]/100)}></em>目标筹资</div>
+                <div class="z-i-raising"><em class="fontcl"><{$item[stime]/3600/24-$nowtime/3600/24|ceil}> 天</em>剩余时间</div>
+              </div>
+              </a> 
+            </li>
+          </calldata>
+        </ul>
+      </div>
+    </if>
+    <if condition="$CONFIG['home']['success'] eq on">
+      <div class="hot_rec_wrap" >
+        <ul>
+          <calldata mdl="project" where="`audit`=1 and `status` IN (5,-2)  and `closed`=0 " limit="0,4" cache="21600" format='true' order="dateline desc">
+            <li>              
+              <a href="<{:U('project/detail',array('project_id'=>$item[project_id]))}>">
+                <img src="__ATTACHS__/<{$Projecttips[$item[tip_id]][img]}>" alt="<{$item.title}>" />
+                <div class="rectit"><{$item.title}></div>
+                <div class="htrecTxt clearfix">
+                  <div class="z-i-raising"><em class="fontcl">￥ <{:zhu_int($item[have_price]/100)}></em>已筹资</div>
+                  <div class="z-i-raising"><em class="fontcl"><{$item.have_num|default='0'}> 个</em>投资人</div>
+                </div>
+                <div class="shou_box">
+                    <span>万元收益：<{$item[shouyi][shouyi]|ceil}>元</span>
+                    <span>回款周期：<{$item[shouyi][days]}>天</span>
+                </div>
+              </a> 
+            </li>
+          </calldata>
+        </ul>
+      </div>
+    </if>
+  </div>
+</div>
+<div class="tz_top">
+    <div class="tz_top_tit"><span><i class="iconfont icon-paixingbang"></i>投资排行榜</span></div>
+    <ul>
+        <li>
+            <em class="tz_id">排位</em>
+            <em class="tz_name">姓名</em>
+            <em class="tz_price">投资额</em>
+        </li>        
+        <calldata mdl="Member" where="`closed`  IN (1,0) " limit="0,8" cache="21600" format='true' order="tou_price desc">      
+          <if condition="$index lt 8 ">
+            <li>
+                <em class="tz_id"><{$index}></em>
+                <em class="tz_name"><{:zhu_name($item[name])}></em>
+                <em class="tz_price">¥ <{:zhu_int($item[tou_price]/100)}></em>
+            </li>
+          </if>
+        </calldata>
+    </ul>
+</div>
+
+<script type="text/javascript">
+  TouchSlide( { slideCell:"#projectOptionBox",
+		endFun:function(i){ //高度自适应
+			var bd = document.getElementById("tabBox-bd");
+			bd.parentNode.style.height = bd.children[i].children[0].offsetHeight+"px";
+			if(i>0)bd.parentNode.style.transition="200ms";//添加动画效果
+		}
+	} );
+</script>
+
+<include file="public:footer" /> 

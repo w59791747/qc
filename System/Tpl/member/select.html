@@ -1,0 +1,73 @@
+<include  file='public:header'/>
+
+<div class="pad">
+          <div class="selectNav">
+          	<div class="flt selectNav_text">选择用户</div>
+           
+            <div class="frt breadNav_other">
+           
+                <div class="bn_input theme-pop-btn">
+                	<form method="post" action="<{:U('member/select',array('id'=>$id,'show'=>$show))}>">
+                        <div class="bn_input">用户名：<input type="text" name="name" value="<{$name}>" class="text">
+                        类型：
+                        <select name="from" class="text">
+                        <option  value="1" <if condition="1 eq $from"> selected="selected" </if>>全部</option>
+                            <foreach name="fromlist" key='key' item="val">
+                                <option  value="<{$key}>" <if condition="$key eq $from"> selected="selected" </if>><{$val}></option>
+                            </foreach>
+                        </select>
+                        </div>
+                        <div class="bn_input"><input type="submit" class="pub_btn" value="搜索"></div>
+                     </form>
+                
+                   <div class="bn_input"></div>
+                </div>
+            <div class="clear"></div>
+          </div>
+          </div>
+         <form method="post" action="<{:U('member/select',array('id'=>$id,'show'=>$show))}>">
+             <div class="daemonTable">
+              <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+                  <tr>
+                	  <th> 用户ID </th>
+                      <th> 会员名 </th>
+                      <th> 类型 </th>
+                </tr>
+                    <foreach name="list" item="var">
+                         <tr>
+                            <td class="w-50"><label><input type="radio" name="uid"   rel="<{$var.name}>" value="<{$var.uid}>" /><{$var.uid}></label></td>
+                            <td width="100"><{$var.name}></td>
+                            
+                            <td width="100"><{$fromlist[$var[from]]}></td>
+                        </tr>
+                    </foreach>
+
+                </table>
+           </div>
+              <div class="daemonBot">
+                <div class="flt daemonBot_cz">
+                  <input  id="select_btn" class="pub_btn" value="确定选择" />
+                </div>
+                <div class="frt daemonPage">
+                   <{$page}>
+                </div>
+                <div class="clear"></div>
+              </div>
+          </div>    
+          
+
+<script>
+    $(document).ready(function (e) {
+        $("#select_btn").click(function () {
+            $("input[name='uid']").each(function (a) {
+                if ($(this).prop("checked") == true) {
+                    parent.selectCallBack('<{$id}>', '<{$title}>', $(this).val(), $(this).attr('rel'));
+                }
+            });
+        });
+
+    });
+</script>
+<include  file='public:footer'/>  
+
+

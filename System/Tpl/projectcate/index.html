@@ -1,0 +1,59 @@
+<include  file='public:header'/>
+
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>后台管理</span><i></i><span>项目管理</span><i></i><span>项目分类</span>
+           
+            </div>
+            <div class="frt breadNav_other">
+           
+                <div class="bn_input theme-pop-btn">
+                
+                   <div class="bn_input"> <{:ROLE('projectcate/create','','添加分类','load','pub_btn',500,250)}></div>
+                </div>
+            <div class="clear"></div>
+          </div>
+          </div>
+		<form target="zhuchuang_frm" method="post">
+             <div class="daemonTable">
+              <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+                
+                <tr>
+                	<th class="w-100">
+                    序号
+                    </th>
+                    <th>分类名</th>
+                    <th>排序</th>
+                    <th>添加时间</th>
+                    <th class="w-150">
+                    操作
+                    </th>
+                </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.cate_id}></td>
+                            <td><{$var.cate_name}></td>
+                            <td><{$var.orderby|default='50'}></td>
+                            <td><{$var.dateline|date="Y-m-d H:i:s",###}></td>
+                            <td>
+                                <{:ROLE('projectcate/edit',array("cate_id"=>$var["cate_id"]),'编辑','load','pub_btn',500,250)}>
+                                <{:ROLE('projectcate/delete',array("cate_id"=>$var["cate_id"]),'删除','act','pub_btn grayBtn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+
+                </table>
+           </div>
+              <div class="daemonBot">
+                <div class="flt daemonBot_cz">
+                </div>
+                <div class="frt daemonPage">
+                   <{$page}>
+                </div>
+                <div class="clear"></div>
+              </div>
+          </div>    
+          
+
+<include  file='public:footer'/>

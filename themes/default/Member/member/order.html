@@ -1,0 +1,60 @@
+<include file="public:header"/>
+
+<div class="uc_mid_r yitou_list">
+			<div class="select_yitou">
+				
+                
+                <form method="post"  action="<{:U('member/order')}>">
+                    <span>请选择时间：</span>
+                    <input  name = 'stime' value="<{$stime}>" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"/><span>到</span><input name = 'ltime' type="text" value="<{$ltime}>"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+                    <span class="zt">支付状态：</span>
+                    <select name="status">
+                    <option value="0"  <if condition="$status eq 0"> selected="selected" </if>>全部</option>
+                    <foreach name="statuslist" key="key" item="var">
+                    <option value="<{$key+2}>" <if condition="$status eq $key"> selected="selected" </if>><{$var}></option>
+                    </foreach>
+                    </select>
+                    <input class="queding sy_queding" type="submit" value="确定" />
+                 </form>
+  
+			</div>
+             <if condition="$list">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				 <tbody>
+					<tr>
+						<th width="10%">ID</th>
+						<th width="15%">订单号</th>
+						<th width="15%">订单金额</th>												
+						<th width="20%">时间</th>
+						<th width="15%">支付状态</th>
+						<th width="25%">操作</th>
+					</tr>
+					<foreach name="list" item="var">
+                        <tr>
+                          <td><{$var.order_id}></td>
+                          <td><{$var.order_no}></td>
+                          <td>￥<{$var.amount}></td>
+                          <td><{$var.dateline|date="Y-m-d H:i:s",###}></td>
+                          <td ><{$statuslist[$var[pay_status]]}></td>
+                         
+                          <td>
+                           <if condition="$var.pay_status eq 0">
+                          <a class="gozf" href="<{:U('member/orderpay',array('order_id'=>$var['order_id']))}>">支付</a>
+                            <a target="chuang_frm" class="quxiao" mini="confirm" href="<{:U('member/orderdelete',array('order_id'=>$var['order_id']))}>">取消订单</a> </if></td>
+                        </tr>
+                      </foreach>
+				</tbody>
+			</table>
+			<else/>
+			<div class="yitou_none">
+				<img src="__TMPL__statics/images/member/jilu_none.jpg" alt="暂时没有记录" title="暂时没有记录" />
+			</div>
+            </if>
+				<div class="select_page us_center"><{$page}></div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+<include file="public:footer"/>

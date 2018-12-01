@@ -1,0 +1,94 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">添加银行卡</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+  <div class="introForm">
+    <form method="post"  action="<{:U('set/card_create')}>"  target="chuang_frm">
+      <ul class="cre_crad_li">
+	      <li  onclick="change('duisi',this)" style="font-weight:bold;color:#59B844;border-bottom:1px solid #59B844">对私</li>
+	      <li  onclick="change('duigong',this)" value="duigong">对公</li>
+      </ul>
+      <div  id='duisi' class="regGroup clearfix">
+       <label class="title">开户银行</label>
+        <div class="control_txt">
+          <select name="data[bank]" class="text">
+                <foreach name="bank" key='key' item="var">
+                        <option  value="<{$var}>"  class="text mima_box" ><{$var}></option>
+                </foreach>
+              </select>
+        </div>
+      </div>
+      
+       <div  id='duigong' style="display:none;" class="regGroup clearfix">
+       <label class="title">开户银行</label>
+        <div class="control_txt">
+          	<select name="data[code]" class="text">
+                <foreach name="bank" key='key' item="var">
+                        <option  value="<{$key}>"  class="text mima_box" ><{$var}></option>
+                </foreach>
+              </select>
+        </div>
+      </div>
+	  
+	  <div id='duigong2' style="display:none;" class="regGroup clearfix">
+       <label class="title">城市编码</label>
+        <div class="control_txt">
+          <input type="text" name="data[city]" class="text" />
+        </div>
+      </div>
+      
+      
+      <div class="regGroup clearfix">
+       <label class="title">开户账号</label>
+        <div class="control_txt">
+          <input type="text" name="data[card]" class="text" />
+        </div>
+      </div>
+	  
+	  
+	  
+      <div  id='duigong3' style="display:none;" class="regGroup clearfix">
+       <label class="title">具体支行</label>
+        <div class="control_txt">
+          <input type="text" name="data[zhihang]" class="text" />
+        </div>
+      </div>
+      <div class="regGroup clearfix">
+       <label class="title">开户名</label>
+        <div class="control_txt">
+          <input type="text" name="data[name]" value="<{$MEMBER.detail.realname}>" class="text" />
+        </div>
+      </div>
+      <div class="regGroup clearfix">
+       
+          <input type="submit" class="btn" value="添加银行卡">
+       	
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+	function change(val,obj){
+		$('.cre_crad_li li').css({fontWeight:'normal',color:'#333333',borderBottom:'1px solid #ffffff'});
+		$(obj).css({fontWeight:'bold',color:'#59B844',borderBottom:'1px solid #59B844'});
+		if(val == 'duisi'){
+			$("#duisi").css('display','block');
+			$("#duigong").css('display','none');
+			$("#duigong2").css('display','none');
+			$("#duigong3").css('display','none');
+		}else{
+			$("#duisi").css('display','none');
+			$("#duigong").css('display','block');
+			$("#duigong2").css('display','block');
+			$("#duigong3").css('display','block');
+		}
+	}
+</script>
+<include file="public:footersmall"/> 

@@ -1,0 +1,81 @@
+<include file="public:header" /> <include file="public:top" />
+<section class="contentWrapper">
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">积分商城</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_center_box">
+<div class="bintroForm">
+  <form method="post"  action="<{:U('product/pay')}>" target="chuang_frm">
+    <div class="bregGroup">
+      <label class="title">姓名</label>
+      <div class="control_txt">
+        <input class="text" type="text"  name='data[contact]' value="<{$addr.contact}>" placeholder="姓名">
+      </div>
+    </div>
+    <div class="bregGroup">
+      <label class="title">手机号</label>
+      <div class="control_txt">
+        <input class="text" type="text"  name='data[phone]' value="<{$addr.phone}>" placeholder="手机号">
+      </div>
+    </div>
+    <div class="bregGroup">
+      <label class="title">城市</label>
+      <div class="control_txt">
+        <input class="text" type="text"  name='data[city]' value="<{$addr.city}>" placeholder="城市">
+      </div>
+    </div>
+    <div class="bregGroup">
+      <label class="title">详细地址</label>
+      <div class="control_txt">
+        <textarea class="text" name='data[addr]' ><{$addr.addr}></textarea>
+      </div>
+    </div>
+    
+    
+     
+    	<input type="hidden" name="data[product_id]" value="<{$detail[product_id]}>">
+        <input type="hidden" name="data[buys]" value="<{$buys}>">
+        <input type="hidden" name="data[amount]" value="<{$detail[freight]+$detail[jifen]*$buys}>">
+        
+        <p class="polyPrice">实付积分<big class="fontcl1"><{$detail[freight]+$detail[jifen]*$buys}></big></p>
+        
+    <input class="button" type="submit" value="提交订单">
+  </form>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	//选择其它支持项
+	$('.otherZfx a').click(function(){
+		$('.zorderAll_support').slideToggle();
+	
+	
+	
+	});
+	//input框获得焦点
+	$('.yzmdl_box input').focus(function(){
+ 		 $(this).addClass('focus'); 
+	  });
+	  	$('.yzmdl_box input').blur(function(){
+ 		 $(this).removeClass('focus'); 
+	  });
+	  
+	//数量加减
+	$("[quantity]").click(function(){
+	var quantity = parseInt($("#cart_product_num").val(), 10);
+	if($(this).attr("quantity") == '+'){
+		quantity += 1;
+	}else{
+		quantity -= 1;
+	}
+	if(quantity < 1){
+		quantity = 1;
+	}
+	$("#cart_product_num").val(quantity);
+	});
+});
+
+</script> 
+<include file="public:footer" /> 

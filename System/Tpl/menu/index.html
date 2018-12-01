@@ -1,0 +1,49 @@
+<include  file='public:header'/>
+<div class="pad">
+  <div class="breadNav">
+  <div class="flt breadNav_text"> <span>后台管理</span><i></i><span>菜单设置</span><i></i><span>菜单列表</span> </div>
+  <form id="cate_action" action="<{:U('menu/update')}>" target="zhuchuang_frm" method="post">
+    <div class="frt breadNav_other">
+      <div class="bn_input">
+        <input type="submit" class="pub_btn" value="更新"  />
+      </div>
+      <div class="bn_input theme-pop-btn"> <{:ROLE('menu/create','','添加菜单','load','pub_btn',600,250)}> </div>
+      <div class="clear"></div>
+    </div>
+    </div>
+    <div class="daemonTable">
+    <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+      <tr>
+        <th> 分类 </th>
+        <th> 排序 </th>
+        <th class="w-150"> 操作 </th>
+      </tr>
+      <foreach name="datas" item="var">
+        <if condition="($var.parent_id eq 0) && ($var.is_show eq 1)">
+          <tr>
+            <td><{$var.menu_name}></td>
+            <td ><input name="orderby[<{$var.menu_id}>]" value="<{$var.orderby}>" type="text" class="text w-80" /></td>
+            <td><{:ROLE('menu/create',array("parent_id"=>$var['menu_id']),'添加','load','pub_btn',600,280)}>
+              <{:ROLE('menu/delete',array("menu_id"=>$var['menu_id']),'删除','act','pub_btn grayBtn')}> </td>
+          </tr>
+          <foreach name="datas" item="var2">
+            <eq name="var2.parent_id" value="$var.menu_id">
+              <tr >
+                <td style="padding-left:70px; margin-left:70px;"><{$var2.menu_name}></td>
+                <td style="padding-left:70px; margin-left:70px;"	><input name="orderby[<{$var2.menu_id}>]" value="<{$var2.orderby}>" type="text" class="text w-80" /></td>
+                <td><{:ROLE('menu/action',array("parent_id"=>$var2['menu_id']),'添加','load','pub_btn',1000,400)}>
+                  <{:ROLE('menu/delete',array("menu_id"=>$var2['menu_id']),'删除','act','pub_btn grayBtn')}> </td>
+              </tr>
+            </eq>
+          </foreach>
+        </if>
+      </foreach>
+    </table>
+  </form>
+</div>
+<div class="daemonBot">
+  <div class="frt daemonPage"> </div>
+  <div class="clear"></div>
+</div>
+</div>
+<include  file='public:footer'/> 

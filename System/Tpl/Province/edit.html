@@ -1,0 +1,37 @@
+<div class="theme-poptit"><span>编辑省份</span> <a href="javascript:;" title="关闭" class="close">×</a> </div>
+						<div class="theme_popover_table">
+                          <form  target="zhuchuang_frm" action="<{:U('province/edit',array('province_id'=>$detail['province_id']))}>" method="post">
+							<table class="table_data" cellpadding="0" cellspacing="0">
+                          <tr>
+                                <th class="alginRt w-100"> <font class="pointcl">*</font> 选择区域 </th>
+                                <td>
+                                    <select name="data[region_id]" class="text w-200" onchange="check(this.value)">
+                                    	 <foreach name="region" item="var">
+                                            <option value="<{$var.region_id}>" <eq name="var.region_id" value="$detail.region_id">selected="selected"</eq>><{$var.title}></option>
+                                        </foreach>
+                                    </select>
+                                </td>
+                              </tr>
+                          <tr>
+                            <th class="alginRt w-100"> <font class="pointcl">*</font> 省份名称 </th>
+                            <td>
+                            	<input type="text" name="data[province_name]" value="<{$detail.province_name|default=''}>" class="text w-200" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="alginRt w-100"> <font class="pointcl">*</font> 排序 </th>
+                            <td>
+                           <input type="text" name="data[orderby]" value="<{$detail.orderby|default=''}>" class="text w-200"  />
+                            </td>
+                          </tr>
+                           
+                          
+                           <tr>
+                                <th class="alginRt w-100"> </th>
+                                <td>
+                                <input type="submit" value="确定编辑" class="pub_btn" />
+                                </td>
+                              </tr>
+                          
+                          </table>
+						</div>

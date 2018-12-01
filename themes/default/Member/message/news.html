@@ -1,0 +1,43 @@
+<include file="public:header"/>
+
+
+<div class="uc_mid_r yitou_list">
+		
+			<div class="select_yitou">
+             <form method="post"  action="<{:U('message/news')}>">
+				<span>请选择时间：</span>
+                <input  name = 'stime' value="<{$stime}>" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"/><span>到</span><input name = 'ltime' type="text" value="<{$ltime}>"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+                <input class="queding sy_queding" type="submit" value="确定" />
+             </form>
+			</div>
+              <if condition="$list">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				 <tbody>
+					<tr>
+						<th width="10%">ID</th>
+						<th width="35%">标题</th>
+						<th width="35%">内容</th>						
+						<th width="20%">时间</th>
+					</tr>
+					<foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.news_id}></td>
+                            <td><{$var.title}></td>
+                            <td><{$var.content}></td>
+                            <td><{$var.dateline|date="Y-m-d H:i:s",###}></td>
+                        </tr>
+                    </foreach>
+				</tbody>
+			</table>
+			<else/>
+			<div class="yitou_none">
+				<img src="__TMPL__statics/images/member/jilu_none.jpg" alt="暂时没有记录" title="暂时没有记录" />
+			</div>
+            </if>
+				<div class="select_page us_center"><{$page}></div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+<include file="public:footer"/>

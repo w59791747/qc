@@ -1,0 +1,121 @@
+<include  file='public:header'/>
+<div class="pad">
+<div class="breadNav">
+  <div class="flt breadNav_text"> <span>运营</span><i></i><span>推荐位管理</span><i></i><span>编辑推荐</span> </div>
+</div>
+<form  target="zhuchuang_frm" action="<{:U('block/itemedit',array('item_id'=>$detail['item_id']))}>" method="post">
+  <table class="table_data" cellpadding="0" cellspacing="0">
+    <tr>
+      <th class="alginRt w-100"> <font class="pointcl">*</font> 标题 </th>
+      <td><input type="text" name="data[title]" value="<{$detail.title|default=''}>" class="text w-200" /></td>
+    </tr>
+    	
+    <if condition="$block_detail.from eq 'Member'">
+     <tr>
+      <th class="alginRt w-100"> <font class="pointcl">*</font> 用户 </th>
+       <td><input type="hidden" id="uid" name="data[itemId]" value="<{$detail.itemId|default=''}>" />
+       <input class="text w-200" type="text" name="name" id="name"  value="<{$detail.link.title}>" />
+
+        <{:ROLE('member/select','','选择用户','select','pub_btn','600','400')}>
+       </td>
+      </td>
+    </tr>
+    
+    <elseif condition="$block_detail.from eq 'Project'"/>
+    
+    
+ 	<tr>
+      <th class="alginRt w-100"> <font class="pointcl">*</font> 选择项目 </th>
+       <td><input type="hidden" id="project_id" name="data[itemId]" value="<{$detail.itemId|default=''}>" />
+       <input class="text w-200" type="text" name="title" id="title"  value="<{$detail.link.title}>" />
+
+        <{:ROLE('project/select','','选择项目','select','pub_btn','600','400')}>
+       </td>
+      </td>
+    </tr>
+    
+    <elseif condition="$block_detail.from eq 'Activity'"/>
+    
+    <tr>
+      <th class="alginRt w-100"> <font class="pointcl">*</font> 选择活动 </th>
+       <td><input type="hidden" id="activity_id" name="data[itemId]" value="<{$detail.itemId|default=''}>" />
+       <input class="text w-200" type="text" name="title" id="title"  value="<{$detail.link.title}>" />
+
+        <{:ROLE('activity/select','','选择活动','select','pub_btn','600','400')}>
+       </td>
+      </td>
+    </tr>
+    
+    <elseif condition="$block_detail.from eq 'Hatch'"/>
+    
+    <tr>
+      <th class="alginRt w-100"> <font class="pointcl">*</font> 选择基地 </th>
+       <td><input type="hidden" id="hatch_id" name="data[itemId]" value="<{$detail.itemId|default=''}>" />
+       <input class="text w-200" type="text" name="title" id="title"  value="<{$detail.link.title}>" />
+
+        <{:ROLE('hatch/select','','选择基地','select','pub_btn','600','400')}>
+       </td>
+      </td>
+    </tr>
+    
+    <else/>
+    
+    <tr>
+      <th class="alginRt w-100"> <font class="pointcl">*</font> 选择文章 </th>
+       <td><input type="hidden" id="article_id" name="data[itemId]" value="<{$detail.itemId|default=''}>" />
+       <input class="text w-200" type="text" name="title" id="title"  value="<{$detail.link.title}>" />
+
+        <{:ROLE('article/select','','选择文章','select','pub_btn','600','400')}>
+       </td>
+      </td>
+    </tr>
+    
+    </if>
+   
+    <tr>
+      <th class="alginRt w-100"> 推荐时间 </th>
+      <td>
+       <input type="text" name='data[stime]' value="<{$detail.stime|default='0'}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"   class="text w-200" />~
+       
+        <input type="text" name='data[ltime]' value="<{$detail.ltime|default='0'}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"   class="text w-200" />
+      </td>
+    </tr>
+  
+    <tr>
+      <th class="alginRt w-200"> 目标窗口 </th>
+      <td><select name="data[target]" class="text w-200">
+          <option  value="_self" 
+          <if condition="_self eq $target"> selected="selected" </if>
+          >本窗口
+          </option>
+          <option  value="_blank" 
+          <if condition="_blank eq $target"> selected="selected" </if>
+          >新窗口
+          </option>
+        </select></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-100"> 审核 </th>
+      <td><label class="radio"> <input type="radio" name="data[audit]" value="1" 
+          <if condition="$detail.audit neq 0"> checked="checked" </if>
+          >
+          审核</label>
+        <label class="radio"> <input type="radio" name="data[audit]" value="0" 
+          <if condition="$detail.audit eq 0"> checked="checked" </if>
+          >
+          待审</label></td>
+    </tr>
+     
+    <tr>
+      <th class="alginRt w-100"> 排序 </th>
+      <td><input type="text" name="data[orderby]" value="<{$detail.orderby|default=''}>" class="text w-200"  /></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-100" style="z-index:1000"> </th>
+      <td><input type="submit" value="编辑推荐" class="pub_btn" /></td>
+    </tr>
+  </table>
+  </div>
+</form>
+<include  file='public:footer'/> 
+

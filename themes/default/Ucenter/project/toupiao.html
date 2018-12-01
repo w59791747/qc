@@ -1,0 +1,26 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">投票</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+<div class="tpiaoText">
+  <p><span class="black9">项目标题：</span><a href="<{:U('mobile/project/detail',array('project_id'=>$var[project_id]))}>"><{$project.title}></a></p>
+  <p><span class="black9">筹资金额：</span>￥<{$project[fund_raising]/100}></p>
+  <p><span class="black9">出售支付定金：</span>￥<{$chushou[dingjin]/100}></p>
+  <p><span class="black9">出售价格：</span>￥<{$chushou[amount]/100}></p>
+</div>
+<div class="zcVote clearfix">
+  <div class="zcVoteList fl"> <p><{$zancheng}>票</p><a class="btn"  mini='act' href="<{:U('project/toupiao',array('project_id'=>$project['project_id'],'status'=>'1'))}>">赞成</a> </div>
+  <div class="zcVoteList fr"><p><{$fandui}>票</p><a class="btn nobtn"  mini='act' href="<{:U('project/toupiao',array('project_id'=>$project['project_id'],'status'=>'-1'))}>">不赞成</a> </div>
+</div>
+<div class="tpiaoText">
+  <p class="pointcl">注:</p>
+  <p> 1.投票结果采取少数服从多数的原则,赞成(或不赞成)投票人数超过众筹总人数的<{$project.tpbfb}>%即视为当次投票通过(或未通过) </p>
+  <p>2.众筹人在投票截止日期到期之后仍未参与投票的,系统将默认判定其为投"赞成"票,该投票截止时间：<{$project.toultime|date='Y-m-d H:i:s',###}></p>
+</div>
+<include file="public:footersmall"/> 

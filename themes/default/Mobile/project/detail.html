@@ -1,0 +1,269 @@
+<include file="public:header" /> <include file="public:top" />
+<section class="contentWrapper">
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title"><{$project['title']}></div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_center_box">
+<div class="zcDetail_top">
+  <div class="qczcImg"> 
+    <img alt="<{$project.title}>" src="__ATTACHS__/<{$project.project_photo|default=$CONFIG['attachs'][crowd_img]}>">
+    <if condition="$project['status'] eq 5 || $project['status'] eq -2">
+      <div class="detail_shou_box">
+          <span class="detail_shou_box_list">万元收益：<{$project[shouyi][shouyi]|ceil}>元</span>
+          <span class="detail_shou_box_list">回款周期：<{$project[shouyi][days]}>天</span>
+          <span class="detail_shou_box_list">年化收益：<?php echo ceil($project[shouyi][shouyi]*365/$project[shouyi][days])/100;?>%</span>
+      </div>   
+    </if>
+  </div>
+  <div class="text">
+    <h1><{$project.title}></h1>
+    <p class="clearfix">      
+      <span class="fl"><font class="black6">目标</font><big class="pointcl">￥<{:zhu_int($project[fund_raising]/100)}></big></span>
+      <span class="fr"><font class="black6">已筹</font><big class="pointcl">￥<{$project[have_price]/100}></big></span>
+    </p>
+    <div class="jindu qcjindu">
+      <div class="lineJindu">
+        <div class="lineJindu_line" w="<{$project[have_price]/$project[fund_raising]*100|ceil}>"></div>
+      </div>
+    </div>
+    <div class="cardetail_li clearfix">
+      <span class="tal black6 fl">
+        状态：
+        <if condition="$project['status'] eq 1">
+          众筹中
+        <else/>
+          <{$status_list[$project[status]]}>
+        </if>
+      </span>
+      <span class="tar black6 fr">
+        达成：<{:zc_int($project[have_price]/$project[fund_raising]*100)}>%
+      </span> 
+    </div>
+    <div class="cardetail_list">
+      <ul>
+        <li><{$project.have_num|default='0'}>次<span>投资人数</span></li>
+        <li><{$time/3600/24|ceil}>天<span>剩余时间</span></li>
+        <li><{$project[chi_days]}>天<span>持有期限</span></li>
+        <li>￥<{:zhu_int($project[fund_raising]/100*$project[max_price]/100)}><span>最大额度</span></li>
+        <li>￥<{:zhu_int($project[min_price])}><span>最小额度</span></li>
+        <li>￥<{:zhu_int($project[fund_raising]/100-$project[have_price]/100)}><span>剩余可投</span></li>
+      </ul>
+      <div class="h_50 fenge"></div>
+      <div class="l_33 fenge"></div>
+      <div class="l_66 fenge"></div>
+    </div>
+  </div>
+</div>
+
+<div class="zcDetail_left_box">
+  <div class="zcDetail_title clearfix">
+    <ul>
+      <li> <a href="javascript:void(0)" >详情</a> </li>
+      <li> <a href="javascript:void(0)" >已投</a> </li>
+      <!-- <li> <a href="javascript:void(0)" >合同</a> </li> -->
+      <li> <a href="javascript:void(0)" >投票</a> </li>
+      <li> <a href="javascript:void(0)" >评价</a> </li>
+    </ul>
+  </div>
+  <div class="zcDetail_cont"> 
+    <!--项目详情start-->
+    <div class="section"> 
+      <!--未登录提醒样式-->
+      <if condition="empty($MEMBER)">
+        <div class="weiLogin"><i class="iconfont icon-suoding"></i><span>您好，请<a href="<{:U('mobile/passport/login')}>" class="fontcl"> 登录</a> 后查看！</span></div>
+        <else/>
+        <div class="qcdeIntro article"> <{$project.content}> 
+        </div>
+      </if>
+    </div>
+    <!--项目详情end--> 
+    <!--众筹记录start-->
+    <div class="section">
+      <if condition="empty($MEMBER)">
+        <div class="weiLogin"><i class="iconfont icon-suoding"></i><span>您好，请<a href="<{:U('mobile/passport/login')}>" class="fontcl"> 登录</a> 后查看！</span></div>
+        <else/>
+        <div id="list_4"></div>
+        <div class="propage clearfix">
+          <ul>
+            <foreach name='list_arr' key='key' item='val'>
+              <li onclick="getzhichi(<{$val}>)"><{$val}></li>
+            </foreach>
+          </ul>
+        </div>
+      </if>
+    </div>
+    <!--众筹记录end--> 
+     <!--合同样本start-->
+    <!-- <div class="section">
+      <if condition="empty($MEMBER)">
+        <div class="weiLogin"><i class="iconfont icon-suoding"></i><span>您好，请<a href="<{:U('mobile/passport/login')}>" class="fontcl"> 登录</a> 后查看！</span></div>
+        <else/>
+        <div class="htyb">
+        <{$project.hetong}>
+        </div>
+      </if>
+    </div> -->
+    <!--合同样本end--> 
+    <!--我要投票start-->
+    <div class="section">
+      <if condition="empty($MEMBER)">
+        <div class="weiLogin"><i class="iconfont icon-suoding"></i><span>您好，请<a href="<{:U('mobile/passport/login')}>" class="fontcl"> 登录</a> 后查看！</span></div>
+        <elseif condition="$project[status] lt 3"/>
+        <div class="weiLogin"><i class="iconfont icon-toupiao"></i><span>您好，该项目还未开始投票！</span></div>
+        <else/>
+        <div class="zcVote">
+        <div class="clearfix">
+          <div class="zcVoteList fl">
+            <if condition="$project[status] gt 3"> <a class="btn"><i class="iconfont icon-dianzan"></i></a>
+              <else/>
+              <a class="btn"  mini='act' href="<{:U('project/toupiao',array('project_id'=>$project['project_id'],'status'=>'1'))}>"><i class="iconfont icon-dianzan"></i></a> </if>
+            <p><{$zancheng}>人赞成</p>
+          </div>
+          <div class="zcVoteList fr">
+            <if condition="$project[status] gt 3"> <a class="btn nobtn"><i class="iconfont icon-dianzan"></i></a>
+              <else/>
+              <a class="btn nobtn"  mini='act' href="<{:U('project/toupiao',array('project_id'=>$project['project_id'],'status'=>'-1'))}>"><i class="iconfont icon-dianzan"></i></a> </if>
+            <p><{$fandui}>人反对</p>
+          </div>
+          </div>
+          <div class="zhu">
+            <p> 1、投票结果采取少数服从多数的原则，赞成(或不赞成)投票人数超过众筹总人数的<{$project.tpbfb}>%即视为当次投票通过(或未通过) </p>
+            <p>2、众筹人在投票截止日期到期之后仍未参与投票的，系统将默认判定其为投“赞成”票，该投票截止时间：<{$project.toultime|date='Y-m-d H:i:s',###}></p>
+          </div>
+        </div>
+      </if>
+    </div>
+    <!--我要投票end--> <!--评价管理start-->
+    
+    <div class="section">
+      <if condition="empty($MEMBER)">
+        <div class="weiLogin"><i class="iconfont icon-suoding"></i><span>您好，请<a href="<{:U('mobile/passport/login')}>" class="fontcl"> 登录</a> 后查看！</span></div>
+        <else/>
+        <?php if($CONFIG['comment']['project_comments'] == 2){ ?>
+        <script type="text/javascript">
+
+			(function(){
+			var url = 'http://widget.weibo.com/distribution/comments.php?width=0&url=auto&border=1&brandline=y&appkey=appkey1&dpc=1';
+			url = url.replace("url=auto", "url=" + encodeURIComponent(document.URL)); 
+			url = url.replace("appkey1", '<{$CONFIG[connect][wb_app_id]}>');
+
+			document.write('<iframe id="WBCommentFrame" src="' + url + '" scrolling="no" frameborder="0" style="width:100%"></iframe>');
+			})();
+			</script> 
+        <script src="http://tjs.sjs.sinajs.cn/open/widget/js/widget/comment.js" type="text/javascript" charset="utf-8"></script> 
+        <script type="text/javascript">
+			window.WBComment.init({
+				"id": "WBCommentFrame"
+			});
+			</script>
+        <?php }elseif($CONFIG['comment']['project_comments'] == 1){ ?>
+        <div class="commentBox clearfix">
+          <form  method="post"  action="<{:U('project/comments',array('project_id'=>$project[project_id]))}>"  target="chuang_frm">
+            <div class="comment_tx"> <img alt="<{$MEMBER[name]}>" src="__ATTACHS__/<{$MEMBER.face|default='default.jpg'}>">
+            </div>
+            <div class="comment_cont">
+              <div class="star">
+                <input type="radio" id="rate5-1" name="rating" value="5">
+                <label for="rate5-1" title="Amazing">5 stars</label>
+                <input type="radio" id="rate4-1" name="rating" value="4">
+                <label for="rate4-1" title="Very good">4 stars</label>
+                <input type="radio" id="rate3-1" name="rating" value="3">
+                <label for="rate3-1" title="Average">3 stars</label>
+                <input type="radio" id="rate2-1" name="rating" value="2">
+                <label for="rate2-1" title="Not good">2 stars</label>
+                <input type="radio" id="rate1-1" name="rating" value="1">
+                <label for="rate1-1" title="Terrible">1 star</label>
+              </div>
+              <textarea name='data[content]' placeholder="输入您想要跟大家交流的内容~"></textarea>
+              <!--未登录时用灰色按钮，登录后用蓝色按钮（去掉graybtn即可）-->
+              <div class="comment_button clearfix">
+                <if condition="$MEMBER  eq ''">
+                  <div class="flt black6">请登录后提问，立即 <a href="<{:U('passport/login')}>" class="fontcl1">登录</a> 或 <a href="<{:U('passport/reg')}>" class="fontcl1"> 注册 </a></div>
+                  <div class="frt"> <a  class="btn graybtn">发布</a> </div>
+                  <else/>
+                  <div class="frt">
+                    <input type="submit" value="发布"  class="btn" />
+                  </div>
+                </if>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div id="list_3"></div>
+        <div class="propage clearfix">
+          <ul>
+            <foreach name='comment_arr' key='key' item='val'>
+              <li onclick="getcomment(<{$val}>)"><{$val}></li>
+            </foreach>
+          </ul>
+        </div>
+        <?php } ?>
+      </if>
+    </div>
+    <!--评价管理end--> 
+  </div>
+</div>
+<script type="text/javascript">
+	$(".zcDetail_left_box .zcDetail_title ul li").click(function () {
+		var index = $(this).index();
+		$(".zcDetail_left_box .zcDetail_title ul li").each(function (a) {
+			if (a == index) {
+				$(this).find('a').addClass('current');
+				$('.zcDetail_left_box .zcDetail_cont').find('.section').eq(a).fadeIn(100);
+			} else {
+				$(this).find('a').removeClass('current');
+				$('.zcDetail_left_box .zcDetail_cont').find('.section').eq(a).fadeOut(0);
+			}
+		})
+	});
+	$(".zcDetail_left_box .zcDetail_title ul li").eq(0).click();
+</script> 
+<script>
+  	function pay(){
+		var link = "<{:U('project/zhichi',array('money'=>'123money','project_id'=>$project[project_id]))}>";
+		var money = $('#money').val();
+		var minm = parseInt('<{$project[min_price]}>');
+		var maxm = parseInt('<{$project[fund_raising]/100*$project[max_price]/100}>');
+		var shengyu = parseInt('<{$project[fund_raising]/100-$project[have_price]/100}>');
+		var uid = '<{$MEMBER[uid]}>';
+		if(!isNaN(money) && money>0){
+			if(money < minm){
+				parent.bmsg("不能小于最小金额","",3000);		
+			}else if(money > maxm){
+				parent.bmsg("不能大于最大金额","",3000);		
+			}else if(money > shengyu){
+				parent.bmsg("不能超过剩余金额","",3000);		
+			}else if(!uid){
+				parent.bmsg("请先登录","<{:U('passport/login')}>",3000);		
+			}else{
+				window.location = link.replace('123money',money);
+			}
+		}else{
+			parent.bmsg("金额不合法","",3000);
+		}
+	}
+	
+	
+	
+	function getzhichi(p){
+		var link = "<{:U('project/zhichi_list',array('project_id'=>$project[project_id],'p'=>'page'))}>";
+		$("#list_4").load(link.replace("page",p));
+	}
+	
+	
+	
+	function getcomment(p){
+		var link = "<{:U('project/comment_list',array('project_id'=>$project[project_id],'p'=>'page'))}>";
+		$("#list_3").load(link.replace("page",p));
+	}
+	//头部标题定位效果
+	(function(K, $){  
+		getzhichi(1);
+		getcomment(1);
+	})(window.KT, window.jQuery)  
+	
+  </script> 
+<include file="public:detaile_footer" /> 

@@ -1,0 +1,40 @@
+<div class="theme-poptit"><span>修改广告位</span> <a href="javascript:;" title="关闭" class="close">×</a> </div>
+						<div class="theme_popover_table">
+                          <form  target="zhuchuang_frm" action="<{:U('adv/edit',array('adv_id'=>$detail['adv_id']))}>" method="post">
+							<table class="table_data" cellpadding="0" cellspacing="0">
+                            
+                            <tr>
+                                <th class="alginRt w-100"> <font class="pointcl">*</font> 标题 </th>
+                                <td>
+                                    <input type="text" name="data[title]" value="<{$detail.title|default=''}>" class="text w-200" />
+                                </td>
+                              </tr>
+                            <tr>
+                          <th class="alginRt w-100">  审核 </th>
+                            <td>
+                            
+                                <label class="radio">
+                                <input type="radio" name="data[audit]" value="1" <if condition="$detail.audit neq 0"> checked="checked" </if>>
+                                审核</label>
+                              <label class="radio">
+                                <input type="radio" name="data[audit]" value="0" <if condition="$detail.audit eq 0"> checked="checked" </if>>
+                                待审</label>
+                            </td>
+                           </tr>
+                          <tr>
+                            <th class="alginRt w-100"> 排序 </th>
+                            <td>
+                           <input type="text" name="data[orderby]" value="<{$detail.orderby|default=''}>" class="text w-200"  />
+                            </td>
+                          </tr>
+                           
+                         
+                           <tr>
+                                <th class="alginRt w-100"> </th>
+                                <td>
+                                <input type="submit" value="修改广告位" class="pub_btn" />
+                                </td>
+                              </tr>
+                          </table>
+						</div>
+

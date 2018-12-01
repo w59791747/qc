@@ -1,0 +1,59 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+  <header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">资金充值</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box"> 
+<div class="introForm">
+  <form method="post"  action="<{:U('ucenter/member/pricepay')}>"  target="chuang_frm">
+    <div class="regGroup">
+      <label class="title">充值金额</label>
+      <div class="control_txt">
+        <if condition="$order">
+          <input readonly="readonly"  type="hidden" name="data[order_id]"  value="<{$order[order_id]}>" />
+          <input readonly="readonly"  type="text" name="data[number]"  value="<{$order[amount]/100}>" class="text" />
+          <else/>
+          <input  type="text" name="data[number]"  value="<{$order[amount]/100}>" class="text" />
+        </if>
+      </div>
+    </div>
+    <div class="regGroup">
+      <label class="imgLabel">支付方式</label>
+      
+        <foreach name="payment" item="var">
+        <if  condition="$var['is_open'] eq 1 && $var['is_mobile_only'] eq 1 && $var['code'] neq 'money'">
+           
+             <label>
+             <div class="payfs">
+             
+             
+                <input class="radio" class="pay_int" value="<{$var.code}>" name="data[code]" type="radio" />
+                <img src="__PUBLIC__/images/<{$var.logo}>" />
+             
+               </div> </label>
+          </if>
+        </foreach>
+      
+    </div>
+    <div class="regGroup">
+     
+        <input type="submit" class="btn" value="确认充值">
+    
+    </div>
+  </form>
+</div>
+<script>
+$(document).ready(function(){
+	$('.control_txt .payfs').click(function(){
+		$('.control_txt .payfs').removeClass('current');
+		$(this).addClass('current');
+	});
+});
+</script> 
+
+</section>
+<include file="public:footersmall"/>

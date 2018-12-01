@@ -1,0 +1,63 @@
+<include file="public:header"/>
+
+<div class="uc_mid_r yitou_list">
+			<ul class="cz_tit">
+				<li><a href="<{:U('member/set/passwd')}>">修改密码</a></li>
+				<li ><a href="<{:U('member/set/renzheng')}>">账号认证</a></li>
+				<li><a href="<{:U('member/set/pwd')}>">支付密码</a></li>
+				<li class="cz_cur"><a href="<{:U('member/set/card')}>">绑定银行卡</a></li>
+				<li><a href="<{:U('member/set/adress')}>">收货地址</a></li>
+			</ul>
+			<div class="xgzl">
+            <form method="post"  action="<{:U('set/card_create')}>"  target="chuang_frm">
+            <ul class="cz_tit cz_tit_card">
+             <li  onclick="change('duisi',this)" style="background: #59B844;color: #ffffff">对私</li>
+            	<li  onclick="change('duigong',this)" value="duigong">对公</li></ul>
+               
+				<p id='duisi'><span>开户银行</span>
+				 <select name="data[bank]" class="text cre_card_sle">
+                 	<foreach name="bank" key='key' item="var">
+                        	<option  value="<{$var}>"  class="text mima_box" ><{$var}></option>
+                    </foreach>
+                  </select>
+				
+				</p>
+                <p id='duigong' style="display:none;"><span>开户银行</span>
+                
+               
+                 <select name="data[code]" class="text cre_card_sle">
+                 	<foreach name="bank" key='key' item="var">
+                        	<option  value="<{$key}>"  class="text mima_box" ><{$var}></option>
+                    </foreach>
+                  </select>
+                </p>
+				<p id='duigong2' style="display:none;"><span>城市编码</span><input type="text" name="data[city]" class="mima_box" /></p>
+				<p><span>开户账号</span><input type="text" name="data[card]" class="mima_box" /></p>
+				
+				<p id='duigong3' style="display:none;"><span>具体支行</span><input type="text" name="data[zhihang]" class="mima_box" /></p>
+				<p><span>开户名称</span><input type="text" name="data[name]" class="mima_box" /></p>
+                <input type="submit" class="cz_but" value="添加银行卡">
+            </form>
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+<script>
+	function change(val,obj){
+		$('.uc_mid_r .cz_tit_card li').css({border:'1px solid #59B844',background:'#ffffff',color:'#59B844'});
+		$(obj).css({background:'#59B844',color:'#ffffff'});
+		if(val == 'duisi'){
+			$("#duisi").css('display','block');
+			$("#duigong").css('display','none');
+			$("#duigong2").css('display','none');
+			$("#duigong3").css('display','none');
+		}else{
+			$("#duisi").css('display','none');
+			$("#duigong").css('display','block');
+			$("#duigong2").css('display','block');
+			$("#duigong3").css('display','block');
+		}
+	}
+</script>
+<include file="public:footer"/>

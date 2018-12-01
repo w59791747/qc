@@ -1,0 +1,21 @@
+<include file="public:header" /><include file="public:top" />
+<section class="contentWrapper">
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">帮助中心</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_center_box">
+<div class="help_list">
+  <ul>
+    <foreach name='list' item='item'>
+      <li class="clearfix"> <a href="<{:U('help/detail',array('article_id'=>$item[article_id]))}>"><{$item.title}></a> <span class="black9"><{$item.dateline|date="Y-m-d",###}></span> </li>
+    </foreach>
+  </ul>
+</div>
+<!--分页-->
+<?php if(strlen($page) > 12){?>
+<div class="page"> <{$page}> </div>
+<?php } ?>
+<include file="public:footer" /> 

@@ -1,0 +1,81 @@
+<include file="public:header" /><include file="public:top" />
+</div>
+</div>
+
+<div class="tjdd">
+  <div class="zorderWrap">
+    <h1><{$product['title']}></h1>
+    <div class="step1">
+      <ul class="steptit qdzf1">
+        <li>提交订单</li>
+        <li class="cur_step">确认支付信息</li>
+        <li>支付成功</li>
+      </ul>
+      <ul class="stepzf">
+        <li class="cur_zf">支付订单</li>
+      </ul>
+      <div class="zf_wrap">
+      <form method="post"  action="<{:U('product/payment')}>" target="chuang_frm">
+          <div class="xregGroup clearfix">
+            <label>购买商品：</label>
+            <div class="control_txt"> <span class="fujf"><{$product['title']}></span> </div>
+          </div>
+          <div class="xregGroup clearfix">
+            <label>购买数量：</label>
+            <div class="control_txt"> <span class="fujf"><{$detail['num']}></span><small class="ml5 black9">件</small> </div>
+          </div>
+          <div class="xregGroup clearfix">
+            <label>支付积分：</label>
+            <div class="control_txt"> <span class="fuje pointcl"><{$detail['amount']}></span><small class="ml5 pointcl">积分</small> </div>
+          </div>
+          <input type="hidden" name="data[order_id]" value="<{$order_id}>" />
+          <div class="xregGroup clearfix">
+            <label></label>
+            <div class="control_txt">
+              <input type="submit" class="btn" value="立刻支付">
+            </div>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	//选择其它支持项
+	$('.otherZfx a').click(function(){
+		$('.zorderAll_support').slideToggle();
+	
+	
+	
+	});
+	//input框获得焦点
+	$('.yzmdl_box input').focus(function(){
+ 		 $(this).addClass('focus'); 
+	  });
+	  	$('.yzmdl_box input').blur(function(){
+ 		 $(this).removeClass('focus'); 
+	  });
+	  
+	//数量加减
+	$("[quantity]").click(function(){
+	var quantity = parseInt($("#cart_product_num").val(), 10);
+	if($(this).attr("quantity") == '+'){
+		quantity += 1;
+	}else{
+		quantity -= 1;
+	}
+	if(quantity < 1){
+		quantity = 1;
+	}
+	$("#cart_product_num").val(quantity);
+	$("#price").html('￥'+quantity*<{$type_find[price]/100}>);
+	});
+});
+
+$(function () {
+	var quantity = parseInt($("#cart_product_num").val(), 10);
+	$("#price").html('￥'+quantity*<{$type_find[price]/100}>);
+});
+</script> 
+<include file="public:footer" /> 

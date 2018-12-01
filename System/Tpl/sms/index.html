@@ -1,0 +1,69 @@
+<include  file='public:header'/>
+
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>设置</span><i></i><span>模版管理</span><i></i><span>短信模版</span>
+           
+            </div>
+            <div class="frt breadNav_other">
+           
+                <div class="bn_input theme-pop-btn">
+                
+                   <div class="bn_input"> <{:ROLE('sms/create','','添加内容','','pub_btn')}></div>
+                </div>
+            <div class="clear"></div>
+          </div>
+          </div>
+		<form target="zhuchuang_frm" method="post">
+             <div class="daemonTable">
+              <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+                  <tr>
+                	<th class="w-100">
+                    序号
+                    </th>
+                    <th class="w-100">标题</th>
+                    <th>标签</th>
+                    <th>模版</th>
+                    <th class="w-80">是否开启</th>
+                    <th class="w-150">
+                    操作
+                    </th>
+                </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            
+                            <td><label class="checkbox"><input class="child_sms_id" type="checkbox" name="sms_id[]" value="<{$var.sms_id}>" /><{$var.sms_id}></label></td>
+                            <td class="wsNormal"><{$var.title}></td>
+                            <td><{$var.sms_key}></td>
+                            <td class="wsNormal"><{$var.sms_tmpl}></td>
+                            <td><eq name="var.is_open" value="1" >是<else/>否</eq></td>
+                            <td>
+                                <{:ROLE('sms/edit',array("sms_id"=>$var["sms_id"]),'编辑','','pub_btn')}>
+                                <eq name="var.is_open" value="0"> <{:ROLE('sms/audit',array("sms_id"=>$var["sms_id"]),'开启','act','pub_btn')}> 
+                        <else />
+                        <{:ROLE('sms/delete',array("sms_id"=>$var["sms_id"]),'关闭','act','pub_btn grayBtn')}>
+                        </eq>
+
+                        </td>
+                        </tr>
+                    </foreach>
+
+                </table>
+           </div>
+              <div class="daemonBot">
+                <div class="flt daemonBot_cz">
+                 <label class="checkbox"><input type="checkbox" class="checkAll" rel="sms_id">全选</label>
+                 
+                    <{:ROLE('sms/audit','','批量开启','list','pub_btn')}>
+              		<{:ROLE('sms/delete','','批量关闭','list','pub_btn grayBtn')}>
+                </div>
+                <div class="frt daemonPage">
+                   <{$page}>
+                </div>
+                <div class="clear"></div>
+              </div>
+          </div>    
+          
+
+<include  file='public:footer'/>

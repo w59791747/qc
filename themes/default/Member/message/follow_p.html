@@ -1,0 +1,46 @@
+<include file="public:header"/>
+<div class="uc_mid_r yitou_list">
+		
+			<div class="select_yitou">
+				<form method="post"  action="<{:U('message/follow_p')}>">
+                    <span>请选择时间：</span>
+                    <input  name = 'stime' value="<{$stime}>" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"/><span>到</span><input name = 'ltime' type="text" value="<{$ltime}>"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+                    <input class="queding sy_queding" type="submit" value="确定" />
+                 </form>
+			</div>
+             <if condition="$list">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				 <tbody>
+					<tr>
+						<th width="10%">ID</th>
+						<th width="35%">关注项目</th>
+						<th width="30%">关注时间</th>	
+						<th width="25%">操作</th>
+					</tr>
+								 
+					<foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.follow_id}></td>
+                            <td><a target="_blank" href="<{:U('home/project/detail',array('project_id'=>$var['project']))}>"><{$projectlist[$var[project]][title]}></a></td>
+                           
+                            <td><{$var.dateline|date="Y-m-d H:i:s",###}></td>
+                            <td>
+                            <a target="chuang_frm" class="quxiao" mini="confirm" href="<{:U('message/deletefollow_p',array('follow_id'=>$var['follow_id']))}>">取消关注</a>
+                            </td>
+                        </tr>
+                    </foreach>
+				</tbody>
+			</table>
+			<else/>
+			<div class="yitou_none">
+				<img src="__TMPL__statics/images/member/jilu_none.jpg" alt="暂时没有记录" title="暂时没有记录" />
+			</div>
+            </if>
+				<div class="select_page us_center"><{$page}></div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+<include file="public:footer"/>

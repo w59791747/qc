@@ -1,0 +1,105 @@
+<include file="public:header" /><include file="public:top" />
+</div>
+</div>
+
+<div class="item_search">
+  <div class="search_wrap">
+    <div class="bread_nav">您的位置：<a href="<{:U('/index')}>">首页</a>&nbsp;/&nbsp;<a href="<{:U('/product')}>">积分商城</a></div>
+    <div class="searchlist">
+      <ul>
+        <li>所有类别：</li>
+        <li> <a 
+        
+        
+        
+        
+          
+          <if condition="$cate eq 0"> class="mr_style" </if>
+          href="<{:U('product/index',array('cate'=>0,'fanwei'=>$fanwei,'order'=>$order))}>"><i></i>全部</a></li>
+        <foreach name='catelist' key='key' item='val'>
+          <li><a  
+          
+          
+          
+          
+            
+            <if condition="$cate eq $val[cate_id]"> class="mr_style" </if>
+            href="<{:U('product/index',array('cate'=>$val[cate_id],'fanwei'=>$fanwei,'order'=>$order))}>"><i></i><{$val.cate_name}></a></li>
+        </foreach>
+      </ul>
+      <ul>
+        <li>积分范围：</li>
+        <li> <a 
+        
+        
+        
+        
+          
+          <if condition="$fanwei eq 0"> class="mr_style" </if>
+          href="<{:U('product/index',array('cate'=>$cate,'fanwei'=>0,'order'=>$order))}>"><i></i>全部</a></li>
+        <foreach name='fanwei_arr' key='key' item='val'>
+          <li> <a  
+          
+          
+          
+          
+            
+            <if condition="$fanwei eq $key"> class="mr_style" </if>
+            href="<{:U('product/index',array('cate'=>$cate,'fanwei'=>$key,'order'=>$order))}>"><i></i><{$val}></a></li>
+        </foreach>
+      </ul>
+      <ul style="border:none">
+        <li>项目排序：</li>
+        <li> <a 
+      
+        
+        
+        
+        
+          
+          <if condition="$order eq 1"> class="mr_style"</if>
+          href="<{:U('product/index',array('cate'=>$cate,'fanwei'=>$fanwei,'order'=>1))}>">最热排行</a> </li>
+        <li><a 
+
+      
+        
+        
+        
+        
+          
+          <if condition="$order eq 2"> class="mr_style"</if>
+          href="<{:U('product/index',array('cate'=>$cate,'fanwei'=>$fanwei,'order'=>2))}>">最新上线</a> </li>
+        <li><a 
+          
+      
+        
+        
+        
+        
+          
+          <if condition="$order eq 3"> class="mr_style"</if>
+          href="<{:U('product/index',array('cate'=>$cate,'fanwei'=>$fanwei,'order'=>3))}>">积分排序</a> </li>
+      </ul>
+      <div style="clear:both"> </div>
+    </div>
+  </div>
+</div>
+<div class="itemwrap">
+  <div class="itemlist">
+    <div class="prin_allpro">
+      <ul class="infos gy_infos">
+        <foreach name='list' key='key' item='item'>
+          <li class="item-li opacity jifen-li"> <a href="<{:U('product/detail',array('product_id'=>$item['product_id']))}>" class="item-a"><img alt="" src="__ATTACHS__/<{$item.photo|default='default.jpg'}>"/> </a>
+            <h3 class="item-title"><a href="<{:U('product/detail',array('product_id'=>$item['product_id']))}>"><{$item['title']}></a> </h3>
+            <div class="p-items">
+              <div class="p-target"> <span class="p-title"> 所需积分</span><span class="num pointcl"><{$item['jifen']}></span> <span class="line"></span> </div>
+              <div class="p-extra"> <span class="p-title"> 累计购买</span><span class="num"><{$item['buys']}></span> </div>
+            </div>
+          </li>
+        </foreach>
+      </ul>
+    </div>
+    <div class="pages"><{$page}></div>
+  </div>
+</div>
+<include file="public:footer" />

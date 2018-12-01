@@ -1,0 +1,31 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<include file="public:top"/>
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">银行卡管理</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+  <div class="addShdz">
+    <ul class="menu_dl menu_detail_dl">
+      <li><a href="<{:U('set/card_create')}>"><em>+</em>添加银行卡</a></li>
+    </ul>
+  </div>
+  <form method="post"   target="chuang_frm">
+    <foreach name="list" item="var">
+      <div class="ucenter_entry">
+        <div class="idTit"><span class="fl">持卡人姓名：<{$var.name}></span><span class="fr black9"><{$var.dateline|date="Y-m-d H:i:s",###}></span> </div>
+        <div class="entrycont">
+          <p><span class="black9">银行卡号：</span><{:cardstr($var[card])}></p>
+          <p><span class="black9">银行名称：</span><{$var.bank}></p>
+          <p><span class="black9">银行支行：</span><{$var.zhihang}></p>
+        </div>
+        <div class="entryBtn"><a target="chuang_frm" class="btn deleteBtn" mini="confirm" href="<{:U('set/card_delete',array('card_id'=>$var['card_id']))}>">删除</a></div>
+      </div>
+    </foreach>
+  </form>
+  <div class="page"> <{$page}> </div>
+</section>
+<include file="public:footersmall"/> 

@@ -1,0 +1,111 @@
+<include  file='public:header'/>
+<div class="pad">
+<div class="breadNav">
+  <div class="flt breadNav_text"> <span>项目</span><i></i><span>订单管理</span><i></i><span>订单管理</span> </div>
+  <div class="frt breadNav_other">
+    <div class="bn_input theme-pop-btn">
+      <form method="post" action="<{:U('order/index')}>">
+        <div class="bn_input">用户名：
+          <input type="text" name="name" value="<{$name}>" class="text">
+          
+          备注：<input type="text" name="beizhu" value="<{$beizhu}>" class="text">
+          类型：
+          <select name="type" class="text">
+            <option  value="1" 
+              
+            <if condition="1 eq $from"> selected="selected" </if>
+            >全部
+              
+            </option>
+            <foreach name="typelist" key='key' item="val"> <option  value="<{$key}>" 
+                
+              <if condition="$key eq $type"> selected="selected" </if>
+              ><{$val}>
+              </option>
+            </foreach>
+          </select>
+          状态：
+          <select name="status" class="text">
+            <option  value="1" 
+              
+            <if condition="1 eq $status"> selected="selected" </if>
+            >全部
+              
+            </option>
+            <foreach name="statuslist" key='key' item="val"> <option  value="<{$key+3}>" 
+                
+              <if condition="$key+3 eq $status"> selected="selected" </if>
+              ><{$val}>
+              </option>
+            </foreach>
+          </select>
+        </div>
+        <div class="bn_input">
+          <input type="submit" class="pub_btn" value="搜索">
+          <{:ROLE('order/dayin',array("name"=>$name,"type"=>$type,"status"=>$status),'打印','pub_btn','pub_btn dyaniu')}>
+        </div>
+      </form>
+      <div class="bn_input"></div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<form target="zhuchuang_frm" method="post">
+<div class="daemonTable">
+  <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+    <tr>
+      <th> 订单ID </th>
+      <th> 订单号 </th>
+      <th> 用户ID </th>
+      <th> 类型 </th>
+      <th> 支付方式 </th>
+      <th> 总金额 </th>
+            <th> 备注 </th>
+
+      <th> 支付状态 </th>
+      <th> 支付时间 </th>
+      <th> 操作  </th>
+    </tr>
+    <foreach name="list" item="var">
+      <tr>
+        <td class="w-50"><label class="checkbox">
+            <input class="child_order_id" type="checkbox" name="order_id[]" value="<{$var.order_id}>" />
+            <{$var.order_id}></label></td>
+        <td width="100"><{$var.order_no}></td>
+        <td width="100"><{$memberlist[$var['uid']]['name']}>【<a class="linkcl" target="main_frm" href="<{:U('member/index',array('uid'=>$var['uid']))}>" >UID:<{$var.uid}></a>】</td>
+        <td ><{$typelist[$var[type]]}><{$var['payment']}></td>
+        <td >
+         <if condition="$var[log]['payment'] eq bank">银行卡支付<elseif condition="$var[log]['payment'] eq alipay"/>支付宝支付<elseif condition="$var[log]['payment'] eq wxpay"/>微信支付<else/>
+        <{$payment[$var[log]['payment']][name]}></if></td>
+        <td >￥<{$var.amount}></td>
+                <td ><{$var.note}></td>
+
+        <td ><{$statuslist[$var[pay_status]]}></td>
+        <td >
+		 <if condition="$var[log]['payedtime']">
+		<{$var[log]['payedtime']|date="Y-m-d H:i:s",###}>
+		<else/>
+			暂无
+		</if>
+		</td>
+        
+        <td class="w-200">
+        <if condition="0 eq $var[pay_status] && $var[log]['payment'] neq money && $var[note]">
+        <{:ROLE('order/audit',array("order_id"=>$var["order_id"]),'审核','act','pub_btn')}>
+        </if>
+        <{:ROLE('order/delete',array("order_id"=>$var["order_id"]),'删除','act','pub_btn grayBtn')}> </td>
+      </tr>
+    </foreach>
+  </table>
+</div>
+<div class="daemonBot">
+  <div class="flt daemonBot_cz">
+    <label class="checkbox">
+      <input type="checkbox" class="checkAll" rel="order_id">
+      全选</label>
+    <{:ROLE('order/delete','','批量删除','list','pub_btn grayBtn')}> </div>
+  <div class="frt daemonPage"> <{$page}> </div>
+  <div class="clear"></div>
+</div>
+</div>
+<include  file='public:footer'/> 

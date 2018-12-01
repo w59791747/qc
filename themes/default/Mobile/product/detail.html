@@ -1,0 +1,73 @@
+<include file="public:header" /> <include file="public:top" />
+<script>
+	function check(value){
+		if(value<1){
+			$("#cart_product_num").val('1');
+		}else if(value > <{$detail.store}>){
+			$("#cart_product_num").val('<{$detail.store}>');
+		}
+	}
+
+</script>
+
+<section class="contentWrapper">
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title"><{$detail.title}></div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_center_box">
+<div class="zcDetail_top"> <img alt="" src="__ATTACHS__/<{$detail.photo|default='default.jpg'}>">
+  <div class="text">
+    <h1><{$detail.title}></h1>
+    <div class="cardetail_li clearfix">
+      <span class="tal black6 fl">
+          所需积分：<{$detail.jifen}>分
+      </span>
+    </div>
+    <div class="cardetail_list prodetail_list">
+        <ul>
+          <li><{$detail.freight}>分<span>运费</span></li>
+          <li><{$catelist[$detail[cate_id]][cate_name]}><span>类别</span></li>
+          <li><{$detail.buys}>人<span>已兑换</span></li>
+          <li><{$detail.store}>个<span>库存</span></li>
+        </ul>
+        <div class="h_50 fenge"></div>
+        <div class="l_50 fenge"></div>
+      </div>
+    </div>
+    
+</div>
+<div class="productIntro">
+  <div class="introtitle">商品详情</div>
+  <div class="articleDetail"><div class="article"><{$detail.content}></div>
+</div></div>
+<include file="public:product_footer" />
+
+<script>
+
+$("[quantity]").click(function(){
+var quantity = parseInt($("#cart_product_num").val(), 10);
+if($(this).attr("quantity") == '+'){
+    quantity += 1;
+}else{
+    quantity -= 1;
+}
+if(quantity < 1){
+    quantity = 1;
+}
+
+if(quantity > <{$detail.store}>){
+    quantity = <{$detail.store}>;
+}
+$("#cart_product_num").val(quantity);
+});
+
+function buy()
+{
+	var link = "<{:U('product/buys',array('product_id'=>$detail[product_id],'buys'=>'123buys'))}>";
+	var num = $("#cart_product_num").val();
+	window.location = link.replace("123buys", num);
+}
+</script>

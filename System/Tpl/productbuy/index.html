@@ -1,0 +1,107 @@
+<include  file='public:header'/>
+<div class="pad">
+  <div class="breadNav">
+    <div class="flt breadNav_text"> <span>功能</span><i></i><span>积分商城</span><i></i><span>购买列表</span> </div>
+    <div class="frt breadNav_other">
+      <div class="bn_input theme-pop-btn">
+      <form method="post" action="<{:U('productbuy/index')}>">
+        <div class="bn_input">
+         用户ID：
+        <input type="text" name="uid" value="<{$uid}>" class="text">
+        支付：
+        <select name="payed" class="text">
+        <option value="0">全部</option>
+        
+          <foreach name='zhifu_list' key="key" item="val"> <option  
+            <if condition="$key+2 eq $payed"> selected="selected" </if>
+             value="<{$key+2}>"><{$val}>
+            </option>
+          </foreach>
+         
+        </select>
+        状态：
+        <select name="status" class="text">
+        <option value="0">全部</option>
+        
+          <foreach name='status_list' key="key" item="val"> <option  
+            <if condition="$key+2 eq $status"> selected="selected" </if>
+             value="<{$key+2}>"><{$val}>
+            </option>
+          </foreach>
+        </select>
+        
+        </div>
+        <div class="bn_input">
+        <input type="submit" class="pub_btn" value="搜索">
+        </div>
+      </form>
+      <div class="bn_input"> </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<form target="zhuchuang_frm" method="post">
+<div class="daemonTable">
+  <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+    <tr>
+      <th class="w-100"> 序号 </th>
+      
+      <th>商品</th>
+      <th>用户</th>
+      <th>数量</th>
+      <th>单价</th>
+      <th>总价</th>
+      <th>是否支付</th>
+      <th>是否发货</th>
+      <th>时间</th>
+      <th class="w-200"> 操作 </th>
+    </tr>
+    <foreach name="list" item="var">
+      <tr>
+        <td><label class="checkbox">
+            <input class="child_buy_id" type="checkbox" name="buy_id[]" value="<{$var.buy_id}>" />
+            <{$var.buy_id}></label></td>
+        <td class="wsNormal"><{$productlist[$var[product_id]]['title']}></td>
+        <td><{$memberlist[$var['uid']]['name']}></td>
+        <td><{$var['num']}> </td>
+        <td><{$var.danjia}></td>
+         <td><{$var.amount}></td>
+       
+        <td><if condition="$var.payed eq 0">
+          <span class="red">[未支付]
+          <else/>
+          <span class="green">[已支付]
+          </if>
+          </span></td>
+        
+        
+        <td><if condition="$var.status eq 0">
+          <span class="red">[未发货]
+          <else/>
+          <span class="green">[已发货]
+          </if>
+          </span></td>
+        
+        
+       <td><{$var.dateline|date='Y-m-d H:i:s',###}></td>
+          
+         <td> <{:ROLE('productbuy/detail',array("buy_id"=>$var["buy_id"]),'查看','','pub_btn')}>
+         <{:ROLE('productbuy/delete',array("buy_id"=>$var["buy_id"]),'删除','act','pub_btn grayBtn')}>
+         </td>
+         
+      </tr>
+    </foreach>
+  </table>
+</div>
+<div class="daemonBot">
+  <div class="flt daemonBot_cz">
+    <label class="checkbox">
+      <input type="checkbox" class="checkAll" rel="productbuy_id">
+      全选</label>
+    <{:ROLE('productbuy/delete','','批量删除','list','pub_btn grayBtn')}> </div>
+</div>
+<div class="frt daemonPage"> <{$page}> </div>
+<div class="clear"></div>
+</div>
+</div>
+<include  file='public:footer'/>

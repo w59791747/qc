@@ -1,0 +1,61 @@
+<include  file='public:header'/>
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>设置</span><i></i><span>基本设置</span><i></i><span>评论设置</span>
+            
+            </div>
+          </div>
+		<form target="zhuchuang_frm" action="<{:U('setting/comment')}>" method="post">
+           <div class="daemonTable">
+              	<table class="table_data" cellpadding="0" cellspacing="0">
+                    
+                    <tr>
+                        <th class="alginRt w-200"> 项目评论: </th>
+                        <td class=" ">
+                        	<select class="text w-300" name="data[project_comments]">
+                            	<option  value="0" <eq name="CONFIG.comment.project_comments"  value="0">selected="selected"</eq>>关闭评论</option>
+                                <option value="1" <eq name="CONFIG.comment.project_comments"  value="1">selected="selected"</eq>>站内评论</option>
+                                <option value="2" <eq name="CONFIG.comment.project_comments"  value="2">selected="selected"</eq>>社会化评论框</option>
+                            </select>
+                        </td>
+                    </tr>
+                   
+                   <!-- <tr>
+                        <th class="alginRt w-200"> 孵化基地评论: </th>
+                        <td>
+                        	<select class="text" name="data[hatch_comments]">
+                            	<option  value="0" <eq name="CONFIG.comment.hatch_comments"  value="0">selected="selected"</eq>>关闭评论</option>
+                                <option value="1" <eq name="CONFIG.comment.hatch_comments"  value="1">selected="selected"</eq>>站内评论</option>
+                                <option value="2" <eq name="CONFIG.comment.hatch_comments"  value="2">selected="selected"</eq>>社会化评论框</option>
+                            </select>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th class="alginRt w-200"> 活动评论: </th>
+                        <td>
+                        	<select class="text" name="data[activiy_comments]">
+                            	<option  value="0" <eq name="CONFIG.comment.activiy_comments"  value="0">selected="selected"</eq>>关闭评论</option>
+                                <option value="1" <eq name="CONFIG.comment.activiy_comments"  value="1">selected="selected"</eq>>站内评论</option>
+                                <option value="2" <eq name="CONFIG.comment.activiy_comments"  value="2">selected="selected"</eq>>社会化评论框</option>
+                            </select>
+                        </td>
+                    </tr>-->
+                    
+                 
+                   
+                      <tr>
+                        <th class="alginRt w-100"> </th>
+                        <td>
+                        <input type="submit" value="确认保存" class="pub_btn" />
+                        </td>
+                      </tr>
+                </table>
+           </div>
+        </form>  
+        
+ 
+
+<include  file='public:footer'/>           
+      

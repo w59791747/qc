@@ -1,0 +1,67 @@
+<include  file='public:header'/>
+<div class="pad">
+<div class="breadNav">
+  <div class="flt breadNav_text"> <span>会员</span><i></i><span>会员日志</span><i></i><span>用户提现</span> </div>
+  <div class="frt breadNav_other">
+    <div class="bn_input theme-pop-btn">
+      <form method="post" action="<{:U('memberlog/tixian')}>">
+        <div class="bn_input">用户ID：
+          <input type="text" name="uid" value="<{$uid}>" class="text">
+        </div>
+        <div class="bn_input">
+          <input type="submit" class="pub_btn" value="搜索">
+        </div>
+      </form>
+      <div class="bn_input"></div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<form target="zhuchuang_frm" method="post">
+<div class="daemonTable">
+  <table class="table_data daemon_data" cellpadding="0" cellspacing="0">
+    <tr>
+      <th class="w-100"> 序号 </th>
+      <th class="w-100">用户ID</th>
+      <th class="w-50">金额</th>
+      <th class="w-200">银行</th>
+      <th>支行</th>
+      <th class="w-100">姓名</th>
+      <th class="w-200">卡号</th>
+      <th class="w-200">手续费</th>
+      <th class="w-200">时间</th>
+      <th class="w-200"> 操作 </th>
+    </tr>
+    <foreach name="list" item="var">
+      <tr>
+        <td><{$var.log_id}></td>
+        <td><{$memberlist[$var['uid']]['name']}>【<a class="linkcl" target="main_frm" href="<{:U('member/index',array('uid'=>$var['uid']))}>" >UID:<{$var.uid}></a>】</td>
+        <td><{$var.number}>元</td>
+        <td><{$cardlist[$var[card_id]][bank]}></td>
+        <td><{$cardlist[$var[card_id]][zhihang]}></td>
+        <td><{$cardlist[$var[card_id]][name]}></td>
+        <td><{$cardlist[$var[card_id]][card]}></td>
+        <td><{$var[shouxufei]}>元</td>
+        <td><{$var.dateline|date="Y-m-d H:i:s",###}></td>
+       <if condition="$var[status] eq 2">
+			<td class="w-200">已提现</td>
+        <elseif condition="$var[status] eq -1"/>
+			<td class="w-200">已取消</td>
+		<elseif condition="$var[status] eq -3"/>
+		<td class="w-200">正在处理中</td>
+		<else/>
+        <td class="w-200">
+        <{:ROLE('memberlog/deltixian',array("log_id"=>$var["log_id"]),'取消','load','pub_btn',500,250)}>
+        <{:ROLE('memberlog/queren',array("log_id"=>$var["log_id"]),'提现','load','pub_btn',500,250)}> </td>
+		</if> 
+      </tr>
+    </foreach>
+  </table>
+</div>
+<div class="daemonBot">
+  <div class="flt daemonBot_cz"> </div>
+  <div class="frt daemonPage"> <{$page}> </div>
+  <div class="clear"></div>
+</div>
+</div>
+<include  file='public:footer'/>

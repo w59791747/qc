@@ -1,0 +1,51 @@
+<include  file='public:header'/>
+<div class="pad">
+<div class="breadNav">
+  <div class="flt breadNav_text"> <span>会员</span><i></i><span>收货地址</span><i></i><span>修改收货地址</span> </div>
+</div>
+<form  target="zhuchuang_frm" action="<{:U('memberaddr/edit' ,array('addr_id'=>$detail['addr_id']))}>" method="post">
+  <table class="table_data" cellpadding="0" cellspacing="0">
+    
+    <tr>
+      <th class="alginRt w-100">  用户 </th>
+       <td>
+       	<{$member[name]}>
+       </td>
+      </td>
+    </tr>
+    <tr>
+      <th class="alginRt w-100"> <font class="pointcl">*</font> 联系人 </th>
+      <td><input type="text" name="data[contact]" value="<{$detail.contact|default=''}>" class="text w-200" /></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-100"> <font class="pointcl">*</font> 电话 </th>
+      <td><input type="text" name="data[phone]" value="<{$detail.phone|default=''}>" class="text w-200" /></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-200"> 城市 </th>
+      <td><{$detail.city}></td>
+    </tr>
+    <tr>
+      <th class="alginRt w-200"> 详细地址 </th>
+      <td><input type="text" name="data[addr]" value="<{$detail.addr|default=''}>" class="text w-400" /></td>
+    </tr>
+    
+    <tr>
+      <th class="alginRt w-100" style="z-index:1000"> </th>
+      <td><input type="submit" value="修改收货地址" class="pub_btn" /></td>
+    </tr>
+  </table>
+  </div>
+</form>
+<script type="text/javascript" src="__PUBLIC__/js/area.js?t=<{$nowtime}>"></script> 
+ <script type="text/javascript">_init_area();</script>
+      
+      <script type="text/javascript">
+		//var Gid  = document.getElementById ;
+		var showArea = function(){
+			$('#show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" + 	
+			$('#s_city').value + " - 县/区" + 
+			$('#s_county').value + "</h3>"
+									}
+		</script>
+<include  file='public:footer'/> 

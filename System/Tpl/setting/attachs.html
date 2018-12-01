@@ -1,0 +1,154 @@
+<include  file='public:header'/>
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>设置</span><i></i><span>基本设置</span><i></i><span>附件设置</span>
+           
+            </div>
+          </div>
+		<form target="zhuchuang_frm" action="<{:U('setting/attachs')}>" method="post">
+           <div class="daemonTable">
+              <table class="table_data" cellpadding="0" cellspacing="0">
+              	 <tr>
+                    <th class="alginRt w-200"> 微信二维码 </th>
+                    <td><div class="fileBox w-200">
+                    
+                     <img id="photo_img8"  src="__ATTACHS__/<{$CONFIG.attachs.erweima1|default='default.jpg'}>" />
+                    </div>
+                      <input type="hidden" name="data[erweima1]" value="<{$CONFIG.attachs.erweima1}>" id="data_photo8" />
+                      <input class="file"  id="photo_file8" name="photo_file8" type="file" multiple="true" value="" />
+                     </td>
+                  </tr>
+                  
+                  
+                 <tr>
+                    <th class="alginRt w-200"> 水印图片 </th>
+                    <td><div class="fileBox shuiyin">
+                    
+                     <img id="photo_img"  src="__ATTACHS__/<{$CONFIG.attachs.water|default='default.jpg'}>" /><label class="close"><input type="checkbox" name="closewater"/>关闭水印</label>
+                    </div>
+                      <input type="hidden" name="data[water]" value="<{$CONFIG.attachs.water}>" id="data_photo" />
+                      <input class="file"  id="photo_file" name="photo_file" type="file" multiple="true" value="" />                      
+                     </td>
+                  </tr>
+                 <tr>
+                    <th class="alginRt w-200"> 用户头像
+                    <td><input type="text" name="data[member_thumb]" value="<{$CONFIG.attachs.member_thumb}>" class="text w-200 " /><span class="comm">格式：长*宽</span></td>
+                </tr>
+                
+                <tr>
+                    <th class="alginRt w-200"> 众筹图片:
+                    <td><input type="text" name="data[crowd_thumb]" value="<{$CONFIG.attachs.crowd_thumb}>" class="text w-200 " /><span class="comm">格式：长*宽</span></td>
+                </tr>
+                
+                <tr>
+                    <th class="alginRt w-200"> 编辑器图片尺寸 
+                    <td><input type="text" name="data[editor_thumb]" value="<{$CONFIG.attachs.editor_thumb}>" class="text w-200 " /><span class="comm">格式：长*宽</span></td>
+                </tr>
+                
+                 <tr>
+                    <th class="alginRt w-200"> 众筹者默认头像 </th>
+                    <td><div class="fileBox w-200">
+                    
+                     <img id="photo_img1"  src="__ATTACHS__/<{$CONFIG.attachs.member_face|default='default.jpg'}>" />
+                    </div>
+                      <input type="hidden" name="data[member_face]" value="<{$CONFIG.attachs.member_face}>" id="data_photo1" />
+                      <input class="file"  id="photo_file1" name="photo_file1" type="file" multiple="true" value="" />
+                     </td>
+                  </tr>
+                  <tr>
+                    <th class="alginRt w-200"> 默认项目封面</th>
+                    <td><div class="fileBox w-200">
+                    
+                     <img id="photo_img6"  src="__ATTACHS__/<{$CONFIG.attachs.crowd_img|default='default.jpg'}>" />
+                    </div>
+                      <input type="hidden" name="data[crowd_img]" value="<{$CONFIG.attachs.crowd_img}>" id="data_photo6" />
+                      <input class="file"  id="photo_file6" name="photo_file" type="file6" multiple="true" value="" />
+                     </td>
+                  </tr>                  
+                      <tr>
+                        <th class="alginRt w-100"> </th>
+                        <td>
+                        <input type="submit" value="确认保存" class="pub_btn" />
+                        </td>
+                      </tr>
+                </table>
+           </div>
+        </form>  
+        
+        
+ <script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js?t=<{$nowtime}>"></script>
+
+    <link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+    <script>
+        $("#photo_file").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"setting"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '设置水印图片',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo").val(data);
+                $("#photo_img").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+		$("#photo_file1").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"setting"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '众筹者默认头像',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo1").val(data);
+                $("#photo_img1").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+		
+	
+		
+		$("#photo_file6").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"setting"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '众筹默认图片',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo6").val(data);
+                $("#photo_img6").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+		
+		$("#photo_file8").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"setting"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '微信二维码',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo8").val(data);
+                $("#photo_img8").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+		
+		$("#photo_file9").uploadify({
+            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+            'uploader': '<{:U("up/upload/uploadify",array("model"=>"setting"))}>;jsessionid=${pageContext.session.id}',
+            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+            'buttonText': '微博二维码',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            'queueSizeLimit': 1,
+            'onUploadSuccess': function (file, data, response) {
+                $("#data_photo9").val(data);
+                $("#photo_img9").attr('src', '__ATTACHS__/' + data).show();
+            }
+        });
+		
+    </script> 
+
+<include  file='public:footer'/>           
+               
+   

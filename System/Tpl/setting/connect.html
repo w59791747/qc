@@ -1,0 +1,75 @@
+<include  file='public:header'/>
+<div class="pad">
+          <div class="breadNav">
+          	<div class="flt breadNav_text">
+            <span>设置</span><i></i><span>基本设置</span><i></i><span>第三方登录</span>
+            
+            </div>
+          </div>
+		<form target="zhuchuang_frm" action="<{:U('setting/connect')}>" method="post">
+           <div class="daemonTable">
+              	<table class="table_data" cellpadding="0" cellspacing="0">
+                 <tr>
+                    <th class="alginlt"  colspan="2" > QQ联合登录 </th>
+                </tr>
+                   	
+                 <tr>
+                    <th class="alginRt w-200">  APPID: </th>
+                    <td>
+                    	<input type="text"  name="data[qq_app_id]" value="<{$CONFIG.connect.qq_app_id}>" class="text w-300 " />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="alginRt w-200">  APP_KEY: </th>
+                    <td>
+                    	<input type="text"  name="data[qq_app_key]" value="<{$CONFIG.connect.qq_app_key}>" class="text w-300 " />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th class="alginlt"  colspan="2" >微信联合登录 </th>
+                </tr>
+                <tr>
+                    <th class="alginRt w-200">  APPID: </th>
+                    <td>
+                    	<input type="text"  name="data[wx_app_id]" value="<{$CONFIG.connect.wx_app_id}>" class="text w-300 " />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="alginRt w-200">  APP_KEY: </th>
+                    <td>
+                    	<input type="text"  name="data[wx_app_key]" value="<{$CONFIG.connect.wx_app_key}>" class="text w-300 " />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th class="alginlt"  colspan="2" >微博联合登录 </th>
+                </tr>
+                <tr>
+                    <th class="alginRt w-200">  APPID: </th>
+                    <td>
+                    	<input type="text"  name="data[wb_app_id]" value="<{$CONFIG.connect.wb_app_id}>" class="text w-300 " />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="alginRt w-200">  APP_KEY: </th>
+                    <td>
+                    	<input type="text"  name="data[wb_app_key]" value="<{$CONFIG.connect.wb_app_key}>" class="text w-300 " />
+                    </td>
+                </tr>
+                
+                    
+                      <tr>
+                        <th class="alginRt w-100"> </th>
+                        <td>
+                        <input type="submit" value="确认保存" class="pub_btn" />
+                        </td>
+                      </tr>
+                </table>
+           </div>
+        </form>  
+        
+ 
+
+<include  file='public:footer'/>           
+      

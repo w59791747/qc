@@ -1,0 +1,115 @@
+<include file="public:header"/>
+<section class="pageWrapper">
+<header>
+  <div class="left"><a id="goback" href="javascript:void(0)" title="返回"><i class="iconfont icon-fanhui1"></i></a></div>
+  <div class="title">账户绑定</div>
+  <div class="right"><a href="javascript:void(0)" class="m_menu"><i class="iconfont icon-daohangliebiao"></i></a></div>
+  <span></span>
+</header>
+<section class="page_ucenter_box">
+  <div class="warning">还差一步，您就可以使用<{$types[$connect['type']]}>快捷登录了 </div>
+  <div class="registBox registBox_bind">
+    <div class="findpswd_tit"> <span rel="cp2" class="current">已有账号</span> <span rel="cp1">还没有注册账号</span> </div>
+    <div id="cp1" class="loginBox" style="display:none;">
+    <p class="tishi">为您创造一个新账户，与<{$types[$connect['type']]}>账户绑定</p>
+      <form  class="loginForm"  action="<{:U('passport/reg')}>" method="post" target="chuang_frm">
+        
+        <div class="loginForm_input"> <i class="user"></i>
+          <input type="text" name="name"  class="text" placeholder="请输入会员账号">
+        </div>
+        
+        <div class="loginForm_input"> <i class="phone"></i>
+          <input type="text" id='mobile' name='mobile' class="text" placeholder="请输入手机号码">
+        </div>
+        <div class="loginForm_input loginForm_yzm">
+          <i class="yzm"></i>
+            <input type="text" name="yzm" id="yzm" class="text" placeholder="验证码">
+          <div class="yzmImg"><a class="phontyz"  id="jq_send">免费获取验证码</a></div>
+        </div>
+        <div class="loginForm_btn">
+          <input type="submit" class="btn" value="绑定账号">
+        </div>
+      </form>
+    </div>
+    <div id="cp2" class="loginBox">
+    <p class="tishi">如果您已有账户可以直接与<{$types[$connect['type']]}>账户绑定</p>
+      <form class="loginForm" id="login_frm"  action="<{:U('passport/login')}>" method="post" target="chuang_frm">
+        
+        <div class="loginForm_input"> <i class="user"></i>
+          <input type="text" name="name" placeholder="用户名"    class="text" value="" />
+        </div>
+        <div class="loginForm_input"> <i class="pswd"></i>
+          <input type="password" name="passwd"  class="text" placeholder="密码" value="" />
+        </div>
+        <if condition="$CONFIG[power][login] eq on">
+          <div class="loginForm_input loginForm_yzm"> <i class="yzm"></i>
+            <input type="text" name="yzm" class="text yanzm">
+             <div class="yzmImgM"><img  src="__ROOT__/index.php?g=mobile&m=verify&a=index&mt=<{:time()}>" /></div>
+          </div>
+        </if>
+        <div class="loginForm_btn">
+          <input type="submit" class="btn" value="绑定账号">
+        </div>
+		
+      </form>
+    </div>
+  </div>
+</section>
+<script>
+$(document).ready(function(){
+   $(".findpswd_tit span").click(function(){
+	   var index = $(this).index();
+		$(".findpswd_tit span").each(function(a){
+			if(a == index){
+				$(this).addClass('current');
+				$("#"+$(this).attr('rel')).show();
+			}else{
+				$(this).removeClass('current');
+				$("#"+$(this).attr('rel')).hide();
+			}
+		});
+	   
+   });
+   
+});
+</script> 
+
+  <script type="text/javascript">
+        var mobile_timeout;
+        var mobile_count = 100;
+        var mobile_lock = 0;
+        $(function () {
+            $("#jq_send").click(function () {
+                if (mobile_lock == 0) {
+                    mobile_lock = 1;
+                    $.post("<{:U('passport/sendsms')}>",{mobile:$("#mobile").val()},function(data){
+                        if(data.status == 'success'){
+                            mobile_count = 60;
+                            layer.msg(data.msg,{icon:1});
+                            BtnCount();
+                        }else{
+                            mobile_lock = 0;
+                            layer.msg(data.msg,{icon:2});
+                        }
+                    },'json');
+                }
+
+            });
+        });
+		
+		
+        function BtnCount () {
+            if (mobile_count == 0) {
+                $('#jq_send').html("重新发送");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+            }
+            else {
+                mobile_count--;
+                $('#jq_send').html("重新发送(" + mobile_count.toString() + ")秒");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+            }
+        };
+    </script>
+
+<include file="public:footersmall"/>
